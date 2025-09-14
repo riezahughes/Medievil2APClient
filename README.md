@@ -1,13 +1,13 @@
-﻿# Medievil Archipelago Client
+﻿# Medievil 2 Archipelago Client
 
 ## Requirements
-To play medievil on archipelago requires:
+To play medievil 2 on archipelago requires:
 
 - A windows machine (for now)
 - [Archipelago](https://archipelago.gg) installed
-- The latest copy of [the medievil client](https://github.com/riezahughes/MedievilArchipelagoClient/releases)
-- The latest copy of [the medievil AP World](https://github.com/riezahughes/MedievilAPWorld/releases)
-- A legal copy of the EU Version of Medievil
+- The latest copy of [the medievil 2 client](https://github.com/riezahughes/Medievil2APClient/releases)
+- The latest copy of [the medievil 2 AP World](https://github.com/riezahughes/Medievil2APWorld/releases)
+- A legal copy of the EU Version of Medievil 2
 - [Duckstation] (https://www.duckstation.org)
 
 # Setup
