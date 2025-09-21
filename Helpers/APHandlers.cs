@@ -107,11 +107,9 @@ namespace MedievilArchipelago.Helpers
                     return;
                 }
 
-                Console.WriteLine($"Recieved: {args.Item.Name}");
-
-                //#if DEBUG
-                //    Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-                //#endif
+                #if DEBUG
+                    Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
+                #endif
                 byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
                 int runeSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("runesanity", "0").ToString());
                 int breakAmmoLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_ammo_limit", "0").ToString());
