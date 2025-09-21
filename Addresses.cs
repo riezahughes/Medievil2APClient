@@ -22,6 +22,17 @@ namespace MedievilArchipelago
 
         ////////////////////////// DAN ADDRESSES /////////////////////////////
 
+
+        public const uint DansCurrentEnergy = 0x000F152C;
+        public const uint DansCurrentStoredEnergy = 0x000F1530;
+        public const uint DansCurrentGold = 0x000f15b4;
+        public const uint DansCurrentLifeBottles = 0x000f1534; // uses full health bars to count (300 = 1)
+
+        public const uint DansCurrentEquipmentSlot = 0x000F153C;
+        public const uint DansEquippedPrimaryWeapon = 0x000F1540;
+        public const uint DansEquippedSecondaryWeapon = 0x000F1544;
+        public const uint DansEquippedShield = 0x000F1548;
+
         // GPS Coords
         public const uint DanRespawnPositionX = 0x000f3b84;
         public const uint DanRespawnPositionY = 0x000f3b88;
@@ -33,6 +44,7 @@ namespace MedievilArchipelago
         // Skills
 
         public const uint DansHandSkill = 0x000F1694;
+        public const uint DaringDashSkill = 0x000F1694;
 
         // Cheat menu
         public const uint CheatMenu = 0x000f0608;
@@ -98,38 +110,48 @@ namespace MedievilArchipelago
         public const uint Book_ProfessorsDiary = 0x0012A495;
 
         // The Museum
+        public const uint TM_Book_SirDan = 0x000ef262;
+        public const uint TM_Winston_DansRoom = 0x000ef20a;
+        public const uint TM_Pickup_ShortSword = 0x0014471c;
         public const uint TM_Pickup_MuseumKey = 0x00144a4c;
-        public const uint TM_Pickup_DinosaurKey = 0x00145c18;
-        public const uint TM_Pickup_CannonBall = 0x0014541c;
-        public const uint TM_Pickup_Torch = 0x00144650;
-        public const uint TM_Pickup_Shortsword = 0x0014471c;
-        public const uint TM_Pickup_Pistol = 0x001446d8;
-        public const uint TM_Pickup_EnergyInPistolRoom = 0x001450f0;
-        public const uint TM_Pickup_EnergyInMausoleumRoom2F = 0x00145134;
-        public const uint TM_Pickup_GoldCoinsInMausoleumRoom2F1 = 0x00144ed0;
-        public const uint TM_Pickup_GoldCoinsInMausoleumRoom2F2 = 0x00144e48;
-        public const uint TM_Pickup_GoldCoinsInMausoleumRoom2F3 = 0x00144e8c;
-        public const uint TM_Pickup_GoldCoinsBuddahStaircase = 0x001451bc;
-        public const uint TM_Pickup_GoldCoinsInZarokRoomRafters1 = 0x00145d6c;
-        public const uint TM_Pickup_GoldCoinsInZarokRoomRafters2 = 0x00145db0;
-        public const uint TM_Pickup_Chalice = 0x0014460c;
-        public const uint TM_Pickup_GoldCoinsInZarokRoomRafters3 = 0x00145d28;
+        public const uint TM_Pickup_EnergyVialPistolRoom = 0x001450f0;
         public const uint TM_Pickup_GoldCoinsBehindPurpleStructure = 0x001455b8;
-        public const uint TM_Pickup_CopperShieldInMausoleumRoom2F = 0x00145240;
-        public const uint TM_Pickup_GoldCoinsInDisplayRoomBalconyR = 0x0014592c;
-        public const uint TM_Pickup_GoldCoinsInDisplayRoomBalconyL = 0x00146388;
-        public const uint TM_Pickup_CopperShieldInZarokRoom = 0x00145ce0;
-        public const uint TM_Pickup_GoldCoinsInTombRoomL = 0x0014609c;
-        public const uint TM_Pickup_GoldCoinsInTombRoomR = 0x001460e0;
-        public const uint TM_Pickup_GoldCoinsInFirstHandRoomChest1 = 0x00145970;
-        public const uint TM_Pickup_GoldCoinsInFirstHandRoomChest2 = 0x001459b4;
-        public const uint TM_Pickup_GoldCoinsInFirstHandRoomChest3 = 0x00144f14;
-        public const uint TM_Pickup_EnergyInSecondHandRoom = 0x00144fe0;
-        public const uint TM_Pickup_GoldCoinsInSecondHandRoomChestRofVial = 0x001459f8;
-        public const uint TM_Pickup_GoldCoinsInSecondHandRoomChestLofVial = 0x00145a3c;
-        public const uint TM_Pickup_GoldCoinsInSecondHandRoomChestBetweenBoxes = 0x00144f58;
-        public const uint TM_Pickup_GoldCoinsInSecondHandRoomChestHiddenPipes = 0x00145ac4;
-        public const uint TM_Pickup_GoldCoinsInSecondHandRoomChestOnBoxes = 0x00145a80;
+        public const uint TM_Pickup_Pistol = 0x001446d8;
+        public const uint TM_Winston_PistolRoom = 0x000ef20a;
+        public const uint TM_Pickup_EnergyVialMausoleumRoom2F = 0x00145134;
+        public const uint TM_Pickup_GoldCoinsMausoleumRoom2F1 = 0x00144ed0;
+        public const uint TM_Pickup_GoldCoinsMausoleumRoom2F2 = 0x00144e48;
+        public const uint TM_Pickup_GoldCoinsMausoleumRoom2F3 = 0x00144e8c;
+        public const uint TM_Winston_ChestOnMausoleumRoom2F = 0x000ef1b6;
+        public const uint TM_Winston_GoldCoinsOnMausoleumRoom2F = 0x000eefe2;
+        public const uint TM_Pickup_CopperShield2ndFloorChest = 0x00145240;
+        public const uint TM_Pickup_GoldCoinsBuddahStatueStaircase = 0x001451bc;
+        public const uint TM_Winston_ClimbingWall = 0x000eefe2;
+        public const uint TM_Winston_StaircaseAfterBuddah = 0x000ef1b6;
+        public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyRight = 0x0014592c;
+        public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyLeft = 0x00146388;
+        public const uint TM_Winston_Chalice = 0x000ef20a;
+        public const uint TM_Pickup_Cannonball = 0x0014541c;
+        public const uint TM_Pickup_Torch = 0x00144650;
+        public const uint TM_Pickup_GoldCoinsZarokRoomRaftersBack = 0x00145d6c;
+        public const uint TM_Pickup_GoldCoinsZarokRoomRaftersLeft = 0x00145db0;
+        public const uint TM_Pickup_GoldCoinsZarokRoomRaftersRight = 0x00145d28;
+        public const uint TM_Pickup_DinosaurKey = 0x00145c18;
+        public const uint TM_Book_TheKraken = 0x00128570;
+        public const uint TM_Book_Zarok = 0x001281b4;
+        public const uint TM_Pickup_CopperShieldZarokRoom = 0x00145ce0;
+        public const uint TM_Pickup_GoldCoinsTombRoomLeft = 0x0014609c;
+        public const uint TM_Pickup_GoldCoinsTombRoomRight = 0x001460e0;
+        public const uint TM_Pickup_GoldCoinsFirstHandRoomChest1 = 0x00145970;
+        public const uint TM_Pickup_GoldCoinsFirstHandRoomChest2 = 0x001459B4;
+        public const uint TM_Pickup_GoldCoinsFirstHandRoomChest3 = 0x00144F14;
+        public const uint TM_Pickup_EnergyVialSecondHandRoom = 0x00144FE0;
+        public const uint TM_Pickup_GoldCoinsSecondHandRoomChestRightOfVial = 0x001459F8;
+        public const uint TM_Pickup_GoldCoinsSecondHandRoomChestLeftOfVial = 0x00145A3C;
+        public const uint TM_Pickup_GoldCoinsSecondHandRoomChestBetweenBoxes = 0x00144F58;
+        public const uint TM_Pickup_GoldCoinsSecondHandRoomChestHiddenOnPipes = 0x00145AC4;
+        public const uint TM_Pickup_GoldCoinsSecondHandRoomChestOnBoxes = 0x00145A80;
+        public const uint TM_Pickup_Chalice = 0x0014460c;
 
         // Tyrannosaurus Wrecks
         public const uint TW_Winston_Entrance = 0x000ef104;
@@ -425,7 +447,7 @@ namespace MedievilArchipelago
         // Ranged Weapons
         public const uint Pistol = 0x000F156C;
         public const uint Crossbow = 0x000F1574;
-        public const uint FireCrossbow = 0x000F1578;
+        public const uint FlamingCrossbow = 0x000F1578;
         public const uint GatlingGun = 0x000F1580;
         public const uint GoodLightning = 0x000F1584;
         public const uint Lightning = 0x000F1588;
@@ -433,7 +455,7 @@ namespace MedievilArchipelago
         public const uint Bombs = 0x000F1594;
 
         // Shields
-        public const uint BronzeShield = 0x000F15A0;
+        public const uint CopperShield = 0x000F15A0;
         public const uint SilverShield = 0x000F15A4;
         public const uint GoldShield = 0x000F15A8;
         public const uint GoldenArmour = 0x000F15AC;

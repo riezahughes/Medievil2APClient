@@ -51,7 +51,7 @@ namespace MedievilArchipelago.Helpers
                 Console.WriteLine($"OnConnected Firing. Itemcount: {client.GameState.ReceivedItems.Count}");
             #endif
 
-            //PlayerStateHandler.UpdatePlayerState(client, false);
+            PlayerStateHandler.UpdatePlayerState(client, false);
 
 
             // reset traps in case of client crashes
@@ -72,10 +72,10 @@ namespace MedievilArchipelago.Helpers
 
             byte[] defaultRenderDistance = BitConverter.GetBytes(0x1000);
 
-            //if (PlayerStateHandler.isInTheGame())
-            //{
-            //    TrapHandlers.ResetTraps();
-            //}
+            if (PlayerStateHandler.isInTheGame())
+            {
+                TrapHandlers.ResetTraps();
+            }
         }
 
 
@@ -101,46 +101,39 @@ namespace MedievilArchipelago.Helpers
 
             if (client.CurrentSession != null)
             {
-                //if (!PlayerStateHandler.isInTheGame() && isValidForDelay)
-                //{
-                //    Program.delayedItems.Add(args);
-                //    return;
-                //}
+                if (!PlayerStateHandler.isInTheGame() && isValidForDelay)
+                {
+                    Program.delayedItems.Add(args);
+                    return;
+                }
 
                 Console.WriteLine($"Recieved: {args.Item.Name}");
 
                 //#if DEBUG
                 //    Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
                 //#endif
-                //byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
-                //int runeSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("runesanity", "0").ToString());
-                //int breakAmmoLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_ammo_limit", "0").ToString());
-                //int breakChargeLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_percentage_limit", "0").ToString());
+                byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                int runeSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("runesanity", "0").ToString());
+                int breakAmmoLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_ammo_limit", "0").ToString());
+                int breakChargeLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_percentage_limit", "0").ToString());
 
-                //switch (args.Item)
-                //{
-                //    // incoming runes need added here
-                //    case var x when x.Name.ContainsAny("Rune") && runeSanityOption == 1: ItemHandlers.ReceiveRune(currentLevel, x); break;
-                //    case var x when x.Name.ContainsAny("Skill"): ItemHandlers.ReceiveSkill(x); break;
-                //    case var x when x.Name.ContainsAny("Equipment"): ItemHandlers.ReceiveEquipment(x); break;
-                //    case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                //    case var x when x.Name.ContainsAny("Soul Helmet"): ItemHandlers.ReceiveSoulHelmet(); break;
-                //    case var x when x.Name.ContainsAny("Dragon Gem"): ItemHandlers.ReceiveDragonGem(); break;
-                //    case var x when x.Name.ContainsAny("Amber"): ItemHandlers.ReceiveAmber(); break;
-                //    case var x when x.Name.ContainsAny("Key Item"): ItemHandlers.ReceiveKeyItem(x); break;
-                //    case var x when x.Name.ContainsAny("Health", "Gold Coins", "Energy"): ItemHandlers.ReceiveStatItems(x); break;
-                //    case var x when x.Name.ContainsAny("Daggers", "Ammo", "Chicken Drumsticks", "Crossbow", "Longbow", "Fire Longbow", "Magic Longbow", "Spear", "Copper Shield", "Silver Shield", "Gold Shield"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
-                //    case var x when x.Name.ContainsAny("Broadsword", "Club", "Lightning"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
-                //    case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
-                //    case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
-                //    case var x when x.Name.Contains("Trap: Darkness"): TrapHandlers.DarknessTrap(currentLevel); break;
-                //    case var x when x.Name.Contains("Trap: Hudless"): TrapHandlers.HudlessTrap(); break;
-                //    case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
-                //    case null: Console.WriteLine("Received an item with null data. Skipping."); break;
-                //    default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
-                //};
+                switch (args.Item)
+                {
+                    case var x when x.Name.ContainsAny("Dan Hand", "Daring Dash"): ItemHandlers.ReceiveSkill(x); break;
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) && !x.Name.Contains("Ammo"): ItemHandlers.ReceiveEquipment(x); break;
+                    case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings): ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when x.Name.ContainsAny("Health", "Gold Coins", "Energy"): ItemHandlers.ReceiveStatItems(x); break;
+                    case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, true); break;
+                    case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, true); break;
+                    case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
+                    case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
+                    case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
+                    case null: Console.WriteLine("Received an item with null data. Skipping."); break;
+                    default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
+                };
 
-                //PlayerStateHandler.UpdatePlayerState(client, false);
+                PlayerStateHandler.UpdatePlayerState(client, false);
             }
 
         }
@@ -183,13 +176,13 @@ namespace MedievilArchipelago.Helpers
         // added a guard so it doesn't fire prematurely
         public static void Client_LocationCompleted(object sender, LocationCompletedEventArgs e, ArchipelagoClient client)
         {
-            //if (client?.CurrentSession?.Items?.AllItemsReceived.Count == client?.GameState.ReceivedItems.Count())
-            //{
-            //    PlayerStateHandler.UpdatePlayerState(client, false);
-            #if DEBUG
+            if (client?.CurrentSession?.Items?.AllItemsReceived.Count == client?.GameState.ReceivedItems.Count())
+            {
+                PlayerStateHandler.UpdatePlayerState(client, false);
+                #if DEBUG
                         Console.WriteLine($"LocationCompleted Firing. {e.CompletedLocation.Name} - {e.CompletedLocation.Id} Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-            #endif
-            //}
+                #endif
+            }
         }
 
 

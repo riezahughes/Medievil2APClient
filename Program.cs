@@ -94,7 +94,7 @@ public class Program
         archipelagoClient.ItemReceived += (sender, args) => Helpers.APHandlers.ItemReceived(sender, args, archipelagoClient);
         archipelagoClient.MessageReceived += (sender, args) => Helpers.APHandlers.Client_MessageReceived(sender, args, archipelagoClient, slot);
         archipelagoClient.LocationCompleted += (sender, args) => Helpers.APHandlers.Client_LocationCompleted(sender, args, archipelagoClient);
-        //archipelagoClient.EnableLocationsCondition = () => Helpers.PlayerStateHandler.isInTheGame();
+        archipelagoClient.EnableLocationsCondition = () => Helpers.PlayerStateHandler.isInTheGame();
 
         Console.WriteLine("Successfully connected to Duckstation.");
 
@@ -284,102 +284,102 @@ public class Program
 
             firstRun = false;
 
-            await archipelagoClient.MonitorLocations(GameLocations, _cancellationTokenSource.Token);
+            _ = archipelagoClient.MonitorLocations(GameLocations, _cancellationTokenSource.Token);
             //_ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
 
-//            while (!_cancellationTokenSource.Token.IsCancellationRequested)
-//            {
-//                try
-//                {
-//                    var input = Console.ReadLine();
-//                    if (input?.Trim().ToLower() == "exit")
-//                    {
-//                        _cancellationTokenSource.Cancel();
-//                        break;
-//                    }
-//                    else if (input?.Trim().ToLower().Contains("hint") == true)
-//                    {
+            while (!_cancellationTokenSource.Token.IsCancellationRequested)
+            {
+                try
+                {
+                    var input = Console.ReadLine();
+                    if (input?.Trim().ToLower() == "exit")
+                    {
+                        _cancellationTokenSource.Cancel();
+                        break;
+                    }
+                    else if (input?.Trim().ToLower().Contains("hint") == true)
+                    {
 
-//                        string hintString = input?.Trim().ToLower() == "hint" ? "!hint" : $"!hint {input.Substring(5).Trim()}";
-//                        archipelagoClient.SendMessage(hintString);
-//                    }
-//                    else if (input?.Trim().ToLower() == "update")
-//                    {
-//                        if (archipelagoClient.GameState.CompletedLocations != null)
-//                        {
-//                            Helpers.PlayerStateHandler.UpdatePlayerState(archipelagoClient, false);
-//                            Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
+                        string hintString = input?.Trim().ToLower() == "hint" ? "!hint" : $"!hint {input.Substring(5).Trim()}";
+                        archipelagoClient.SendMessage(hintString);
+                    }
+                    else if (input?.Trim().ToLower() == "update")
+                    {
+                        if (archipelagoClient.GameState.CompletedLocations != null)
+                        {
+                            Helpers.PlayerStateHandler.UpdatePlayerState(archipelagoClient, false);
+                            Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
 
-//#if DEBUG
-//                            foreach (ItemInfo item in archipelagoClient.CurrentSession.Items.AllItemsReceived)
-//                            {
-//                                Console.WriteLine($"id: {item.ItemId} - {item.ItemName}");
-//                            }
-//#endif
-//                        }
-//                        else
-//                        {
-//                            Console.WriteLine("Cannot update player state: GameState or CompletedLocations is null.");
-//                        }
-//                    }
-//                    else if (input?.Trim().ToLower() == "items")
-//                    {
-//                        var items = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Key Item") select item;
+#if DEBUG
+                            foreach (ItemInfo item in archipelagoClient.CurrentSession.Items.AllItemsReceived)
+                            {
+                                Console.WriteLine($"id: {item.ItemId} - {item.ItemName}");
+                            }
+#endif
+                        }
+                        else
+                        {
+                            Console.WriteLine("Cannot update player state: GameState or CompletedLocations is null.");
+                        }
+                    }
+                    else if (input?.Trim().ToLower() == "items")
+                    {
+                        var items = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Key Item") select item;
 
-//                        var bottles = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Bottle") select item;
+                        var bottles = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Bottle") select item;
 
-//                        var equipment = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Equipment") select item;
+                        var equipment = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Equipment") select item;
 
-//                        Console.WriteLine("Current Equipment: ");
-//                        foreach (var weapon in equipment.OrderBy(item => item.ItemName))
-//                        {
-//                            Console.WriteLine(weapon.ItemName);
-//                        }
+                        Console.WriteLine("Current Equipment: ");
+                        foreach (var weapon in equipment.OrderBy(item => item.ItemName))
+                        {
+                            Console.WriteLine(weapon.ItemName);
+                        }
 
-//                        Console.WriteLine("Current Key Items: ");
-//                        foreach (var item in items.OrderBy(item => item.ItemName))
-//                        {
-//                            Console.WriteLine(item.ItemName);
-//                        }
+                        Console.WriteLine("Current Key Items: ");
+                        foreach (var item in items.OrderBy(item => item.ItemName))
+                        {
+                            Console.WriteLine(item.ItemName);
+                        }
 
-//                        Console.WriteLine("Current Bottles: ");
-//                        foreach (var bottle in bottles.OrderBy(item => item.ItemName))
-//                        {
-//                            Console.WriteLine(bottle.ItemName);
-//                        }
+                        Console.WriteLine("Current Bottles: ");
+                        foreach (var bottle in bottles.OrderBy(item => item.ItemName))
+                        {
+                            Console.WriteLine(bottle.ItemName);
+                        }
 
 
-//                    }
-//                    // allow manually handling traps if you're in dev mode (for testing)
-//                    #if DEBUG
-//                        else if (input?.Trim().ToLower() == "heavytrap")
-//                        {
-//                            Helpers.TrapHandlers.HeavyDanTrap();
-//                        }
-//                        else if (input?.Trim().ToLower() == "lighttrap")
-//                        {
-//                            Helpers.TrapHandlers.LightDanTrap();
-//                        }
-//                        else if (input?.Trim().ToLower() == "darknesstrap")
-//                        {
-//                            Helpers.TrapHandlers.DarknessTrap(0x01);
-//                        }
-//                        else if (input?.Trim().ToLower() == "hudtrap")
-//                        {
-//                            Helpers.TrapHandlers.HudlessTrap();
-//                        }
-//                    #endif
-//                    else if (!string.IsNullOrWhiteSpace(input))
-//                    {
-//                        Console.WriteLine($"Unknown command: '{input}'");
-//                    }
-//                }
-//                catch (Exception ex)
-//                {
-//                    _cancellationTokenSource.Cancel();
-//                    Console.WriteLine("The system has crashed. (Probably broken connection");
-//                }
-//            }
+                    }
+                    // allow manually handling traps if you're in dev mode (for testing)
+#if DEBUG
+                        else if (input?.Trim().ToLower() == "heavytrap")
+                        {
+                            Helpers.TrapHandlers.HeavyDanTrap();
+                        }
+                        else if (input?.Trim().ToLower() == "lighttrap")
+                        {
+                            Helpers.TrapHandlers.LightDanTrap();
+                        }
+                        //else if (input?.Trim().ToLower() == "darknesstrap")
+                        //{
+                        //    Helpers.TrapHandlers.DarknessTrap(0x01);
+                        //}
+                        //else if (input?.Trim().ToLower() == "hudtrap")
+                        //{
+                        //    Helpers.TrapHandlers.HudlessTrap();
+                        //}
+#endif
+                    else if (!string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine($"Unknown command: '{input}'");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _cancellationTokenSource.Cancel();
+                    Console.WriteLine("The system has crashed. (Probably broken connection");
+                }
+            }
 
             Console.WriteLine("Shutting down due to connection issues.");
         }

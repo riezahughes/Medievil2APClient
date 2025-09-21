@@ -55,7 +55,7 @@ namespace MedievilArchipelago.Helpers
             "The Time Machine, Sewers",
             "The Ripper",
             "Cathedral Spires",
-            "Cathedral Spires: The Descent",
+            "Cathedral Spires, The Descent",
             "The Demon",
 ];
 
@@ -416,8 +416,7 @@ namespace MedievilArchipelago.Helpers
                         //    continue;
                         //}
 
-
-                        if (loc.Name.Contains("Key Item:") || loc.Name.Contains("Chalice Reward") || loc.Name.Contains("Cleared:") || loc.Name.Contains("Chalice:") || loc.Name.Contains("Rune:") || loc.Name.Contains("Equipment:") || loc.Name.Contains("Gold Coins:") || loc.Name.Contains("Skill:") || loc.Name.Contains("Life Bottle:") || loc.Name.Contains("Energy Vial:") || loc.Name.Contains("Fairy") || loc.Name.Contains("Egg Drop"))
+                        if (loc.Name.Contains("Key Item:") || loc.Name.Contains("Chalice Reward") || loc.Name.Contains("Cleared:") || loc.Name.Contains("Chalice:") || loc.Name.Contains("Equipment:") || loc.Name.Contains("Gold Coins:") || loc.Name.Contains("Skill:") || loc.Name.Contains("Life Bottle:") || loc.Name.Contains("Energy Vial:") || loc.Name.Contains("Book:") || loc.Name.Contains("Winston:"))
                         {
                             {
                                 List<ILocation> conditionalChoice = new List<ILocation>();
@@ -438,7 +437,7 @@ namespace MedievilArchipelago.Helpers
                                     Id = -1,
                                     Name = "Pickup Check",
                                     Address = loc.Address,
-                                    CheckType = LocationCheckType.UInt,
+                                    CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Match,
                                     CheckValue = loc.Check
                                 });
@@ -477,30 +476,73 @@ namespace MedievilArchipelago.Helpers
             return locations;
         }
 
+        //private static List<GenericItemsData> Hub()
+        //{
+        //    List<GenericItemsData> museumLocations = new List<GenericItemsData>()
+        //    {
+
+        //    }
+        //}
+
         private static List<GenericItemsData> GetTheMuseumData()
         {
             List<GenericItemsData> museumLocations = new List<GenericItemsData>()
             {
-                new GenericItemsData("Key Item: Museum Key", Addresses.TM_Pickup_MuseumKey, "10", "704"),
-                new GenericItemsData("Key Item: Dinosaur Key", Addresses.TM_Pickup_MuseumKey, "10", "704"), // these aren't working
-                new GenericItemsData("Key Item: Cannonball", Addresses.TM_Pickup_CannonBall, "10", "704"),
-                new GenericItemsData("Key Item: Torch", Addresses.TM_Pickup_Torch, "10", "704"),
-                new GenericItemsData("Equipment: Short Sword", Addresses.TM_Pickup_Shortsword, "10", "704"),
-                new GenericItemsData("Equipment: Pistol", Addresses.TM_Pickup_Pistol, "10", "704"),
-                new GenericItemsData("Energy Vial: Pistol Room", Addresses.TM_Pickup_EnergyInPistolRoom, "10", "704"),
-                new GenericItemsData("Energy Vial: Mausoleum Room 2nd Floor", Addresses.TM_Pickup_EnergyInMausoleumRoom2F, "10", "704"),
-                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 1", Addresses.TM_Pickup_GoldCoinsInMausoleumRoom2F1, "10", "704"),
-                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 2", Addresses.TM_Pickup_GoldCoinsInMausoleumRoom2F2, "10", "704"),
-                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 3", Addresses.TM_Pickup_GoldCoinsInMausoleumRoom2F3, "10", "704"),
-                new GenericItemsData("Gold Coins: Buddah Statue Staircase", Addresses.TM_Pickup_GoldCoinsBuddahStaircase, "10", "704"),
-                new GenericItemsData("Gold Coins: Zarok Room Rafters 1", Addresses.TM_Pickup_GoldCoinsBuddahStaircase, "10", "704"), // these aren't working
-                new GenericItemsData("Gold Coins: Zarok Room Rafters 2", Addresses.TM_Pickup_GoldCoinsBuddahStaircase, "10", "704"), // these aren't working
-                new GenericItemsData("Chalice: The Museum", Addresses.TM_Pickup_Chalice, "10", "704"),
-                new GenericItemsData("Cleared: The Museum", Addresses.TM_LevelStatus, "10", "25"),
+                new GenericItemsData("Key Item: Museum Key - TM", Addresses.TM_Pickup_MuseumKey, "10", "704", LocationCheckType.UInt),
+                new GenericItemsData("Key Item: Cannonball - TM", Addresses.TM_Pickup_Cannonball, "10", "33049", LocationCheckType.UInt),
+                new GenericItemsData("Key Item: Torch - TM", Addresses.TM_Pickup_Torch, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Key Item: Dinosaur Key - TM", Addresses.TM_Pickup_DinosaurKey, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Equipment: Short Sword - TM", Addresses.TM_Pickup_ShortSword, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Equipment: Pistol in Case - TM", Addresses.TM_Pickup_Pistol, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Equipment: Copper Shield 2nd Floor Chest - TM", Addresses.TM_Pickup_CopperShield2ndFloorChest, "10", "33049",  LocationCheckType.UInt),
+                new GenericItemsData("Equipment: Copper Shield Zarok Room - TM", Addresses.TM_Pickup_CopperShieldZarokRoom, "10", "33049",  LocationCheckType.UInt),
+                new GenericItemsData("Energy Vial: Pistol Room - TM", Addresses.TM_Pickup_EnergyVialPistolRoom, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Energy Vial: Mausoleum Room 2nd Floor - TM", Addresses.TM_Pickup_EnergyVialMausoleumRoom2F, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Energy Vial: Second Hand Room - TM", Addresses.TM_Pickup_EnergyVialSecondHandRoom, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Hidden Behind Purple Structure - TM", Addresses.TM_Pickup_GoldCoinsBehindPurpleStructure, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 1 - TM", Addresses.TM_Pickup_GoldCoinsMausoleumRoom2F1, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 2 - TM", Addresses.TM_Pickup_GoldCoinsMausoleumRoom2F2, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Mausoleum Room 2nd Floor 3 - TM", Addresses.TM_Pickup_GoldCoinsMausoleumRoom2F3, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Buddah Statue Staircase - TM", Addresses.TM_Pickup_GoldCoinsBuddahStatueStaircase, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Display Room Balcony Right - TM", Addresses.TM_Pickup_GoldCoinsDisplayRoomBalconyRight, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Display Room Balcony Left - TM", Addresses.TM_Pickup_GoldCoinsDisplayRoomBalconyLeft, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Zarok Room Rafters Back - TM", Addresses.TM_Pickup_GoldCoinsZarokRoomRaftersBack, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Zarok Room Rafters Left - TM", Addresses.TM_Pickup_GoldCoinsZarokRoomRaftersLeft, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Zarok Room Rafters Right - TM", Addresses.TM_Pickup_GoldCoinsZarokRoomRaftersRight, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Tomb Room Left - TM", Addresses.TM_Pickup_GoldCoinsTombRoomLeft, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Tomb Room Right - TM", Addresses.TM_Pickup_GoldCoinsTombRoomRight, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: First Hand Room - Chest - TM1", Addresses.TM_Pickup_GoldCoinsFirstHandRoomChest1, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: First Hand Room - Chest 2 - TM", Addresses.TM_Pickup_GoldCoinsFirstHandRoomChest2, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: First Hand Room - Chest 3 - TM", Addresses.TM_Pickup_GoldCoinsFirstHandRoomChest3, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Second Hand Room - Chest Right of Vial - TM", Addresses.TM_Pickup_GoldCoinsSecondHandRoomChestRightOfVial, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Second Hand Room - Chest Left of Vial - TM", Addresses.TM_Pickup_GoldCoinsSecondHandRoomChestLeftOfVial, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Second Hand Room - Chest Between Boxes - TM", Addresses.TM_Pickup_GoldCoinsSecondHandRoomChestBetweenBoxes, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Second Hand Room - Chest Hidden on Pipes - TM", Addresses.TM_Pickup_GoldCoinsSecondHandRoomChestHiddenOnPipes, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Second Hand Room - Chest on Boxes - TM", Addresses.TM_Pickup_GoldCoinsSecondHandRoomChestOnBoxes, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Book: Sir Dan - TM", Addresses.TM_Book_SirDan, "10", "0", LocationCheckType.Byte),
+                new GenericItemsData("Book: The Kraken - TM", Addresses.TM_Book_TheKraken, "10", "0", LocationCheckType.Byte),
+                new GenericItemsData("Book: Zarok - TM", Addresses.TM_Book_Zarok, "10", "0", LocationCheckType.Byte),
+                new GenericItemsData("Winston: Dans Room - TM", Addresses.TM_Winston_DansRoom, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Winston: Pistol Room - TM", Addresses.TM_Winston_PistolRoom, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Winston: Chest on Mausoleum Room 2nd Floor - TM", Addresses.TM_Winston_ChestOnMausoleumRoom2F, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Winston: Gold Coins on Mausoleum Room 2nd Floor - TM", Addresses.TM_Winston_GoldCoinsOnMausoleumRoom2F, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Winston: Staircase after buddah - TM", Addresses.TM_Winston_StaircaseAfterBuddah, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Winston: Chalice - TM", Addresses.TM_Pickup_Chalice, "10", "32797", LocationCheckType.UInt),
+                new GenericItemsData("Chalice: The Museum", Addresses.TM_Pickup_Chalice, "10", "704", LocationCheckType.UShort),
+                new GenericItemsData("Chalice: The Museum", Addresses.TM_Pickup_Chalice, "10", "704", LocationCheckType.UShort),
             };
 
             return museumLocations;
         }
+
+
+        //private static List<GenericItemsData> GetTheMuseumData()
+        //{
+        //    List<GenericItemsData> museumLocations = new List<GenericItemsData>()
+        //    {
+
+        //    }
+        //}
 
 
     }

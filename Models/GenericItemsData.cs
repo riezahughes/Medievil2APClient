@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Archipelago.Core.Models;
 
 namespace MedievilArchipelago.Models
 {
@@ -17,15 +18,18 @@ namespace MedievilArchipelago.Models
 
         public string Check {  get; set; }
 
+        public LocationCheckType CheckType { get; set; }
+
         public bool IsInChest { get; set; }
 
-        public GenericItemsData(string name, uint locationAddress, string levelId, string check, bool isChest = false, int id = 0)
+        public GenericItemsData(string name, uint locationAddress, string levelId, string check, LocationCheckType checkType, bool isChest = false, int id = 0)
         {
             Name = name;
             Id = id;
             Address = locationAddress;
             LevelId = levelId;
             Check = check;
+            CheckType = checkType;
             IsInChest = isChest;
         }
     }
