@@ -587,7 +587,8 @@ namespace MedievilArchipelago.Helpers
 
         public static void DefaultToArm()
         {
-            SetItemMemoryValue(Addresses.DansCurrentEquipmentSlot, 1, 1);
+            SetItemMemoryValue(Addresses.DansCurrentEquipmentSlot, 0, 0);
+            SetItemMemoryValue(Addresses.DansEquippedSecondaryWeapon, 255, 255);
             SetItemMemoryValue(Addresses.DansEquippedPrimaryWeapon, 12, 12);
         }
     }

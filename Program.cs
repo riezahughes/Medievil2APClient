@@ -20,7 +20,7 @@ public class Program
     private static async Task Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
-        Console.Title = "Medievil Archipelago Client";
+        Console.Title = "Medievil 2 Archipelago Client";
 
         // set values
         const byte US_OFFSET = 0x38; // this is ADDED to addresses to get their US location
