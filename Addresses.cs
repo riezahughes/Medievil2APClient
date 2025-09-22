@@ -49,10 +49,13 @@ namespace MedievilArchipelago
         // Cheat menu
         public const uint CheatMenu = 0x000f0608;
 
+        public const uint WinstonTalkToggle = 0x000ef104;
+        public const uint BookInteractToggle = 0x000ef268;
+
         ////////////////////////// LEVEL ADDRESSES /////////////////////////////
 
         // Current Level
-        public const uint CurrentLevel = 0x000EFF0C;
+        public const uint CurrentLevel = 0x000EFF0C; 
 
         /*  Current Level Bytes: 
 
@@ -106,8 +109,19 @@ namespace MedievilArchipelago
         ////////////////////////// LEVEL PICKUPS /////////////////////////////
 
         // Hub - Professors Lab
-        public const uint Book_LifestylesOfThePharaohs = 0x0012B419;
-        public const uint Book_ProfessorsDiary = 0x0012A495;
+        public const uint PL_Book_LifestylesOfThePharaohs = 0x0012B419;
+        public const uint PL_Book_ProfessorsDiary = 0x0012A495;
+        public const uint PL_ChaliceReward_CaneStick = 0x001006E0;
+        public const uint PL_ChaliceReward_Hammer = 0x001007F0;
+        public const uint PL_ChaliceReward_Crossbow = 0x00100900;
+        public const uint PL_ChaliceReward_Axe = 0x00100658;
+        public const uint PL_ChaliceReward_Bombs = 0x00100ADC;
+        public const uint PL_ChaliceReward_BroadSword = 0x00100614;
+        public const uint PL_ChaliceReward_Lightning = 0x001007AC;
+        public const uint PL_ChaliceReward_Blunderbuss = 0x0010069C;
+        public const uint PL_ChaliceReward_MagicSword = 0x00100724;
+        public const uint PL_ChaliceReward_GatlingGun = 0x00100768;
+
 
         // The Museum
         public const uint TM_Book_SirDan = 0x000ef262;
