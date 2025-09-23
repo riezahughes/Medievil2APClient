@@ -83,6 +83,7 @@ namespace MedievilArchipelago.Helpers
         public static async void OnDisconnected(object sender, ConnectionChangedEventArgs args, ArchipelagoClient client, bool firstRun)
         {
             if(firstRun == true)
+
             {
                 return;
             }
@@ -111,19 +112,20 @@ namespace MedievilArchipelago.Helpers
                     Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
                 #endif
                 byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
-                int runeSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("runesanity", "0").ToString());
+                int keyItemSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
                 int breakAmmoLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_ammo_limit", "0").ToString());
                 int breakChargeLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_percentage_limit", "0").ToString());
 
                 switch (args.Item)
                 {
                     case var x when x.Name.ContainsAny("Dan Hand", "Daring Dash"): ItemHandlers.ReceiveSkill(x); break;
-                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) && !x.Name.Contains("Ammo"): ItemHandlers.ReceiveEquipment(x); break;
-                    case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings): ItemHandlers.ReceiveKeyItem(x); break;
-                    case var x when x.Name.ContainsAny("Health", "Gold Coins", "Energy"): ItemHandlers.ReceiveStatItems(x); break;
                     case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, true); break;
                     case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, true); break;
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings): ItemHandlers.ReceiveEquipment(x); break;
+                    case var x when x.Name.ContainsAny("Life Bottle:"): ItemHandlers.ReceiveLifeBottle(); break;
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings): ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when x.Name.ContainsAny("Gold Coins:"): ItemHandlers.ReceiveGold(x); break;
+                    case var x when x.Name.ContainsAny("Health", "Energy:"): ItemHandlers.ReceiveEnergy(x); break;
                     case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
                     case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
                     case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;

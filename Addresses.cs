@@ -51,6 +51,7 @@ namespace MedievilArchipelago
 
         public const uint WinstonTalkToggle = 0x000ef104;
         public const uint BookInteractToggle = 0x000ef268;
+        public const uint CutscenePlayingValue = 0x000ebc5a;
 
         ////////////////////////// LEVEL ADDRESSES /////////////////////////////
 
@@ -124,27 +125,27 @@ namespace MedievilArchipelago
 
 
         // The Museum
-        public const uint TM_Book_SirDan = 0x000ef262;
-        public const uint TM_Winston_DansRoom = 0x000ef20a;
+        public const uint TM_Book_SirDan = 0x00128bed;
+        public const uint TM_Winston_DansRoom = 0x000FFA70;
         public const uint TM_Pickup_ShortSword = 0x0014471c;
         public const uint TM_Pickup_MuseumKey = 0x00144a4c;
         public const uint TM_Pickup_EnergyVialPistolRoom = 0x001450f0;
         public const uint TM_Pickup_GoldCoinsBehindPurpleStructure = 0x001455b8;
         public const uint TM_Pickup_Pistol = 0x001446d8;
-        public const uint TM_Winston_PistolRoom = 0x000ef20a;
+        public const uint TM_Winston_PistolRoom = 0x000FFA70;
         public const uint TM_Pickup_EnergyVialMausoleumRoom2F = 0x00145134;
         public const uint TM_Pickup_GoldCoinsMausoleumRoom2F1 = 0x00144ed0;
         public const uint TM_Pickup_GoldCoinsMausoleumRoom2F2 = 0x00144e48;
         public const uint TM_Pickup_GoldCoinsMausoleumRoom2F3 = 0x00144e8c;
-        public const uint TM_Winston_ChestOnMausoleumRoom2F = 0x000ef1b6;
-        public const uint TM_Winston_GoldCoinsOnMausoleumRoom2F = 0x000eefe2;
+        public const uint TM_Winston_ChestOnMausoleumRoom2F = 0x000FFA70;
+        public const uint TM_Winston_GoldCoinsOnMausoleumRoom2F = 0x000FFA70;
         public const uint TM_Pickup_CopperShield2ndFloorChest = 0x00145240;
         public const uint TM_Pickup_GoldCoinsBuddahStatueStaircase = 0x001451bc;
-        public const uint TM_Winston_ClimbingWall = 0x000eefe2;
-        public const uint TM_Winston_StaircaseAfterBuddah = 0x000ef1b6;
+        public const uint TM_Winston_ClimbingWall = 0x000FFA70;
+        public const uint TM_Winston_StaircaseAfterBuddah = 0x000FFA70;
         public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyRight = 0x0014592c;
         public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyLeft = 0x00146388;
-        public const uint TM_Winston_Chalice = 0x000ef20a;
+        public const uint TM_Winston_Chalice = 0x000FFA70;
         public const uint TM_Pickup_Cannonball = 0x0014541c;
         public const uint TM_Pickup_Torch = 0x00144650;
         public const uint TM_Pickup_GoldCoinsZarokRoomRaftersBack = 0x00145d6c;
@@ -168,7 +169,7 @@ namespace MedievilArchipelago
         public const uint TM_Pickup_Chalice = 0x0014460c;
 
         // Tyrannosaurus Wrecks
-        public const uint TW_Winston_Entrance = 0x000ef104;
+        public const uint TW_Winston_Entrance = 0x000FF628;
         public const uint TW_Pickup_GoldCoinsBagBehindLionStatue = 0x001664A0;
         public const uint TW_Pickup_CopperChestInStairway = 0x00166524;
         public const uint TW_Pickup_GoldCoinsNearSpivOnStairway = 0x001664e4;
@@ -177,13 +178,13 @@ namespace MedievilArchipelago
 
         // Kensington
         public const uint KT_Pickup_CopperShieldOnRailway = 0x00166a74;
-        public const uint KT_Winston_PushingAndPulling = 0x000ef20a;
+        public const uint KT_Winston_PushingAndPulling = 0x001006A0;
         public const uint KT_Pickup_GoldCoinsBagNearWater = 0x001658f0;
         public const uint KT_Pickup_TheDepotKey = 0x00164a10;
         public const uint KT_Pickup_TownHouseKey = 0x001649cc;
-        public const uint KT_Winston_WhereTheSpellWasCast = 0x000efc4e;
+        public const uint KT_Winston_WhereTheSpellWasCast = 0x001006A0;
         public const uint KT_Pickup_Pocketwatch = 0x001657dc;
-        public const uint KT_Winston_MuseumRoof = 0x000ef20a;
+        public const uint KT_Winston_MuseumRoof = 0x001006A0;
         public const uint KT_Pickup_Chalice = 0x001639dc;
 
         // The Tomb
@@ -194,10 +195,11 @@ namespace MedievilArchipelago
         public const uint TT_Pickup_StaffOfAnubis = 0x0014c500;
         public const uint TT_Pickup_GoldCoinsHandAreaChestGroundFloor = 0x0014f404;
         public const uint TT_Pickup_GoldCoinsHandAreaChestUpperFloor = 0x0014f448;
+        public const uint TT_Winston_Entrance = 0x001005C8;
 
         // The Freakshow
         public const uint TF_Pickup_GoldCoinsBagAtStartLeft = 0x00153604;
-        public const uint TF_Winston_Entrance = FakeAddress;
+        public const uint TF_Winston_Entrance = 0x00100928;
         public const uint TF_Pickup_GoldCoinsLadiesBagTrap1 = 0x00152218;
         public const uint TF_Pickup_GoldCoinsLadiesBagTrap2 = 0x00151E1C;
         public const uint TF_Pickup_GoldCoinsLadiesBagTrap3 = 0x00151DD8;
@@ -208,10 +210,10 @@ namespace MedievilArchipelago
         public const uint TF_Pickup_LifeBottle = 0x00151C40;
         public const uint TF_Pickup_HammerGame = FakeAddress;
         public const uint TF_Pickup_WhackAImpDrumsticks = FakeAddress;
-        public const uint TF_Winston_Trampoline = FakeAddress;
+        public const uint TF_Winston_Trampoline = 0x00100928;
         public const uint TF_Pickup_GoldCoinsChestBelowGiantClown = 0x00154280;
         public const uint TF_Pickup_GoldCoinsChestHiddenAtTrampolines = 0x0015137C;
-        public const uint TF_Winston_ElephantArmy = FakeAddress;
+        public const uint TF_Winston_ElephantArmy = 0x00100928;
         public const uint TF_Pickup_CopperShieldInChaliceRoom = 0x001527AC;
         public const uint TF_Pickup_Chalice = 0x00152C74;
         public const uint TF_Pickup_CopperShieldInElephantBossArena = 0x00151AEC;
@@ -222,18 +224,18 @@ namespace MedievilArchipelago
         public const uint TF_Pickup_GoldCoinsHandAreaHiddenChestR = 0x00153978;
 
         // Greenwich Observatory
-        public const uint GO_Winston_LostYourHead = FakeAddress;
-        public const uint GO_Winston_CloseToLadder = FakeAddress;
+        public const uint GO_Winston_LostYourHead = 0x000FF6B0;
+        public const uint GO_Winston_CloseToLadder = 0x000FF6B0;
         public const uint GO_Pickup_GoldCoinsFountainBag1 = 0x00140DD0;
         public const uint GO_Pickup_GoldCoinsFountainBag2 = 0x001411CC;
         public const uint GO_Pickup_CopperShieldNearBombChest = 0x00141AD4;
-        public const uint GO_Winston_LeverPuzzle = FakeAddress;
+        public const uint GO_Winston_LeverPuzzle = 0x000FF6B0;
         public const uint GO_Pickup_GoldCoinsBagBelowSpiv = 0x00140154;
         public const uint GO_Pickup_GoldCoinsBagBelowChalice1 = 0x001423DC;
         public const uint GO_Pickup_GoldCoinsBagBelowChalice2 = 0x00142398;
         public const uint GO_Pickup_LifeBottle = 0x00141298;
         public const uint GO_Pickup_Chalice = 0x00141254;
-        public const uint GO_Winston_OnceThroughThisDoor = FakeAddress;
+        public const uint GO_Winston_OnceThroughThisDoor = 0x000FF6B0;
         public const uint GO_Pickup_GoldCoinsChestNearExit = 0x001426C8;
         public const uint GO_Pickup_GoldCoinsHandAreaChest1 = 0x00142684;
         public const uint GO_Pickup_GoldCoinsHandAreaChest2 = 0x00142640;
@@ -243,9 +245,10 @@ namespace MedievilArchipelago
         public const uint GONA_Pickup_GoldCoinsBagNearTrees = 0x0014D794;
         public const uint GONA_Pickup_EnergyVialNearTrees = 0x0014D750;
         public const uint GONA_Pickup_Bellows = 0x0014CC6C;
+        public const uint GONA_Winston_Balloon = 0x000FF728;
 
         // Kew Gardens
-        public const uint KG_Winston_LevelStart = 0x000ef20a;
+        public const uint KG_Winston_LevelStart = 0x000FFA14;
         public const uint KG_Pickup_PottingShedKey = 0x0014145c;
         public const uint KG_Pickup_EnergyVialBehindFence1 = 0x00144a8c;
         public const uint KG_Pickup_EnergyVialBehindFence2 = 0x00144a48;
@@ -254,7 +257,7 @@ namespace MedievilArchipelago
         public const uint KG_Pickup_LifeBottle = 0x00140f50;
         public const uint KG_Pickup_GoldCoinsBagNearShed = 0x00144030;
         public const uint KG_Pickup_WaterTankValve = 0x001410e8;
-        public const uint KG_Winston_Infection = 0x000fee80;
+        public const uint KG_Winston_Infection = 0x000FFA14;
         public const uint KG_Pickup_GoldCoinsChestAtTopOfTree = 0x00143e98;
         public const uint KG_Pickup_GoldCoinsBridgeRoomVineChest1 = 0x00143f20;
         public const uint KG_Pickup_GoldCoinsBridgeRoomVineChest2 = 0x00143edc;
@@ -272,7 +275,7 @@ namespace MedievilArchipelago
         public const uint KG_Pickup_Chalice = 0x0013fe50;
 
         // Dankenstein
-        public const uint DK_Winston_SavePoint = FakeAddress;
+        public const uint DK_Winston_SavePoint = 0x000FECD0;
         public const uint DK_Pickup_Bum = 0x00101870;
         public const uint DK_Pickup_LeftArm = 0x00101870;
         public const uint DK_Pickup_LeftLeg = 0x00101870;
@@ -291,13 +294,13 @@ namespace MedievilArchipelago
         public const uint IS_Book_DankensteinManual = 0x001286a0;
 
         // Wulfrum Hall
-        public const uint WH_Winston_LevelStart = FakeAddress;
+        public const uint WH_Winston_LevelStart = 0x000FFA84;
         public const uint WH_Pickup_GoldCoinsBagLeftOfEntrance = 0x001534b4;
         public const uint WH_Pickup_FrontDoorKey = 0x001532d8;
         public const uint WH_Pickup_EnergyVialNearKitchenStairs = 0x001544a4;
         public const uint WH_Pickup_EnergyVialLeftRoomOfEntrance = 0x00154570;
         public const uint WH_Pickup_EnergyVialInFrontOfHallsStaircase = 0x00155230;
-        public const uint WH_Winston_Vampires = FakeAddress;
+        public const uint WH_Winston_Vampires = 0x000FFA84;
         public const uint WH_Pickup_GoldCoinsChestCloseToVampireRoom1 = 0x001542c8;
         public const uint WH_Pickup_SilverShieldCloseToVampireRoom2 = 0x00154d68;
         public const uint WH_Pickup_GoldCoinsChestInVampireRoom3 = 0x00153b9c;
@@ -306,11 +309,11 @@ namespace MedievilArchipelago
         public const uint WH_Pickup_Chalice = 0x0015452c;
 
         // The Count
-        public const uint TC_Winston_LevelStart = FakeAddress;
-        public const uint TC_Pickup_GoldChest = FakeAddress;
+        public const uint TC_Winston_LevelStart = 0x000FF958;
+        public const uint TC_Pickup_GoldChest = 0x00160758;
 
         // Whitechapel
-        public const uint WC_Winston_KiyaLastSeen = FakeAddress;
+        public const uint WC_Winston_KiyaLastSeen = 0x000FF640;
         public const uint WC_Pickup_LibraryKeyInHouseBasement = 0x001469E8;
         public const uint WC_Pickup_GoldCoinsBag1InHouseBasement = 0x00148CB4;
         public const uint WC_Pickup_GoldCoinsBag2InHouseBasement = 0x00148C70;
@@ -330,7 +333,7 @@ namespace MedievilArchipelago
         public const uint WC_Pickup_LifeBottle = 0x000FF640;
 
         // The Sewers
-        public const uint TS_Winston_SavePoint = FakeAddress;
+        public const uint TS_Winston_SavePoint = 0x000FF758;
         public const uint TS_GirlsFreed_1 = 0x000ff904;
         public const uint TS_GirlsFreed_2 = 0x000ff904;
         public const uint TS_GirlsFreed_3 = 0x000ff904;
@@ -340,7 +343,7 @@ namespace MedievilArchipelago
         public const uint TS_Pickup_GoldCoinsBagAtPipesAreaStart = 0x0016fc98;
         public const uint TS_Pickup_GoldCoinsBag1InPipesPuzzleRoom = 0x0017110c;
         public const uint TS_Pickup_GoldCoinsBag2InPipesPuzzleRoom = 0x001710c8;
-        public const uint TS_Winston_SomethingReallyInteresting = FakeAddress;
+        public const uint TS_Winston_SomethingReallyInteresting = 0x000FF758;
         public const uint TS_Pickup_Poster = 0x00170b34;
         public const uint TS_Pickup_EnergyVial1EndPipesArea = 0x00171a14;
         public const uint TS_Pickup_EnergyVial2EndPipesArea = 0x00171a58;
@@ -358,21 +361,22 @@ namespace MedievilArchipelago
         public const uint TTM_Book_MoonExhibit = 0x00128218;
         public const uint TTM_Pickup_TimeMachinePieceMoonExhibit = 0x00149a84;
         public const uint TTM_Book_TheTimeMachine = 0x001283e4;
+        public const uint TTM_Winston_Entrance = 0x000FF6EC;
 
         // The Time Machine, The Sewers
-        public const uint TTMTS_Winston_Entrance = FakeAddress;
-        public const uint TTMTS_Winston_KingsHat = 0x000ef10a;
+        public const uint TTMTS_Winston_Entrance = 0x000FF734;
+        public const uint TTMTS_Winston_KingsHat = 0x000FF734;
         public const uint TTMTS_Pickup_TimeStoneHutTrap = 0x00148ad4;
-        public const uint TTMTS_Winston_StealingTimeStone = 0x000ef20a;
+        public const uint TTMTS_Winston_StealingTimeStone = 0x000FF734;
         public const uint TTMTS_Pickup_KingMullocksKey = 0x00148c28;
         public const uint TTMTS_Pickup_GoodLightning = 0x000efe56;
 
         // The Ripper
-        public const uint TR_Winston_Entrance = FakeAddress;
+        public const uint TR_Winston_Entrance = 0x000FF6EC;
 
         // Cathedral Spires
         public const uint CS_Pickup_LostSoul = 0x00137a50;
-        public const uint CS_Winston_Entrance = 0x000eaa02;
+        public const uint CS_Winston_Entrance = 0x00100994;
         public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dcd4;
         public const uint CS_Pickup_GoldCoinsBottomRightNearSpiv = 0x0013ecc8;
         public const uint CS_Pickup_EnergyVialNextToSpiv = 0x0013afb0;
@@ -391,7 +395,7 @@ namespace MedievilArchipelago
         public const uint CSTD_Pickup_LostSoulTopOfPulleyFront = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulTopOfPulleyBack = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulPulleyRoomRight = 0x0013f4b4;
-        public const uint CSTD_Winston_Entrance = FakeAddress;
+        public const uint CSTD_Winston_Entrance = 0x00100B14;
         public const uint CSTD_Pickup_LifeBottle = 0x00147a3c;
         public const uint CSTD_Pickup_GoldCoinsGoldenCogRoomEntrance = 0x0014919c;
         public const uint CSTD_Pickup_GoldCoinsGoldenCogRoomBottom = 0x001491e0;
@@ -400,7 +404,7 @@ namespace MedievilArchipelago
         public const uint CSTD_Pickup_SpellPageDemonDeath = 0x00146188;
 
         // The Demon
-        public const uint TD_Winston_Entrance = 0x000f453e;
+        public const uint TD_Winston_Entrance = 0x000FFAD4;
 
         ////////////////////////// INVENTORY /////////////////////////////
 

@@ -85,7 +85,6 @@ namespace MedievilArchipelago.Helpers
             "Blunderbuss",
             "Bombs",
             "Chicken Drumsticks",
-            "Torch",
         };
 
         public static List<string> ListOfWeaponAmmoStrings = new List<string>()
@@ -105,21 +104,8 @@ namespace MedievilArchipelago.Helpers
 
         public static List<string> ListOfWeaponChargeStrings = new List<string>()
         {
-            "Small Sword",
             "Broadsword",
-            "Magic Sword",
-            "Cane Stick",
-            "Pistol",
-            "Hammer",
-            "Crossbow",
-            "Flaming Crossbow",
-            "Axe",
-            "Gatling Gun",
             "Lightning",
-            "Blunderbuss",
-            "Bombs",
-            "Chicken Drumsticks",
-            "Torch",
         };
 
         public static Dictionary<string, int> WeaponEquipDictionary = new Dictionary<string, int>
@@ -401,15 +387,27 @@ namespace MedievilArchipelago.Helpers
             SetItemMemoryValue(itemMemoryAddress, newUpdateValue, maxCountLimit);
         }
 
+        public static void UpdateGoldCount(int updateValue)
+        {
+            var currentGold = Memory.ReadShort(Addresses.DansCurrentGold);
+
+            var newUpdateValue = currentGold + updateValue;
+
+            SetItemMemoryValue(Addresses.DansCurrentGold, newUpdateValue, countMax);
+
+        }
+
         public static void UpdateHealthCount(int updateValue)
         {
             var currentEnergy = Memory.ReadShort(Addresses.DansCurrentEnergy);
             var currentStoredEnergy = Memory.ReadShort(Addresses.DansCurrentStoredEnergy);
             var currentLifeBottles = Memory.ReadShort(Addresses.DansCurrentLifeBottles);
 
-            bool useCurrentHealth = currentEnergy + updateValue >= 30;
+            bool useCurrentHealth = currentEnergy + updateValue <= 300;
 
-            SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, updateValue, currentLifeBottles);
+            Console.WriteLine($"{currentEnergy}, {updateValue}, {currentStoredEnergy}, {currentLifeBottles}, {useCurrentHealth}");
+
+            SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, currentEnergy + updateValue, useCurrentHealth ? 300: currentLifeBottles * 300);
 
         }
 
@@ -486,10 +484,16 @@ namespace MedievilArchipelago.Helpers
             UpdateLifeBottleValues();
         }
 
-        public static void ReceiveStatItems(Item item)
+        public static void ReceiveEnergy(Item item)
         {
             var amount = ExtractBracketAmount(item.Name);
             UpdateHealthCount(amount);
+        }
+
+        public static void ReceiveGold(Item item)
+        {
+            var amount = ExtractBracketAmount(item.Name);
+            UpdateGoldCount(amount);
         }
 
         public static void ReceiveSkill(Item item)
@@ -506,7 +510,7 @@ namespace MedievilArchipelago.Helpers
         public static void DefaultToArm()
         {
             SetItemMemoryValue(Addresses.DansCurrentEquipmentSlot, 0, 0);
-            SetItemMemoryValue(Addresses.DansEquippedSecondaryWeapon, 255, 255);
+            SetItemMemoryValue(Addresses.DansEquippedSecondaryWeapon, 12, 12);
             SetItemMemoryValue(Addresses.DansEquippedPrimaryWeapon, 12, 12);
         }
     }

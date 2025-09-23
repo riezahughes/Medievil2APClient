@@ -109,6 +109,8 @@ namespace MedievilArchipelago.Helpers
 
             playerStateUpdating = true;
 
+            int keyItemSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
+
             // get a list of all locatoins
             Dictionary<string, uint> all_items = ItemHandlers.FlattenedInventoryStrings();
 
@@ -122,13 +124,17 @@ namespace MedievilArchipelago.Helpers
             byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
             ItemHandlers.SetItemMemoryValue(Addresses.DansCurrentLifeBottles, 0, 0);
-            ItemHandlers.SetItemMemoryValue(Addresses.GoldenCog, 0, 0);
-            ItemHandlers.SetItemMemoryValue(Addresses.LostSoul, 0, 0);
+
+            if (keyItemSanityOption == 1)
+            {
+                ItemHandlers.SetItemMemoryValue(Addresses.GoldenCog, 0, 0);
+                ItemHandlers.SetItemMemoryValue(Addresses.LostSoul, 0, 0);
+            }
 
             // for each location that's coming in
             bool hasEquipableWeapon = false;
 
-            Console.WriteLine("Updaring player state");
+            Console.WriteLine("Updating player state...");
 
             foreach (ItemInfo itemInf in itemsCollected)
             {
@@ -156,7 +162,8 @@ namespace MedievilArchipelago.Helpers
                     // these two will need to be adjusted, functions don't exist yet.
                     //case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveDragonGem(); break;
                     //case var x when x.Name.Contains("Lost Soul"): ItemHandlers.ReceiveAmber(); break;
-                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings): ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0: ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings) && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); break;
                 }
                 usedItems.Add(itm.Name);
             }
@@ -171,7 +178,7 @@ namespace MedievilArchipelago.Helpers
                 string itemName = item.Key;
                 uint itemAddress = item.Value;
 
-                if (itemName.ContainsAny("Lost Soul", "Golden Cog"))
+                if (itemName.ContainsAny("Lost Soul", "Golden Cog") && keyItemSanityOption == 1)
                 {
                     continue;
                 }
@@ -193,7 +200,7 @@ namespace MedievilArchipelago.Helpers
                     continue;
 
                 }
-                else if (itemName.ContainsAny(ItemHandlers.ListOfKeyItemStrings))
+                else if (itemName.ContainsAny(ItemHandlers.ListOfKeyItemStrings) && keyItemSanityOption == 1)
                 {
                     ItemHandlers.SetItemMemoryValue(itemAddress, 65535, 65535);
                     continue;
