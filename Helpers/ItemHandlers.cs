@@ -38,7 +38,8 @@ namespace MedievilArchipelago.Helpers
             "Torso",
             "Bellows",
             "Lost Soul",
-            "Golden Cog",
+            "Golden Cog 1",
+            "Golden Cog 2",
             "Spell Page",
             "Griffin Shield",
             "Unicorn Shield",
@@ -64,7 +65,7 @@ namespace MedievilArchipelago.Helpers
             "Cannon Ball",
             "Front Door Key",
             "Potting Shed Key",
-            "The Depot Key",
+            "Depot Key",
             "Museum Key",
             "Dinosaur Key",
         };
@@ -72,7 +73,7 @@ namespace MedievilArchipelago.Helpers
         public static List<string> ListOfWeaponStrings = new List<string>()
         {
             "Small Sword",
-            "Broadsword",
+            "Broad Sword",
             "Magic Sword",
             "Cane Stick",
             "Pistol",
