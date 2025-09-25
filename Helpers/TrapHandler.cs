@@ -27,6 +27,10 @@ namespace MedievilArchipelago.Helpers
             byte[] DefaultMoneyIconY = BitConverter.GetBytes(0x001e);
 
             byte[] defaultSpeedValue = BitConverter.GetBytes(0x001e);
+            byte[] defaultPushValue = BitConverter.GetBytes(0x0016);
+            byte[] defaultPushRelatedValue = BitConverter.GetBytes(0x0200);
+
+
             byte[] defaultJumpValue = BitConverter.GetBytes(0x0004);
 
             byte[] defaultRenderDistance = BitConverter.GetBytes(0x1000);
@@ -48,6 +52,8 @@ namespace MedievilArchipelago.Helpers
 
             // Reset Normal Speed
             Memory.Write(Addresses.DanForwardSpeed, defaultSpeedValue);
+            Memory.Write(Addresses.DanPushValue, defaultPushValue);
+            Memory.Write(Addresses.DanPushRelatedValue, defaultPushRelatedValue);
 
             // Reset Lighting
             //Memory.Write(Addresses.RenderDistance, defaultRenderDistance);

@@ -53,25 +53,6 @@ namespace MedievilArchipelago.Helpers
 
             PlayerStateHandler.UpdatePlayerState(client, false);
 
-
-            // reset traps in case of client crashes
-
-            byte[] DefaultWeaponIconX = BitConverter.GetBytes(0x0018);
-            byte[] DefaultShieldIconX = BitConverter.GetBytes(0x0050);
-            byte[] DefaultHealthbarX = BitConverter.GetBytes(0x0100);
-            byte[] DefaultChaliceIconX = BitConverter.GetBytes(0x017e);
-            byte[] DefaultMoneyIconX = BitConverter.GetBytes(0x01b6);
-            byte[] DefaultWeaponIconY = BitConverter.GetBytes(0x001e);
-            byte[] DefaultShieldIconY = BitConverter.GetBytes(0x001e);
-            byte[] DefaultHealthbarY = BitConverter.GetBytes(0x0022);
-            byte[] DefaultChaliceIconY = BitConverter.GetBytes(0x001e);
-            byte[] DefaultMoneyIconY = BitConverter.GetBytes(0x001e);
-
-            byte[] defaultSpeedValue = BitConverter.GetBytes(0x0100);
-            byte[] defaultJumpValue = BitConverter.GetBytes(0x002f);
-
-            byte[] defaultRenderDistance = BitConverter.GetBytes(0x1000);
-
             if (PlayerStateHandler.isInTheGame())
             {
                 TrapHandlers.ResetTraps();

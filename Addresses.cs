@@ -40,6 +40,8 @@ namespace MedievilArchipelago
 
         public const uint DanForwardSpeed = 0x000CBA5C;
         public const uint DanJumpHeight = 0x000CBA6E;
+        public const uint DanPushValue = 0x000cba5e;
+        public const uint DanPushRelatedValue = 0x000cba70;
 
         // Skills
 
@@ -49,6 +51,7 @@ namespace MedievilArchipelago
         // Cheat menu
         public const uint CheatMenu = 0x000f0608;
 
+        // Important check toggles
         public const uint WinstonTalkToggle = 0x000ef104;
         public const uint BookInteractToggle = 0x000ef268;
         public const uint CutscenePlayingValue = 0x000ebc5a;
