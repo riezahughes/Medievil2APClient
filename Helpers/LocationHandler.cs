@@ -381,7 +381,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Chalice Reward: Crossbow", Addresses.PL_ChaliceReward_Crossbow, "13", "704", LocationCheckType.UShort),
                 new GenericItemsData("Chalice Reward: Axe", Addresses.PL_ChaliceReward_Axe, "13", "704", LocationCheckType.UShort),
                 new GenericItemsData("Chalice Reward: Bombs", Addresses.PL_ChaliceReward_Bombs, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Broad Sword", Addresses.PL_ChaliceReward_BroadSword, "13", "704", LocationCheckType.UShort),
+                new GenericItemsData("Chalice Reward: Broadsword", Addresses.PL_ChaliceReward_BroadSword, "13", "704", LocationCheckType.UShort),
                 new GenericItemsData("Chalice Reward: Lightning", Addresses.PL_ChaliceReward_Lightning, "13", "704", LocationCheckType.UShort),
                 new GenericItemsData("Chalice Reward: Blunderbuss", Addresses.PL_ChaliceReward_Blunderbuss, "13", "704", LocationCheckType.UShort),
                 new GenericItemsData("Chalice Reward: Magic Sword", Addresses.PL_ChaliceReward_MagicSword, "13", "704", LocationCheckType.UShort),

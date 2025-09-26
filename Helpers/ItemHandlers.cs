@@ -73,7 +73,7 @@ namespace MedievilArchipelago.Helpers
         public static List<string> ListOfWeaponStrings = new List<string>()
         {
             "Small Sword",
-            "Broad Sword",
+            "Broadsword",
             "Magic Sword",
             "Cane Stick",
             "Pistol",
@@ -184,7 +184,7 @@ namespace MedievilArchipelago.Helpers
                 ["Blunderbuss"] = 50,
                 ["Crossbow"] = 200,
                 ["Flaming Crossbow"] = 200,
-                ["Broad Sword"] = 4096,
+                ["Broadsword"] = 4096,
                 ["Bombs"] = 20,
                 ["Chicken Drumsticks"] = 30,
                 ["Gatling Gun"] = 999,
@@ -358,7 +358,13 @@ namespace MedievilArchipelago.Helpers
 
         public static void UpdateAmmoCount(string itemName, uint itemMemoryAddress, int updateValue, bool breakLimit)
         {
-            var currentNumberAmount = Memory.ReadShort(itemMemoryAddress);
+            var currentNumberAmount = Memory.ReadUShort(itemMemoryAddress);
+
+            if (currentNumberAmount == 65535)
+            {
+                return;
+            }
+
             var maxCountLimit = countMax;
             var limitDict = AmmoAndChargeLimits();
 
@@ -377,6 +383,12 @@ namespace MedievilArchipelago.Helpers
             var currentNumberAmount = Memory.ReadShort(itemMemoryAddress);
             var maxCountLimit = percentageMax;
             var dict = AmmoAndChargeLimits();
+
+
+            if (currentNumberAmount == 65535)
+            {
+                return;
+            }
 
             if (!breakLimit)
             {
