@@ -111,29 +111,29 @@ namespace MedievilArchipelago.Helpers
 
         public static Dictionary<string, int> WeaponEquipDictionary = new Dictionary<string, int>
         {
-            {"Equipment: Small Sword", 0},
-            {"Equipment: Broadsword", 1},
-            {"Equipment: Magic Sword", 2},
-            {"Equipment: Cane Stick", 3},
-            {"Equipment: Pistol", 4},
-            {"Equipment: Hammer", 5},
-            {"Equipment: Crossbow", 6},
-            {"Equipment: Flaming Crossbow", 7},
-            {"Equipment: Axe", 8},
-            {"Equipment: Gatling Gun", 9},
-            {"Equipment: Lightning",11 },
+            {"Small Sword", 0},
+            {"Broadsword", 1},
+            {"Magic Sword", 2},
+            {"Cane Stick", 3},
+            {"Pistol", 4},
+            {"Hammer", 5},
+            {"Crossbow", 6},
+            {"Flaming Crossbow", 7},
+            {"Axe", 8},
+            {"Gatling Gun", 9},
+            {"Lightning",11 },
             {"Dans Arm", 12 },
-            {"Equipment: Blunderbuss",13},
-            {"Equipment: Bombs", 14},
-            {"Equipment: Chicken Drumsticks", 15},
-            {"Equipment: Torch", 16}
+            {"Blunderbuss",13},
+            {"Bombs", 14},
+            {"Chicken Drumsticks", 15},
+            {"Torch", 16}
         };
 
         public static Dictionary<string, int> ShieldEquipDictionary = new Dictionary<string, int>
         {
-            {"Equipment: Copper Shield", 0},
-            {"Equipment: Silver Shield", 1},
-            {"Equipment: Gold Shield", 2}
+            {"Copper Shield", 0},
+            {"Silver Shield", 1},
+            {"Gold Shield", 2}
         };
 
         public static Dictionary<string, uint> FlattenedInventoryStrings()

@@ -40,6 +40,7 @@ namespace MedievilArchipelago
 
         public const uint DanForwardSpeed = 0x000CBA5C;
         public const uint DanJumpHeight = 0x000CBA6E;
+        public const uint DanClimbValue = 0x000cba72;
         public const uint DanPushValue = 0x000cba5e;
         public const uint DanPushRelatedValue = 0x000cba70;
 

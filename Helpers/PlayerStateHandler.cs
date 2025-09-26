@@ -215,7 +215,8 @@ namespace MedievilArchipelago.Helpers
             }
             else
             {
-                ItemHandlers.EquipWeapon(currentPrimaryWeapon);
+                ItemHandlers.EquipWeapon(currentPrimaryWeapon); 
+                ItemHandlers.EquipWeapon(currentSecondaryWeapon);
             }
 
 
