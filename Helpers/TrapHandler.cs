@@ -28,9 +28,9 @@ namespace MedievilArchipelago.Helpers
 
             byte[] defaultSpeedValue = BitConverter.GetBytes(0x001e);
             byte[] defaultClimbValue = BitConverter.GetBytes(0x001e);
-            byte[] defaultPushValue = BitConverter.GetBytes(0x0016);
+            byte[] defaultPushValue = BitConverter.GetBytes(0x001e);
             byte[] defaultPushRelatedValue = BitConverter.GetBytes(0x0200);
-
+            byte[] defaultSidewaysValue = BitConverter.GetBytes(0x001e);
 
             byte[] defaultJumpValue = BitConverter.GetBytes(0x0004);
 
@@ -53,9 +53,10 @@ namespace MedievilArchipelago.Helpers
 
             // Reset Normal Speed
             Memory.Write(Addresses.DanForwardSpeed, defaultSpeedValue);
+            Memory.Write(Addresses.DanClimbValue, defaultClimbValue);
             Memory.Write(Addresses.DanPushValue, defaultPushValue);
             Memory.Write(Addresses.DanPushRelatedValue, defaultPushRelatedValue);
-            Memory.Write(Addresses.DanClimbValue, defaultClimbValue);
+            Memory.Write(Addresses.DanSidewaysValue, defaultSidewaysValue);
 
             // Reset Lighting
             //Memory.Write(Addresses.RenderDistance, defaultRenderDistance);
@@ -73,14 +74,28 @@ namespace MedievilArchipelago.Helpers
         public static void HeavyDanTrap()
 
         {
-            byte[] defaultValue = BitConverter.GetBytes(0x001e);
+
+
+            byte[] defaultSpeedValue = BitConverter.GetBytes(0x001e);
+            byte[] defaultClimbValue = BitConverter.GetBytes(0x001e);
+            byte[] defaultPushValue = BitConverter.GetBytes(0x001e);
+            byte[] defaultPushRelatedValue = BitConverter.GetBytes(0x0200);
+            byte[] defaultSidewaysValue = BitConverter.GetBytes(0x001e);
+
             byte[] changedValue = BitConverter.GetBytes(0x000a);
             TimeSpan duration = TimeSpan.FromSeconds(15);
+
             Memory.Write(Addresses.DanForwardSpeed, changedValue);
 
             Task.Delay(duration).ContinueWith(delegate
             {
-                Memory.Write(Addresses.DanForwardSpeed, defaultValue);
+                Memory.Write(Addresses.DanForwardSpeed, defaultSpeedValue);
+
+                // update related locations
+                Memory.Write(Addresses.DanClimbValue, defaultClimbValue);
+                Memory.Write(Addresses.DanPushValue, defaultPushValue);
+                Memory.Write(Addresses.DanPushRelatedValue, defaultPushRelatedValue);
+                Memory.Write(Addresses.DanSidewaysValue, defaultSidewaysValue);
             }, TaskScheduler.Default);
 
         }
