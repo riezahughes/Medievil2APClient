@@ -88,6 +88,13 @@ namespace MedievilArchipelago.Helpers
             "Chicken Drumsticks",
         };
 
+        public static List<string> ListOfShieldStrings = new List<string>()
+        {
+            "Copper Shield",
+            "Silver Shield",
+            "Gold Shield",
+        };
+
         public static List<string> ListOfWeaponAmmoStrings = new List<string>()
         {
             "Pistol",
@@ -188,7 +195,10 @@ namespace MedievilArchipelago.Helpers
                 ["Bombs"] = 20,
                 ["Chicken Drumsticks"] = 30,
                 ["Gatling Gun"] = 999,
-                ["Lightning"] = 4096
+                ["Lightning"] = 4096,
+                ["Copper Shield"] = 150,
+                ["Silver Shield"] = 250,
+                ["Gold Shield"] = 400
             };
         }
 
@@ -340,13 +350,22 @@ namespace MedievilArchipelago.Helpers
             SetItemMemoryValue(itemMemoryAddress, 1, 1);
         }
 
-        public static void UpdateEquippedItemValues(uint itemMemoryAddress)
+        public static void UpdateEquippedItemValues(uint itemMemoryAddress, string inventoryItem)
         {
             var currentWeaponValue = Memory.ReadShort(itemMemoryAddress);
 
+            var dict = AmmoAndChargeLimits();
+
             if (currentWeaponValue == -1)
             {
-                SetItemMemoryValue(itemMemoryAddress, 1, 1);
+                var fillValue = 1;
+
+                if (inventoryItem.ContainsAny(ListOfWeaponAmmoStrings) || inventoryItem.ContainsAny(ListOfWeaponChargeStrings) || inventoryItem.ContainsAny(ListOfShieldStrings))
+                {
+                    fillValue = dict[inventoryItem];
+                }
+
+                SetItemMemoryValue(itemMemoryAddress, fillValue, fillValue);
             }
         }
 
@@ -478,7 +497,7 @@ namespace MedievilArchipelago.Helpers
         {
             var addressDict = StatusAndInventoryAddressDictionary();
 
-            UpdateEquippedItemValues(addressDict["Equipment"][item.Name]);
+            UpdateEquippedItemValues(addressDict["Equipment"][item.Name], item.Name);
 
         }
 

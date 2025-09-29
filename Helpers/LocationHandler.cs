@@ -27,7 +27,7 @@ namespace MedievilArchipelago.Helpers
     public class LocationHandlers
     {
 
-        public static List<ILocation> BuildLocationList(Dictionary<string, object> options)
+        public static List<ILocation> BuildLocationList(Dictionary<string, object> options, byte offset = 0)
         {
             int base_id = 99250000;
             int region_offset = 1000;
@@ -432,7 +432,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Winston: Dans Room - TM", Addresses.TM_Winston_DansRoom, "10", "353", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Pistol Room - TM", Addresses.TM_Winston_PistolRoom, "10", "356", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Chest on Mausoleum Room 2nd Floor - TM", Addresses.TM_Winston_ChestOnMausoleumRoom2F, "10", "326", LocationCheckType.UShort),
-                new GenericItemsData("Winston: Gold Coins on Mausoleum Room 2nd Floor - TM", Addresses.TM_Winston_GoldCoinsOnMausoleumRoom2F, "10", "299", LocationCheckType.UShort),
+                new GenericItemsData("Winston: Gold Coins on Mausoleum Room 2nd Floor - TM", Addresses.TM_Winston_GoldCoinsOnMausoleumRoom2F, "10", "395", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Climbing Wall - TM", Addresses.TM_Winston_GoldCoinsOnMausoleumRoom2F, "10", "365", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Staircase After Buddah - TM", Addresses.TM_Winston_StaircaseAfterBuddah, "10", "277", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Chalice - TM", Addresses.TM_Winston_Chalice, "10", "289", LocationCheckType.UShort),

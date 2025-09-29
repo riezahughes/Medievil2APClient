@@ -110,32 +110,6 @@ public class Program
         }
 
 
-        // wait until you can read the euro/US
-
-        // doesn't work. got wrong memory address. I tried.
-        //while(!hasFoundMem)
-        //{
-        //    Console.Clear();
-        //    short region = Memory.ReadShort(0x001c3540);
-
-        //    if (region == 817)
-        //    {
-        //        Console.WriteLine("PAL Copy of the game found");
-        //        hasFoundMem = true;
-        //    }
-        //    if (region == 31370)
-        //    {
-        //        //Memory.GlobalOffset. = Memory.GlobalOffset - US_OFFSET; // this line isn't working. Once i can get the offset working it should go with the US version of the game. *should*..
-        //        Console.WriteLine("US Copy of the game found. Please note that i've not done any tests with the US version of the game. This progam has been built to work with the PAL one. Use so at your own discretion.");
-        //        hasFoundMem = true;
-        //    } else
-        //    {
-        //        Console.WriteLine("Looking for game version...");
-        //        await Task.Delay(5000);
-        //    }
-
-        //};
-
         #if DEBUG
             // auto logs in with Local.json settings if it's set to dev (because laziness)
             var configuration = new ConfigurationBuilder()
