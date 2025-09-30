@@ -159,7 +159,16 @@ namespace MedievilArchipelago.Helpers
         {
             if (client?.CurrentSession?.Items?.AllItemsReceived.Count == client?.GameState.ReceivedItems.Count())
             {
+                var currentPrimaryWeapon = Memory.ReadByte(Addresses.DansEquippedPrimaryWeapon);
+                var currentSecondaryWeapon = Memory.ReadByte(Addresses.DansEquippedSecondaryWeapon);
+
                 PlayerStateHandler.UpdatePlayerState(client, false);
+
+                Console.WriteLine($"{currentPrimaryWeapon} {currentSecondaryWeapon}");
+                if(currentPrimaryWeapon == 12 && currentSecondaryWeapon == 0)
+                {
+                    ItemHandlers.DefaultToArm();
+                }
                 #if DEBUG
                         Console.WriteLine($"LocationCompleted Firing. {e.CompletedLocation.Name} - {e.CompletedLocation.Id} Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
                 #endif

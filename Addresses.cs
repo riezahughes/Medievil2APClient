@@ -28,6 +28,7 @@ namespace MedievilArchipelago
         public const uint DansCurrentGold = 0x000f15b4;
         public const uint DansCurrentLifeBottles = 0x000f1534; // uses full health bars to count (300 = 1)
 
+        public const uint DansCurrentWeapon = 0x000F1538;
         public const uint DansCurrentEquipmentSlot = 0x000F153C;
         public const uint DansEquippedPrimaryWeapon = 0x000F1540;
         public const uint DansEquippedSecondaryWeapon = 0x000F1544;

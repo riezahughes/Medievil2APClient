@@ -300,7 +300,7 @@ namespace MedievilArchipelago.Helpers
                     ["Cannon Ball"] = Addresses.CannonBall,
                     ["Front Door Key"] = Addresses.FrontDoorKey,
                     ["Potting Shed Key"] = Addresses.PottingShedKey,
-                    ["The Depot Key"] = Addresses.TheDepotKey,
+                    ["Depot Key"] = Addresses.TheDepotKey,
                     ["Museum Key"] = Addresses.MuseumKey,
                     ["Dinosaur Key"] = Addresses.DinosaurKey
                 },
@@ -534,9 +534,11 @@ namespace MedievilArchipelago.Helpers
             SetItemMemoryValue(Addresses.DansHandSkill, 1, 1);
         }
 
-        public static void EquipWeapon(int value)
+        public static void EquipWeapon(short currentPrimary, short currentSecondary, byte chosenSlotValue)
         {
-            SetItemMemoryValue(Addresses.DansEquippedPrimaryWeapon, value, value);
+            
+            var value = chosenSlotValue == 0 ? currentPrimary : currentSecondary;
+            SetItemMemoryValue(Addresses.DansCurrentWeapon, value, value);
         }
 
         public static void DefaultToArm()
@@ -544,6 +546,7 @@ namespace MedievilArchipelago.Helpers
             SetItemMemoryValue(Addresses.DansCurrentEquipmentSlot, 0, 0);
             SetItemMemoryValue(Addresses.DansEquippedSecondaryWeapon, 12, 12);
             SetItemMemoryValue(Addresses.DansEquippedPrimaryWeapon, 12, 12);
+            SetItemMemoryValue(Addresses.DansCurrentWeapon, 12, 12);
         }
     }
 }

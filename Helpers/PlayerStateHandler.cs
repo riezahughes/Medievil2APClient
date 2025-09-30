@@ -121,6 +121,7 @@ namespace MedievilArchipelago.Helpers
 
             short currentPrimaryWeapon = Memory.ReadShort(Addresses.DansEquippedPrimaryWeapon);
             short currentSecondaryWeapon = Memory.ReadShort(Addresses.DansEquippedSecondaryWeapon);
+            byte currentSlotChoice = Memory.ReadByte(Addresses.DansCurrentEquipmentSlot);
             byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
             ItemHandlers.SetItemMemoryValue(Addresses.DansCurrentLifeBottles, 0, 0);
@@ -209,14 +210,13 @@ namespace MedievilArchipelago.Helpers
 
             }
 
-            if (!hasEquipableWeapon)
+            if (hasEquipableWeapon != true)
             {
                 ItemHandlers.DefaultToArm();
             }
             else
             {
-                ItemHandlers.EquipWeapon(currentPrimaryWeapon); 
-                ItemHandlers.EquipWeapon(currentSecondaryWeapon);
+                ItemHandlers.EquipWeapon(currentPrimaryWeapon, currentSecondaryWeapon, currentSlotChoice); 
             }
 
 
