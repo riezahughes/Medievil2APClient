@@ -13,9 +13,9 @@ namespace MedievilArchipelago.Helpers
     {
         private static bool CheckDemonCondition(ArchipelagoClient client)
         {
-            if(client?.GameState?.CompletedLocations == null) return false;
+            if(client?.LocationState?.CompletedLocations == null) return false;
 
-            if (client?.GameState?.CompletedLocations.Any(x => x != null && x.Name.Equals("Cleared: The Demon")) == true)
+            if (client?.LocationState?.CompletedLocations.Any(x => x != null && x.Name.Equals("Cleared: The Demon")) == true)
             {
                 Console.WriteLine("You've Defeated The Demon!");
                 return true;
@@ -52,7 +52,7 @@ namespace MedievilArchipelago.Helpers
         public static bool CheckGoalCondition(ArchipelagoClient client)
         {
 
-            if (client?.GameState?.CompletedLocations == null)
+            if (client?.LocationState?.CompletedLocations == null)
             {
                 return false;
             }

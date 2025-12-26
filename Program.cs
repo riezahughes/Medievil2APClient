@@ -12,6 +12,7 @@ using Archipelago.Core.Util.Overlay;
 using Archipelago.MultiClient.Net.Models;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using MedievilArchipelago.Helpers;
 
 public class Program
 {
@@ -211,7 +212,7 @@ public class Program
             overlayOptions.XOffset = 50;
             overlayOptions.YOffset = 500;
             overlayOptions.FontSize = 12;
-            overlayOptions.TextColor = Archipelago.Core.Util.Overlay.Color.Yellow;
+            overlayOptions.DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow;
 
             var gameOverlay = new WindowsOverlayService(overlayOptions);
 
@@ -219,7 +220,8 @@ public class Program
             //Console.WriteLine(fontPath)
             //gameOverlay.CreateFont(fontPath, 12);
 
-            archipelagoClient.IntializeOverlayService(gameOverlay);
+            // overlay is turned off till version update of AP Client Library
+            //archipelagoClient.IntializeOverlayService(gameOverlay);
 
             while (archipelagoClient.CurrentSession == null)
             {
@@ -227,11 +229,28 @@ public class Program
                 Thread.Sleep(1000);
             }
 
-            archipelagoClient.ShouldSaveStateOnItemReceived = false;
             archipelagoClient.CurrentSession.Locations.CheckedLocationsUpdated += Helpers.APHandlers.Locations_CheckedLocationsUpdated;
 
+            // listen for the memory shift happening
 
-            GameLocations = Helpers.LocationHandlers.BuildLocationList(archipelagoClient.Options);
+            GameLocations = LocationHandlers.BuildLocationList(archipelagoClient.Options);
+
+            // Check for when ripper dies and shifts memory
+
+            var task = Memory.MonitorAddressForAction<byte>(
+                Addresses.TR_LevelStatus,
+                () =>
+                {
+                    // Read as a single byte to avoid grabbing neighboring data
+                    var val = Memory.Read<byte>(Addresses.TR_LevelStatus, Enums.Endianness.Big);
+#if DEBUG
+                    Console.WriteLine("!!!!!  MEMORY SHIFT IS HAPPENING !!!!!");
+                    LocationHandlers.MemoryShiftAfterRipperClear(archipelagoClient, archipelagoClient.Options);
+                    Console.WriteLine("!!!!!  MEMORY SHIFT DONE !!!!!");
+#endif
+                },
+                value => value >= 9);
+
 
             // Set up GPS
             //archipelagoClient.GPSHandler = Helpers.APHandlers.Client_GPSHandler();
@@ -258,7 +277,7 @@ public class Program
 
             firstRun = false;
 
-            _ = archipelagoClient.MonitorLocations(GameLocations, _cancellationTokenSource.Token);
+            _ = archipelagoClient.MonitorLocations(GameLocations);
             //_ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
 
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
@@ -279,7 +298,7 @@ public class Program
                     }
                     else if (input?.Trim().ToLower() == "update")
                     {
-                        if (archipelagoClient.GameState.CompletedLocations != null)
+                        if (archipelagoClient.LocationState.CompletedLocations != null)
                         {
                             Helpers.PlayerStateHandler.UpdatePlayerState(archipelagoClient, false);
                             Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
