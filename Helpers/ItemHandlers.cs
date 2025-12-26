@@ -9,8 +9,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using SharpDX.Direct2D1.Effects;
-using SharpDX.DirectWrite;
 
 namespace MedievilArchipelago.Helpers
 {

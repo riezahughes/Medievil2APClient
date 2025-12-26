@@ -20,9 +20,9 @@ namespace MedievilArchipelago.Models
 
         public LocationCheckType CheckType { get; set; }
 
-        public bool IsInChest { get; set; }
+        public uint RipperShiftAddress { get; set; }
 
-        public GenericItemsData(string name, uint locationAddress, string levelId, string check, LocationCheckType checkType, bool isChest = false, int id = 0)
+        public GenericItemsData(string name, uint locationAddress, string levelId, string check, LocationCheckType checkType, int id = 0, uint ripperShiftAddress = 0)
         {
             Name = name;
             Id = id;
@@ -30,7 +30,7 @@ namespace MedievilArchipelago.Models
             LevelId = levelId;
             Check = check;
             CheckType = checkType;
-            IsInChest = isChest;
+            RipperShiftAddress = ripperShiftAddress;
         }
     }
 }

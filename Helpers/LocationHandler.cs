@@ -1,33 +1,31 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Models;
-using Archipelago.Core.Util;
-using Archipelago.Core.Util.GPS;
-using Archipelago.MultiClient.Net.Models;
 using MedievilArchipelago.Models;
-using Newtonsoft.Json;
-using Serilog;
-using SharpDX.DXGI;
-using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.InteropServices.JavaScript;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using Location = Archipelago.Core.Models.Location;
 
 namespace MedievilArchipelago.Helpers
 {
     public class LocationHandlers
     {
+        public static void MemoryShiftAfterRipperClear(ArchipelagoClient client, Dictionary<string, object>  options)
+        {
+            // After The Ripper is cleared, some memory addresses shift
 
-        public static List<ILocation> BuildLocationList(Dictionary<string, object> options, byte offset = 0)
+            var currentLocations = BuildLocationList(options);
+            var newLocations = BuildLocationList(options, 0, true);
+
+            foreach (var loc in currentLocations)
+            {
+                client.RemoveLocationAsync(loc);
+            }
+
+            foreach (var loc in newLocations)
+            { 
+                client.AddLocationAsync(loc);
+            }
+        }
+
+        public static List<ILocation> BuildLocationList(Dictionary<string, object> options, byte offset = 0, bool ripperShift = false)
         {
             int base_id = 99250000;
             int region_offset = 1000;
@@ -139,7 +137,7 @@ namespace MedievilArchipelago.Helpers
                                 {
                                     Id = -1,
                                     Name = "Talk Check",
-                                    Address = loc.Address,
+                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
                                     CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Match,
                                     CheckValue = loc.Check
@@ -202,7 +200,7 @@ namespace MedievilArchipelago.Helpers
                                 {
                                     Id = -1,
                                     Name = "Read Check",
-                                    Address = loc.Address,
+                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
                                     CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Match,
                                     CheckValue = loc.Check
@@ -253,7 +251,7 @@ namespace MedievilArchipelago.Helpers
                                 {
                                     Id = -1,
                                     Name = "Read Check",
-                                    Address = loc.Address,
+                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
                                     CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Match,
                                     CheckValue = loc.Check
@@ -294,8 +292,8 @@ namespace MedievilArchipelago.Helpers
                                 conditionalChoice.Add(new Location()
                                 {
                                     Id = -1,
-                                    Name = "Pickup Check",
-                                    Address = loc.Address,
+                                    Name = "Level Clear Check",
+                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
                                     CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Range,
                                     RangeStartValue = "9",
@@ -336,11 +334,18 @@ namespace MedievilArchipelago.Helpers
                                 {
                                     Id = -1,
                                     Name = "Pickup Check",
-                                    Address = loc.Address,
+                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
                                     CheckType = loc.CheckType,
                                     CompareType = LocationCheckCompareType.Match,
                                     CheckValue = loc.Check
                                 });
+
+
+                                // testing for memory shift.
+                                //if(ripperShift && loc.RipperShiftAddress != 0)
+                                //{
+                                //    Console.WriteLine($"New Address for {loc.Name} is {loc.RipperShiftAddress:X}");
+                                //}
 
                                 CompositeLocation location = new CompositeLocation()
                                 {
@@ -374,18 +379,18 @@ namespace MedievilArchipelago.Helpers
         {
             List<GenericItemsData> hubLocations = new List<GenericItemsData>()
             {
-                new GenericItemsData("Book: Lifestyles of the Pharaohs", Addresses.PL_Book_LifestylesOfThePharaohs, "13", "0", LocationCheckType.Byte),
-                new GenericItemsData("Book: Professor's Diary", Addresses.PL_Book_ProfessorsDiary, "13", "0", LocationCheckType.Byte),
-                new GenericItemsData("Chalice Reward: Cane Stick", Addresses.PL_ChaliceReward_CaneStick, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Hammer", Addresses.PL_ChaliceReward_Hammer, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Crossbow", Addresses.PL_ChaliceReward_Crossbow, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Axe", Addresses.PL_ChaliceReward_Axe, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Bombs", Addresses.PL_ChaliceReward_Bombs, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Broadsword", Addresses.PL_ChaliceReward_BroadSword, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Lightning", Addresses.PL_ChaliceReward_Lightning, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Blunderbuss", Addresses.PL_ChaliceReward_Blunderbuss, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Magic Sword", Addresses.PL_ChaliceReward_MagicSword, "13", "704", LocationCheckType.UShort),
-                new GenericItemsData("Chalice Reward: Gatling Gun", Addresses.PL_ChaliceReward_GatlingGun, "13", "704", LocationCheckType.UShort),
+                new GenericItemsData("Book: Lifestyles of the Pharaohs", Addresses.PL_Book_LifestylesOfThePharaohs, "13", "0", LocationCheckType.Byte, 0, Addresses.PL_Book_Shift_LifestylesOfThePharaohs ),
+                new GenericItemsData("Book: Professor's Diary", Addresses.PL_Book_ProfessorsDiary, "13", "0", LocationCheckType.Byte, 0, Addresses.PL_Book_Shift_ProfessorsDiary ),
+                new GenericItemsData("Chalice Reward: Cane Stick", Addresses.PL_ChaliceReward_CaneStick, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_CaneStick ),
+                new GenericItemsData("Chalice Reward: Hammer", Addresses.PL_ChaliceReward_Hammer, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Hammer ),
+                new GenericItemsData("Chalice Reward: Crossbow", Addresses.PL_ChaliceReward_Crossbow, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Crossbow ),
+                new GenericItemsData("Chalice Reward: Axe", Addresses.PL_ChaliceReward_Axe, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Axe ),
+                new GenericItemsData("Chalice Reward: Bombs", Addresses.PL_ChaliceReward_Bombs, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Bombs ),
+                new GenericItemsData("Chalice Reward: Broadsword", Addresses.PL_ChaliceReward_BroadSword, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_BroadSword ),
+                new GenericItemsData("Chalice Reward: Lightning", Addresses.PL_ChaliceReward_Lightning, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Lightning ),
+                new GenericItemsData("Chalice Reward: Blunderbuss", Addresses.PL_ChaliceReward_Blunderbuss, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_Blunderbuss ),
+                new GenericItemsData("Chalice Reward: Magic Sword", Addresses.PL_ChaliceReward_MagicSword, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_MagicSword ),
+                new GenericItemsData("Chalice Reward: Gatling Gun", Addresses.PL_ChaliceReward_GatlingGun, "13", "704", LocationCheckType.UShort, 0, Addresses.PL_ChaliceReward_Shift_GatlingGun )
             };
 
             return hubLocations;

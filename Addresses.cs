@@ -1,19 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.JavaScript;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Archipelago.Core.Util.GPS;
-using SharpDX.Direct2D1;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace MedievilArchipelago
+﻿namespace MedievilArchipelago
 {
     public static class Addresses
     {
@@ -129,6 +114,20 @@ namespace MedievilArchipelago
         public const uint PL_ChaliceReward_Blunderbuss = 0x0010069C;
         public const uint PL_ChaliceReward_MagicSword = 0x00100724;
         public const uint PL_ChaliceReward_GatlingGun = 0x00100768;
+
+        // Hub - Professors Lab - After Ripper Has Been Defeated
+        public const uint PL_Book_Shift_LifestylesOfThePharaohs = 0x0012B419;
+        public const uint PL_Book_Shift_ProfessorsDiary = 0x0012A495;
+        public const uint PL_ChaliceReward_Shift_CaneStick = 0x001006B8;
+        public const uint PL_ChaliceReward_Shift_Hammer = 0x001007C8;
+        public const uint PL_ChaliceReward_Shift_Crossbow = 0x001008D8;
+        public const uint PL_ChaliceReward_Shift_Axe = 0x00100630;
+        public const uint PL_ChaliceReward_Shift_Bombs = 0x00100AB4;
+        public const uint PL_ChaliceReward_Shift_BroadSword = 0x001005EC;
+        public const uint PL_ChaliceReward_Shift_Lightning = 0x00100784;
+        public const uint PL_ChaliceReward_Shift_Blunderbuss = 0x00100674;
+        public const uint PL_ChaliceReward_Shift_MagicSword = 0x001006FC;
+        public const uint PL_ChaliceReward_Shift_GatlingGun = 0x00100740;
 
 
         // The Museum
