@@ -96,7 +96,6 @@ namespace MedievilArchipelago.Helpers
         public static List<string> ListOfWeaponAmmoStrings = new List<string>()
         {
             "Pistol",
-            "Hammer",
             "Crossbow",
             "Flaming Crossbow",
             "Axe",

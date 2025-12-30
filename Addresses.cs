@@ -174,6 +174,18 @@
         public const uint TM_Pickup_GoldCoinsSecondHandRoomChestOnBoxes = 0x00145A80;
         public const uint TM_Pickup_Chalice = 0x0014460c;
 
+        // The Museum - After Ripper Has Been Defeated
+        public const uint TM_Winston_Shift_DansRoom = 0x001008F8;
+        public const uint TM_Winston_Shift_PistolRoom = 0x001008F8;
+        public const uint TM_Winston_Shift_ChestOnMausoleumRoom2F = 0x001008F8;
+        public const uint TM_Winston_Shift_GoldCoinsOnMausoleumRoom2F = 0x001008F8;
+        public const uint TM_Winston_Shift_ClimbingWall = 0x001008F8;
+        public const uint TM_Winston_Shift_StaircaseAfterBuddah = 0x001008F8;
+        public const uint TM_Winston_Shift_Chalice = 0x001008F8;
+
+        public const uint TM_Book_Shift_TheKraken = 0x00128570;
+        public const uint TM_Book_Shift_Zarok = 0x001281b4;
+
         // Tyrannosaurus Wrecks
         public const uint TW_Winston_Entrance = 0x000FF628;
         public const uint TW_Pickup_GoldCoinsBagBehindLionStatue = 0x001664A0;
@@ -181,6 +193,9 @@
         public const uint TW_Pickup_GoldCoinsNearSpivOnStairway = 0x001664e4;
         public const uint TW_Book_DinosaurDisplay = 0x00128414;
         public const uint TW_Pickup_LifeBottle = 0x00166748;
+         
+        // Tyrannosaurus Wrecks - After Ripper Has Been Defeated
+        public const uint TW_Winston_Shift_Entrance = 0x000FF914;
 
         // Kensington
         public const uint KT_Pickup_CopperShieldOnRailway = 0x00166a74;
@@ -193,6 +208,11 @@
         public const uint KT_Winston_MuseumRoof = 0x001006A0;
         public const uint KT_Pickup_Chalice = 0x001639dc;
 
+        // Kensington - After Ripper Has Been Defeated
+        public const uint KT_Winston_Shift_PushingAndPulling = 0x000FF410;
+        public const uint KT_Winston_Shift_WhereTheSpellWasCast = 0x000FF410;
+        public const uint KT_Winston_Shift_MuseumRoof = 0x000FF410;
+
         // The Tomb
         public const uint TT_Pickup_GoldCoinsTombEntranceTopR = 0x0014f090;
         public const uint TT_Pickup_GoldCoinsTombEntranceTopL = 0x0014f04c;
@@ -202,6 +222,9 @@
         public const uint TT_Pickup_GoldCoinsHandAreaChestGroundFloor = 0x0014f404;
         public const uint TT_Pickup_GoldCoinsHandAreaChestUpperFloor = 0x0014f448;
         public const uint TT_Winston_Entrance = 0x001005C8;
+
+        // The Tomb - After Ripper Has Been Defeated
+        public const uint TT_Winston_Shift_Entrance = 0x00100D40;
 
         // The Freakshow
         public const uint TF_Pickup_GoldCoinsBagAtStartLeft = 0x00153604;
@@ -229,6 +252,11 @@
         public const uint TF_Pickup_GoldCoinsHandAreaHiddenChestL = 0x00153934;
         public const uint TF_Pickup_GoldCoinsHandAreaHiddenChestR = 0x00153978;
 
+        // The Freakshow - After Ripper Has Been Defeated
+        public const uint TF_Winston_Shift_Entrance = 0x001013E8;
+        public const uint TF_Winston_Shift_Trampoline = 0x001013E8;
+        public const uint TF_Winston_Shift_ElephantArmy = 0x001013E88;
+
         // Greenwich Observatory
         public const uint GO_Winston_LostYourHead = 0x000FF6B0;
         public const uint GO_Winston_CloseToLadder = 0x000FF6B0;
@@ -247,11 +275,20 @@
         public const uint GO_Pickup_GoldCoinsHandAreaChest2 = 0x00142640;
         public const uint GO_Pickup_GoldCoinsHandAreaChest3 = 0x001425FC;
 
+        // Greenwich Observatory - After Ripper Has Been Defeated
+        public const uint GO_Winston_Shift_LostYourHead = 0x00100560;
+        public const uint GO_Winston_Shift_CloseToLadder = 0x00100560;
+        public const uint GO_Winston_Shift_LeverPuzzle = 0x00100560;
+        public const uint GO_Winston_Shift_OnceThroughThisDoor = 0x00100560;
+
         // Greenwhich Observatory, Naval Academy
         public const uint GONA_Pickup_GoldCoinsBagNearTrees = 0x0014D794;
         public const uint GONA_Pickup_EnergyVialNearTrees = 0x0014D750;
         public const uint GONA_Pickup_Bellows = 0x0014CC6C;
-        public const uint GONA_Winston_Balloon = 0x000FF728;
+        public const uint GONA_Winston_Balloon = 0x000ff728;
+
+        // Greenwhich Observatory, Naval Academy - After Ripper Has Been Defeated
+        public const uint GONA_Winston_Shift_Balloon = 0x001005C0;
 
         // Kew Gardens
         public const uint KG_Winston_LevelStart = 0x000FFA14;
@@ -261,6 +298,7 @@
         public const uint KG_Pickup_GoldCoinsBehindFenceChest1 = 0x00144ad0;
         public const uint KG_Pickup_GoldCoinsBehindFenceChest2 = 0x00144d78;
         public const uint KG_Pickup_LifeBottle = 0x00140f50;
+        public const uint KG_Pickup_LifeBottle_2 = 0x00140cec;
         public const uint KG_Pickup_GoldCoinsBagNearShed = 0x00144030;
         public const uint KG_Pickup_WaterTankValve = 0x001410e8;
         public const uint KG_Winston_Infection = 0x000FFA14;
@@ -280,6 +318,10 @@
         public const uint KG_Pickup_SilverShieldInGauntletRoom = 0x0014413c;
         public const uint KG_Pickup_Chalice = 0x0013fe50;
 
+        // Kew Gardens - After Ripper Has Been Defeated
+        public const uint KG_Winston_Shift_LevelStart = 0x001005F8;
+        public const uint KG_Winston_Shift_Infection = 0x001005F8;
+
         // Dankenstein
         public const uint DK_Winston_SavePoint = 0x000FECD0;
         public const uint DK_Pickup_Bum = 0x00101870;
@@ -296,8 +338,14 @@
         public const uint DK_Pickup_GoldCoinsHandAreaChest1 = 0x0016AF18;
         public const uint DK_Pickup_GoldCoinsHandAreaChest2 = 0x0016AED4;
 
+        // Dankenstein - After Ripper Has Been Defeated
+        public const uint DK_Winston_Shift_SavePoint = 0x000FF4D0;
+
         // Iron Slugger
         public const uint IS_Book_DankensteinManual = 0x001286a0;
+
+        // Iron Slugger - After Ripper Has Been Defeated - NOTHING AVAILABLE
+        //public const uint IS_Book_Shift_DankensteinManual = 0x001286a0;
 
         // Wulfrum Hall
         public const uint WH_Winston_LevelStart = 0x000FFA84;
@@ -314,9 +362,17 @@
         public const uint WH_Pickup_GoldCoinsBagInVampireRoom5 = 0x00153fdc;
         public const uint WH_Pickup_Chalice = 0x0015452c;
 
+        // Wulfrum Hall - After Ripper Has Been Defeated
+        public const uint WH_Winston_Shift_LevelStart = 0x001008D8;
+        public const uint WH_Winston_Shift_Vampires = 0x001008D8;
+
         // The Count
         public const uint TC_Winston_LevelStart = 0x000FF958;
         public const uint TC_Pickup_GoldChest = 0x00160758;
+
+
+        // The Count - After Ripper Has Been Defeated
+        public const uint TC_Winston_Shift_LevelStart = 0x001004C4;
 
         // Whitechapel
         public const uint WC_Winston_KiyaLastSeen = 0x000FF640;
@@ -337,6 +393,9 @@
         public const uint WC_Pickup_Beard = 0x00147DD4;
         public const uint WC_Pickup_GoldCoinsChestInsideClub = 0x00148ED4;
         public const uint WC_Pickup_LifeBottle = 0x000FF640;
+
+        // Whitechapel - After Ripper Has Been Defeated
+        public const uint WC_Winston_Shift_KiyaLastSeen = 0x0010093C;
 
         // The Sewers
         public const uint TS_Winston_SavePoint = 0x000FF758;
@@ -359,6 +418,16 @@
         public const uint TS_Pickup_GoldCoinsRewardChest1 = 0x00171728;
         public const uint TS_Pickup_GoldCoinsRewardChest2 = 0x001716e4;
 
+        // The Sewers - After Ripper Has Been Defeated
+        public const uint TS_Winston_Shift_SavePoint = 0x000FFAC8;
+        // needs checked
+        //public const uint TS_GirlsFreed_Shift_1 = 0x000ff904;
+        //public const uint TS_GirlsFreed_Shift_2 = 0x000ff904;
+        //public const uint TS_GirlsFreed_Shift_3 = 0x000ff904;
+        //public const uint TS_GirlsFreed_Shift_4 = 0x000ff904;
+        //public const uint TS_GirlsFreed_Shift_5 = 0x000ff904;
+        public const uint TS_Winston_Shift_SomethingReallyInteresting = 0x000FFAC8;
+
         // The Time Machine
         public const uint TTM_Book_SpaceBeacon = 0x001285da;
         public const uint TTM_Pickup_TimeMachinePiecePlanetarium = 0x00149ac8;
@@ -369,6 +438,9 @@
         public const uint TTM_Book_TheTimeMachine = 0x001283e4;
         public const uint TTM_Winston_Entrance = 0x000FF6EC;
 
+        // The Time Machine - After Ripper Has Been Defeated
+        public const uint TTM_Winston_Shift_Entrance = 0x001002C0;
+
         // The Time Machine, The Sewers
         public const uint TTMTS_Winston_Entrance = 0x000FF734;
         public const uint TTMTS_Winston_KingsHat = 0x000FF734;
@@ -377,10 +449,20 @@
         public const uint TTMTS_Pickup_KingMullocksKey = 0x00148c28;
         public const uint TTMTS_Pickup_GoodLightning = 0x000efe56;
 
+        // The Time Machine, The Sewers - After Ripper Has Been Defeated
+
+        public const uint TTMTS_Winston_Shift_Entrance = 0x00100300;
+        public const uint TTMTS_Winston_Shift_KingsHat = 0x00100300;
+        public const uint TTMTS_Winston_Shift_StealingTimeStone = 0x00100300;
+
         // The Ripper
         public const uint TR_Winston_Entrance = 0x000FF6EC;
 
+        // The Ripper - After Ripper Has Been Defeated
+        public const uint TR_Winston_Shift_Entrance = 0x000FF6EC;
+
         // Cathedral Spires
+        // REGULAR NEEDS MAPPED
         public const uint CS_Pickup_LostSoul = 0x00137a50;
         public const uint CS_Winston_Entrance = 0x00100994;
         public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dcd4;
@@ -393,7 +475,21 @@
         public const uint CS_Pickup_LifeBottle = 0x0013c754;
         public const uint CS_Pickup_GoldCoinsBagAtTopOfSpire = 0x0013ed94;
 
+        // Cathedral Spires - After Ripper Has Been Defeated
+        public const uint CS_Pickup_Shift_LostSoul = 0x00137a50;
+        public const uint CS_Winston_Shift_Entrance = 0x00100994;
+        public const uint CS_Pickup_Shift_GoldShieldInChestAtStart = 0x0013dcd4;
+        public const uint CS_Pickup_Shift_GoldCoinsBottomRightNearSpiv = 0x0013ecc8;
+        public const uint CS_Pickup_Shift_EnergyVialNextToSpiv = 0x0013afb0;
+        public const uint CS_Pickup_Shift_GoldCoinsChestAfterFirstLostSoul = 0x0013f080;
+        public const uint CS_Pickup_Shift_GoldCoinsChestAfterFirstFlameGargoyles = 0x0013ed50;
+        public const uint CS_Pickup_Shift_GoldCoinsChestNearSilverShield = 0x0013ed0c;
+        public const uint CS_Pickup_Shift_SilverShieldChest = 0x0013f104;
+        public const uint CS_Pickup_Shift_LifeBottle = 0x0013c754;
+        public const uint CS_Pickup_Shift_GoldCoinsBagAtTopOfSpire = 0x0013ed94;
+
         // Cathedral Spires, The Descent
+        // REGULAR NEEDS MAPPED
         public const uint CSTD_Pickup_LostSoulLeftChandelier = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulRightChandelier = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulDemonStatueMausoleum = 0x0013f4b4;
@@ -409,8 +505,28 @@
         public const uint CSTD_Pickup_GoldenCogInHandArea = 0x001458c4;
         public const uint CSTD_Pickup_SpellPageDemonDeath = 0x00146188;
 
+        // Cathedral Spires, The Descent - After Ripper Has Been Defeated
+        public const uint CSTD_Pickup_Shift_LostSoulLeftChandelier = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulRightChandelier = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulDemonStatueMausoleum = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulEntranceRoom = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulTopOfPulleyFront = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulTopOfPulleyBack = 0x0013f4b4;
+        public const uint CSTD_Pickup_Shift_LostSoulPulleyRoomRight = 0x0013f4b4;
+        public const uint CSTD_Winston_Shift_Entrance = 0x00100B14;
+        public const uint CSTD_Pickup_Shift_LifeBottle = 0x00147a3c;
+        public const uint CSTD_Pickup_Shift_GoldCoinsGoldenCogRoomEntrance = 0x0014919c;
+        public const uint CSTD_Pickup_Shift_GoldCoinsGoldenCogRoomBottom = 0x001491e0;
+        public const uint CSTD_Pickup_Shift_GoldenCogInRoom = 0x00146474;
+        public const uint CSTD_Pickup_Shift_GoldenCogInHandArea = 0x001458c4;
+        public const uint CSTD_Pickup_Shift_SpellPageDemonDeath = 0x00146188;
+
         // The Demon
+        // REGULAR NEEDS MAPPED
         public const uint TD_Winston_Entrance = 0x000FFAD4;
+
+        // The Demon - After Ripper Has Been Defeated
+        public const uint TD_Winston_Shift_Entrance = 0x000FFAD4;
 
         ////////////////////////// INVENTORY /////////////////////////////
 
