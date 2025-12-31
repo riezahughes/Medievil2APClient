@@ -434,8 +434,6 @@ namespace MedievilArchipelago.Helpers
 
             bool useCurrentHealth = currentEnergy + updateValue <= 300;
 
-            Console.WriteLine($"{currentEnergy}, {updateValue}, {currentStoredEnergy}, {currentLifeBottles}, {useCurrentHealth}");
-
             SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, currentEnergy + updateValue, useCurrentHealth ? 300: currentLifeBottles * 300);
 
         }

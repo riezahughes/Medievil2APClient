@@ -33,7 +33,6 @@
 
 
         // Skills
-
         public const uint DansHandSkill = 0x000F1694;
         public const uint DaringDashSkill = 0x000F1694;
 

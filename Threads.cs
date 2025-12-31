@@ -16,9 +16,22 @@ namespace MedievilArchipelago
         {
             await Task.Run(() =>
             {
-
                 Console.WriteLine("Starting Background Tasks...");
-            }, cts.Token);
+
+                while (!cts.Token.IsCancellationRequested)
+                {
+                    try
+                    {
+                        ThreadHandlers.SetCheatMenu(client);
+                        Thread.Sleep(5);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error in PassiveLogicChecks: {ex.Message}");
+                    }
+                    
+                }
+                }, cts.Token);
 
         }
     }
