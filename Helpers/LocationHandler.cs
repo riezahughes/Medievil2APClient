@@ -788,7 +788,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Gold Coins: Chest After First Flame Gargoyles - CS", Addresses.CS_Pickup_GoldCoinsChestAfterFirstFlameGargoyles, "2", "704", LocationCheckType.UShort),
                 new GenericItemsData("Gold Coins: Chest Near Silver Shield Chest - CS", Addresses.CS_Pickup_GoldCoinsChestNearSilverShield, "2", "704", LocationCheckType.UShort),
                 new GenericItemsData("Gold Coins: Bag at top of Spire - CS", Addresses.CS_Pickup_GoldCoinsBagAtTopOfSpire, "2", "704", LocationCheckType.UShort),
-                new GenericItemsData("Winston: Entrance - CS", Addresses.CS_Winston_Entrance, "2", "404", LocationCheckType.UShort, 0, Addresses.CS_Winston_Shift_Entrance),
+                new GenericItemsData("Winston: Entrance - CS", Addresses.CS_Winston_Entrance, "2", "33282", LocationCheckType.UShort),
                 new GenericItemsData("Cleared: Cathedral Spires", Addresses.CS_LevelStatus, "2", "9", LocationCheckType.Byte),
             };
             return spiresLocations;
@@ -811,7 +811,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Life Bottle: Cathedral Spires, The Decent", Addresses.CSTD_Pickup_LifeBottle, "30", "2752", LocationCheckType.UShort),
                 new GenericItemsData("Gold Coins: Golden Cog Room Entrance - CSTD", Addresses.CSTD_Pickup_GoldCoinsGoldenCogRoomEntrance, "30", "704", LocationCheckType.UShort),
                 new GenericItemsData("Gold Coins: Golden Cog Room Bottom - CSTD", Addresses.CSTD_Pickup_GoldCoinsGoldenCogRoomBottom, "30", "704", LocationCheckType.UShort),
-                new GenericItemsData("Winston: Entrance - CSTD", Addresses.CSTD_Winston_Entrance, "30", "404", LocationCheckType.UShort,0, Addresses.CSTD_Winston_Shift_Entrance),
+                new GenericItemsData("Winston: Entrance - CSTD", Addresses.CSTD_Winston_Entrance, "30", "404", LocationCheckType.UShort,0, Addresses.CSTD_Winston_Shift_Entrance), //  on shift
                 new GenericItemsData("Cleared: Cathedral Spires - The Descent", Addresses.CSTD_LevelStatus, "30", "9", LocationCheckType.Byte),
             };
             return descentLocations;
@@ -822,7 +822,7 @@ namespace MedievilArchipelago.Helpers
             List<GenericItemsData> demonLocations = new List<GenericItemsData>()
             {
                 new GenericItemsData("Winston: Entrance - TD", Addresses.TD_Winston_Entrance, "3", "331", LocationCheckType.UShort,0,Addresses.TD_Winston_Shift_Entrance),
-                new GenericItemsData("Cleared: The Demon", Addresses.TD_LevelStatus, "3", "41",LocationCheckType.Byte),
+                new GenericItemsData("Cleared: The Demon", Addresses.TD_LevelStatus, "3", "41", LocationCheckType.UShort),
             };
             return demonLocations;
         }

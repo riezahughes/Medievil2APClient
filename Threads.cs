@@ -20,10 +20,14 @@ namespace MedievilArchipelago
 
                 while (!cts.Token.IsCancellationRequested)
                 {
+                    //byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                    //byte currentgold = Memory.ReadByte(Addresses.DansCurrentGold);
+
+                    //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
                     try
                     {
                         ThreadHandlers.SetCheatMenu(client);
-                        Thread.Sleep(5);
+                        Thread.Sleep(500);
                     }
                     catch (Exception ex)
                     {

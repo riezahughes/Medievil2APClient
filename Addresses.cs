@@ -463,7 +463,7 @@
         // Cathedral Spires
         // REGULAR NEEDS MAPPED
         public const uint CS_Pickup_LostSoul = 0x00137a50;
-        public const uint CS_Winston_Entrance = 0x00100994;
+        public const uint CS_Winston_Entrance = 0x000eec60;
         public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dcd4;
         public const uint CS_Pickup_GoldCoinsBottomRightNearSpiv = 0x0013ecc8;
         public const uint CS_Pickup_EnergyVialNextToSpiv = 0x0013afb0;
@@ -496,7 +496,7 @@
         public const uint CSTD_Pickup_LostSoulTopOfPulleyFront = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulTopOfPulleyBack = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulPulleyRoomRight = 0x0013f4b4;
-        public const uint CSTD_Winston_Entrance = 0x00100B14;
+        public const uint CSTD_Winston_Entrance = 0x00100328;
         public const uint CSTD_Pickup_LifeBottle = 0x00147a3c;
         public const uint CSTD_Pickup_GoldCoinsGoldenCogRoomEntrance = 0x0014919c;
         public const uint CSTD_Pickup_GoldCoinsGoldenCogRoomBottom = 0x001491e0;
