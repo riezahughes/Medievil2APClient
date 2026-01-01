@@ -142,6 +142,11 @@ namespace MedievilArchipelago.Helpers
                 Item itm = new Item();
                 itm.Name = itemInf.ItemName;
 
+                // used to clean up key items per level
+                var list = ItemHandlers.ListOfKeyItemsInLevels;
+                var currentAllowedKeyItems = list[currentLevel];
+                var existsInLevel = currentAllowedKeyItems.Any(keyitem => keyitem == itm.Name) ? true : false;
+
                 switch (itm)
                 {
                     // Update memory
@@ -151,7 +156,7 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.ContainsAny("Charge"):
                         // no plans yet
                         break;
-                    case var x when x.Name.Contains("Skill"): ItemHandlers.ReceiveSkill(x); break;
+                    case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveSkill(x); break;
                     case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings):
                         ItemHandlers.ReceiveEquipment(x);
                         if (!x.Name.Contains("Shield"))
@@ -163,8 +168,9 @@ namespace MedievilArchipelago.Helpers
                     // these two will need to be adjusted, functions don't exist yet.
                     //case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveDragonGem(); break;
                     //case var x when x.Name.Contains("Lost Soul"): ItemHandlers.ReceiveAmber(); break;
-                    case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0: ItemHandlers.ReceiveKeyItem(x); break;
-                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfKeyItemStrings) && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && keyItemSanityOption == 1 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && keyItemSanityOption == 1 && !existsInLevel: ItemHandlers.RemoveKeyItem(x); break;
                 }
                 usedItems.Add(itm.Name);
             }

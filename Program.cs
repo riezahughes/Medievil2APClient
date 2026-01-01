@@ -317,7 +317,7 @@ public class Program
                     }
                     else if (input?.Trim().ToLower() == "items")
                     {
-                        var items = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Key Item") select item;
+                        var items = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.ContainsAny(ItemHandlers.ListOfKeyItemStrings) select item;
 
                         var bottles = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Bottle") select item;
 

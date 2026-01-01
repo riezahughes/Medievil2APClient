@@ -475,7 +475,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Equipment: Copper Shield on Railway - KT", Addresses.KT_Pickup_CopperShieldOnRailway, "18", "33049", LocationCheckType.UShort),
                 new GenericItemsData("Gold Coins: Bag Near Water in Quayside Mill - KT", Addresses.KT_Pickup_GoldCoinsBagNearWater, "18", "704", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Pushing and Pulling - KT", Addresses.KT_Winston_PushingAndPulling, "18", "298", LocationCheckType.UShort, 0, Addresses.KT_Winston_Shift_PushingAndPulling),
-                new GenericItemsData("Winston: Where the Spell was Cast - KT", Addresses.KT_Winston_WhereTheSpellWasCast, "18", "213", LocationCheckType.UShort, 0, Addresses.KT_Winston_Shift_WhereTheSpellWasCast),
+                new GenericItemsData("Winston: Where the Spell was Cast - KT", Addresses.KT_Winston_WhereTheSpellWasCast, "18", "109", LocationCheckType.UShort, 0, Addresses.KT_Winston_Shift_WhereTheSpellWasCast),
                 new GenericItemsData("Winston: Museum Roof - KT", Addresses.KT_Winston_MuseumRoof, "18", "380", LocationCheckType.UShort, 0, Addresses.KT_Winston_Shift_MuseumRoof),
                 new GenericItemsData("Chalice: Kensington - KT", Addresses.KT_Pickup_Chalice, "18", "704", LocationCheckType.UShort),
                 new GenericItemsData("Cleared: Kensington", Addresses.KT_LevelStatus, "18", "9", LocationCheckType.Byte),
@@ -551,8 +551,8 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Winston: Close To Ladder - GO", Addresses.GO_Winston_CloseToLadder, "7", "124", LocationCheckType.UShort, 0, Addresses.GO_Winston_Shift_CloseToLadder),
                 new GenericItemsData("Winston: Lever Puzzle - GO", Addresses.GO_Winston_LeverPuzzle, "7", "367", LocationCheckType.UShort, 0, Addresses.GO_Winston_Shift_LeverPuzzle),
                 new GenericItemsData("Winston: Once through This Door - GO", Addresses.GO_Winston_OnceThroughThisDoor, "7", "380", LocationCheckType.UShort, 0, Addresses.GO_Winston_Shift_OnceThroughThisDoor),
-                new GenericItemsData("Chalice: Greenwhich Observatory", Addresses.GO_Pickup_Chalice, "7", "2752", LocationCheckType.UShort),
-                new GenericItemsData("Cleared: Greenwhich Observatory", Addresses.GO_LevelStatus, "7", "9", LocationCheckType.Byte),
+                new GenericItemsData("Chalice: Greenwich Observatory", Addresses.GO_Pickup_Chalice, "7", "2752", LocationCheckType.UShort),
+                new GenericItemsData("Cleared: Greenwich Observatory", Addresses.GO_LevelStatus, "7", "9", LocationCheckType.Byte),
             };
             return observatoryLocations;
         }
@@ -623,7 +623,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Gold Coins: Hand Area Chest 2 - DK", Addresses.DK_Pickup_GoldCoinsHandAreaChest2, "5", "704", LocationCheckType.UShort),
                 new GenericItemsData("Book: Reanimation - DK", Addresses.DK_Book_Reanimation, "5", "0", LocationCheckType.Byte),
                 new GenericItemsData("Winston: Save Point - DK", Addresses.DK_Winston_SavePoint, "5", "404", LocationCheckType.UShort, 0, Addresses.DK_Winston_Shift_SavePoint),
-                new GenericItemsData("Chalice: Dankenstein - DK", Addresses.DK_Pickup_Chalice, "5", "704", LocationCheckType.UShort),
+                new GenericItemsData("Chalice: Dankenstein", Addresses.DK_Pickup_Chalice, "5", "704", LocationCheckType.UShort),
                 new GenericItemsData("Cleared: Dankenstein", Addresses.DK_LevelStatus, "5", "9", LocationCheckType.Byte),
             };
             return dankensteinLocations;
@@ -722,7 +722,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Gold Coins: Reward Chest 2 - TS", Addresses.TS_Pickup_GoldCoinsRewardChest2, "14", "704", LocationCheckType.UShort),
                 new GenericItemsData("Winston: Save Point - TS", Addresses.TS_Winston_SavePoint, "14", "404", LocationCheckType.UShort,0, Addresses.TS_Winston_Shift_SavePoint),
                 new GenericItemsData("Winston: Something Really Interesting - TS", Addresses.TS_Winston_SomethingReallyInteresting, "14", "648", LocationCheckType.UShort,0, Addresses.TS_Winston_Shift_SomethingReallyInteresting),
-                new GenericItemsData("Chalice: Sewers", Addresses.TS_Pickup_Chalice, "14", "704", LocationCheckType.UShort),
+                new GenericItemsData("Chalice: The Sewers", Addresses.TS_Pickup_Chalice, "14", "704", LocationCheckType.UShort),
                 new GenericItemsData("Cleared: The Sewers", Addresses.TS_LevelStatus, "14", "9", LocationCheckType.Byte),
             };
             return sewersLocations;

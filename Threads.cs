@@ -18,14 +18,27 @@ namespace MedievilArchipelago
             {
                 Console.WriteLine("Starting Background Tasks...");
 
+                byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
+
                 while (!cts.Token.IsCancellationRequested)
                 {
-                    //byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
-                    //byte currentgold = Memory.ReadByte(Addresses.DansCurrentGold);
-
-                    //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
                     try
                     {
+
+                        byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                        //byte currentgold = Memory.ReadByte(Addresses.DansCurrentGold);
+
+                        //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
+
+
+                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame())
+                        {
+                            Thread.Sleep(5000);
+                            PlayerStateHandler.UpdatePlayerState(client, false);
+                        }
+
+                        currentLocation = currentLevel;
+
                         GoalConditionHandlers.CheckGoalCondition(client);
                         ThreadHandlers.SetCheatMenu(client);
                         Thread.Sleep(500);

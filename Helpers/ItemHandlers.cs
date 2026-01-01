@@ -49,10 +49,10 @@ namespace MedievilArchipelago.Helpers
             "Time Machine Piece (Contact Room)",
             "Time Machine Piece (Earth Room)",
             "Time Machine Piece (Space Room)",
-            "King Mullocks Key",
-            "Staff Of Anubis",
-            "Scroll Of Sekhmet",
-            "Tablet Of Horus",
+            "King Mullock's Key",
+            "Staff of Anubis",
+            "Scroll of Sekhmet",
+            "Tablet of Horus",
             "Pocket Watch",
             "Town House Key",
             "Time Stone",
@@ -131,6 +131,148 @@ namespace MedievilArchipelago.Helpers
             {"Bombs", 14},
             {"Chicken Drumsticks", 15},
             {"Torch", 16}
+        };
+
+        public static Dictionary<int, List<string>> ListOfKeyItemsInLevels = new Dictionary<int, List<string>>
+        {
+            // Cathedral Spires
+            { 0x02, [
+                 "Torch",
+                 "Lost Souls",
+                 "Dan's Head",
+            ] },
+            // The Demon
+            { 0x03,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Iron Slugger
+            { 0x04,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Dankenstein
+            { 0x05,[
+                 "Torch",
+                "Dan's Head",
+                // this is a bit of a wierd one. Techincally i should include dankenstein key items here, but 
+                // i think this will interfere with the level itself and how it works.
+            ] },
+            // The Freakshow
+            { 0x06,[
+                 "Torch",
+                 "Elephant Key 1",
+                 "Elephant Key 2",
+                "Dan's Head",
+            ] },
+            // Greenwich Observatory
+            { 0x07,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Kew Gardens
+            { 0x08,[
+                 "Torch",
+                 "Potting Shed Key",
+                 "Pond Room Valve",
+                 "Hot House Valve",
+                 "Water Tank Valve",
+                "Dan's Head",
+            ] },
+            // Whitechapel
+            { 0x09,[
+                 "Torch",
+                 "Griffin Shield",
+                 "Unicorn Shield",
+                 "Beard" ,
+                 "Library Key",
+                 "Club Membership Card",
+                "Dan's Head",
+            ] },
+            // The Museum
+            { 0x0a,[
+                "Museum Key",
+                "Torch",
+                "Cannon Ball",
+                "Dinosaur Key",
+                "Dan's Head",
+            ] },
+            // Tyrannosaurus Wrecks
+            { 0x0b,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Hub
+            { 0x0d,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // The Sewers
+            { 0x0e,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // The Time Machine
+            { 0x0f,[
+                 "Time Machine PIece (Contact Room)",
+                 "Time Machine PIece (Earth Room)",
+                 "Time Machine PIece (Space Room)",
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // The Count
+            { 0x10,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Wulfrum Hall
+            { 0x11,[
+                 "Front Door Key",
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Kensington
+            { 0x12,[
+                 "Depot Key",
+                 "Town House Key",
+                 "Pocket Watch",
+                "Dan's Head",
+            ] },
+            // Kensington, The Tomb
+            { 0x1a,[
+                 "Torch",
+                 "Staff of Anubis",
+                 "Scroll of Sekhmet",
+                 "Tablet of Horus",
+                "Dan's Head",
+            ] },
+            // Greenwhich Navel Academy
+            { 0x1b,[
+                 "Torch",
+                 "Bellows",
+                "Dan's Head",
+            ] },
+            // Time Machine, Sewers
+            { 0x1c,[
+                 "Torch",
+                 "Time Stone",
+                 "King Mullock's Key",
+                "Dan's Head",
+            ] },
+            // Time Machine, The Ripper
+            { 0x1d,[
+                 "Torch",
+                "Dan's Head",
+            ] },
+            // Cathedral Spires, The Descent
+            { 0x1e,[
+                 "Torch",
+                 "Lost Souls",
+                 "Golden Cog 1",
+                 "Golden Cog 2",
+                "Dan's Head",
+            ] },
+
         };
 
         public static Dictionary<string, int> ShieldEquipDictionary = new Dictionary<string, int>
@@ -284,10 +426,10 @@ namespace MedievilArchipelago.Helpers
                     ["Time Machine Piece (Contact Room)"] = Addresses.TimeMachinePieceContactRoom,
                     ["Time Machine Piece (Earth Room)"] = Addresses.TimeMachinePieceEarthRoom,
                     ["Time Machine Piece (Space Room)"] = Addresses.TimeMachinePieceSpaceRoom,
-                    ["King Mullocks Key"] = Addresses.KingMullocksKey,
-                    ["Staff Of Anubis"] = Addresses.StaffOfAnubis,
-                    ["Scroll Of Sekhmet"] = Addresses.ScrollOfSekhmet,
-                    ["Tablet Of Horus"] = Addresses.TabletOfHorus,
+                    ["King Mullock's Key"] = Addresses.KingMullocksKey,
+                    ["Staff of Anubis"] = Addresses.StaffOfAnubis,
+                    ["Scroll of Sekhmet"] = Addresses.ScrollOfSekhmet,
+                    ["Tablet of Horus"] = Addresses.TabletOfHorus,
                     ["Pocket Watch"] = Addresses.PocketWatch,
                     ["Town House Key"] = Addresses.TownHouseKey,
                     ["Time Stone"] = Addresses.TimeStone,
@@ -343,9 +485,10 @@ namespace MedievilArchipelago.Helpers
             return itemUpdateValue;
         }
 
-        public static void UpdateKeyItemValues(uint itemMemoryAddress)
+        public static void UpdateKeyItemValues(uint itemMemoryAddress, bool add = true)
         {
-            SetItemMemoryValue(itemMemoryAddress, 1, 1);
+            int value = add ? 1 : -1;
+            SetItemMemoryValue(itemMemoryAddress, value, 1);
         }
 
         public static void UpdateEquippedItemValues(uint itemMemoryAddress, string inventoryItem)
@@ -504,6 +647,15 @@ namespace MedievilArchipelago.Helpers
             var addressDict = StatusAndInventoryAddressDictionary();
 
             UpdateKeyItemValues(addressDict["Key Items"][item.Name]);
+
+        }
+
+        public static void RemoveKeyItem(Item item)
+        {
+            // commented out because i need to make a list of player data addresses to deal with this.
+            var addressDict = StatusAndInventoryAddressDictionary();
+
+            UpdateKeyItemValues(addressDict["Key Items"][item.Name], false);
 
         }
 
