@@ -164,7 +164,6 @@ namespace MedievilArchipelago.Helpers
 
                 PlayerStateHandler.UpdatePlayerState(client, false);
 
-                Console.WriteLine($"{currentPrimaryWeapon} {currentSecondaryWeapon}");
                 if(currentPrimaryWeapon == 12 && currentSecondaryWeapon == 0)
                 {
                     ItemHandlers.DefaultToArm();

@@ -77,6 +77,7 @@ namespace MedievilArchipelago.Helpers
             "Pistol",
             "Hammer",
             "Crossbow",
+            "Good Lightning",
             "Flaming Crossbow",
             "Axe",
             "Gatling Gun",
@@ -98,7 +99,6 @@ namespace MedievilArchipelago.Helpers
             "Pistol",
             "Crossbow",
             "Flaming Crossbow",
-            "Axe",
             "Gatling Gun",
             "Lightning",
             "Blunderbuss",
@@ -271,7 +271,8 @@ namespace MedievilArchipelago.Helpers
                     ["Torso"] = Addresses.Torso,
                     ["Bellows"] = Addresses.Bellows,
                     ["Lost Soul"] = Addresses.LostSoul,
-                    ["Golden Cog"] = Addresses.GoldenCog,
+                    ["Golden Cog 1"] = Addresses.GoldenCog,
+                    ["Golden Cog 2"] = Addresses.GoldenCog,
                     ["Spell Page"] = Addresses.SpellPage,
                     ["Griffin Shield"] = Addresses.GriffinShield,
                     ["Unicorn Shield"] = Addresses.UnicornShield,
@@ -357,7 +358,7 @@ namespace MedievilArchipelago.Helpers
             {
                 var fillValue = 1;
 
-                if (inventoryItem.ContainsAny(ListOfWeaponAmmoStrings) || inventoryItem.ContainsAny(ListOfWeaponChargeStrings) || inventoryItem.ContainsAny(ListOfShieldStrings))
+                if (ListOfWeaponAmmoStrings.Any(x => x == inventoryItem) || ListOfWeaponChargeStrings.Any(x=>x == inventoryItem) || ListOfShieldStrings.Any(x => x == inventoryItem))
                 {
                     fillValue = dict[inventoryItem];
                 }
@@ -433,8 +434,6 @@ namespace MedievilArchipelago.Helpers
             var currentLifeBottles = Memory.ReadShort(Addresses.DansCurrentLifeBottles);
 
             bool useCurrentHealth = currentEnergy + updateValue <= 300;
-
-            Console.WriteLine($"{currentEnergy}, {updateValue}, {currentStoredEnergy}, {currentLifeBottles}, {useCurrentHealth}");
 
             SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, currentEnergy + updateValue, useCurrentHealth ? 300: currentLifeBottles * 300);
 

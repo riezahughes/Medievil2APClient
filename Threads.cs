@@ -16,9 +16,27 @@ namespace MedievilArchipelago
         {
             await Task.Run(() =>
             {
-
                 Console.WriteLine("Starting Background Tasks...");
-            }, cts.Token);
+
+                while (!cts.Token.IsCancellationRequested)
+                {
+                    //byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                    //byte currentgold = Memory.ReadByte(Addresses.DansCurrentGold);
+
+                    //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
+                    try
+                    {
+                        GoalConditionHandlers.CheckGoalCondition(client);
+                        ThreadHandlers.SetCheatMenu(client);
+                        Thread.Sleep(500);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error($"Error in PassiveLogicChecks: {ex.Message}");
+                    }
+                    
+                }
+                }, cts.Token);
 
         }
     }
