@@ -96,7 +96,7 @@
         public const uint TR_LevelStatus = 0x000E1834;
         public const uint CS_LevelStatus = 0x000E1844;
         public const uint CSTD_LevelStatus = 0x000E1854;
-        public const uint TD_LevelStatus = 0x000E1864;
+        public const uint TD_LevelStatus = 0x000E1864; // maps to ending cutscene
 
         ////////////////////////// LEVEL PICKUPS /////////////////////////////
 
@@ -522,7 +522,7 @@
 
         // The Demon
         // REGULAR NEEDS MAPPED
-        public const uint TD_Winston_Entrance = 0x000FFAD4;
+        public const uint TD_Winston_Entrance = 0x000ff7bc;
 
         // The Demon - After Ripper Has Been Defeated
         public const uint TD_Winston_Shift_Entrance = 0x000FFAD4;

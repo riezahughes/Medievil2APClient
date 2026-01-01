@@ -26,6 +26,7 @@ namespace MedievilArchipelago
                     //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
                     try
                     {
+                        GoalConditionHandlers.CheckGoalCondition(client);
                         ThreadHandlers.SetCheatMenu(client);
                         Thread.Sleep(500);
                     }

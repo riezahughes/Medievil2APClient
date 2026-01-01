@@ -241,21 +241,21 @@ namespace MedievilArchipelago.Helpers
 
                                     Id = -1,
                                     Name = "Cinematic Check",
-                                    Address = Addresses.CutscenePlayingValue,
+                                    Address = Addresses.TD_LevelStatus,
                                     CheckType = LocationCheckType.Byte,
                                     CompareType = LocationCheckCompareType.Match,
-                                    CheckValue = "22"
+                                    CheckValue = "41"
                                 });
 
-                                conditionalChoice.Add(new Location()
-                                {
-                                    Id = -1,
-                                    Name = "Read Check",
-                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
-                                    CheckType = loc.CheckType,
-                                    CompareType = LocationCheckCompareType.Match,
-                                    CheckValue = loc.Check
-                                });
+                                //conditionalChoice.Add(new Location()
+                                //{
+                                //    Id = -1,
+                                //    Name = "Read Check",
+                                //    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
+                                //    CheckType = loc.CheckType,
+                                //    CompareType = LocationCheckCompareType.Match,
+                                //    CheckValue = loc.Check
+                                //});
 
                                 CompositeLocation location = new CompositeLocation()
                                 {
@@ -822,7 +822,7 @@ namespace MedievilArchipelago.Helpers
             List<GenericItemsData> demonLocations = new List<GenericItemsData>()
             {
                 new GenericItemsData("Winston: Entrance - TD", Addresses.TD_Winston_Entrance, "3", "331", LocationCheckType.UShort,0,Addresses.TD_Winston_Shift_Entrance),
-                new GenericItemsData("Cleared: The Demon", Addresses.TD_LevelStatus, "3", "41", LocationCheckType.UShort),
+                new GenericItemsData("Cleared: The Demon", Addresses.TD_LevelStatus, "3", "41", LocationCheckType.UShort)
             };
             return demonLocations;
         }

@@ -68,6 +68,7 @@ namespace MedievilArchipelago.Helpers
                 if (goal)
                 {
                     client.SendGoalCompletion();
+                    Console.WriteLine("Goaled!!");
                     return true;
                 }
             }

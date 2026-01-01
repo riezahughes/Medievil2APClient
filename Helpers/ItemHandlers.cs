@@ -77,6 +77,7 @@ namespace MedievilArchipelago.Helpers
             "Pistol",
             "Hammer",
             "Crossbow",
+            "Good Lightning",
             "Flaming Crossbow",
             "Axe",
             "Gatling Gun",
@@ -98,7 +99,6 @@ namespace MedievilArchipelago.Helpers
             "Pistol",
             "Crossbow",
             "Flaming Crossbow",
-            "Axe",
             "Gatling Gun",
             "Lightning",
             "Blunderbuss",
@@ -358,7 +358,7 @@ namespace MedievilArchipelago.Helpers
             {
                 var fillValue = 1;
 
-                if (inventoryItem.ContainsAny(ListOfWeaponAmmoStrings) || inventoryItem.ContainsAny(ListOfWeaponChargeStrings) || inventoryItem.ContainsAny(ListOfShieldStrings))
+                if (ListOfWeaponAmmoStrings.Any(x => x == inventoryItem) || ListOfWeaponChargeStrings.Any(x=>x == inventoryItem) || ListOfShieldStrings.Any(x => x == inventoryItem))
                 {
                     fillValue = dict[inventoryItem];
                 }
