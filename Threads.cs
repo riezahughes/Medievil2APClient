@@ -31,17 +31,22 @@ namespace MedievilArchipelago
                         //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
 
 
-                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame())
+                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame() && currentLevel != 0x13)
                         {
-                            Thread.Sleep(5000);
                             PlayerStateHandler.UpdatePlayerState(client, false);
                         }
 
                         currentLocation = currentLevel;
 
                         GoalConditionHandlers.CheckGoalCondition(client);
-                        ThreadHandlers.SetCheatMenu(client);
-                        Thread.Sleep(500);
+
+                        if (currentLocation != 0x13)
+                        {
+                            ThreadHandlers.SetCheatMenu(client);
+                            ThreadHandlers.SetChestContents(currentLocation);
+                        }
+
+                        Thread.Sleep(5000);
                     }
                     catch (Exception ex)
                     {

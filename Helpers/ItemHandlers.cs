@@ -21,6 +21,93 @@ namespace MedievilArchipelago.Helpers
         internal const int countMax = 32767;
         internal const int maxHealth = 300;
         internal const int maxLifeBottleValue = 3000;
+        internal const byte offset = 0x18;
+
+        public static Dictionary<byte, List<uint>> ListOfChestLocations = new Dictionary<byte, List<uint>>
+       {
+            // Cathedral Spires
+            { 0x02, [
+               Addresses.CS_Pickup_GoldShieldInChestAtStart - offset,
+               Addresses.CS_Pickup_SilverShieldChest - offset
+            ] },
+            // The Demon
+            { 0x03,[
+            ] },
+            // Iron Slugger
+            { 0x04,[
+            ] },
+            // Dankenstein
+            { 0x05,[
+                Addresses.DK_Pickup_SilverShield - offset
+            ] },
+            // The Freakshow
+            { 0x06,[
+                Addresses.TF_Pickup_CopperShieldInChaliceRoom - offset,
+                Addresses.TF_Pickup_CopperShieldInElephantBossArena - offset
+            ] },
+            // Greenwich Observatory
+            { 0x07,[
+                Addresses.GO_Pickup_CopperShieldNearBombChest - offset
+            ] },
+            // Kew Gardens
+            { 0x08,[
+                Addresses.KG_Pickup_SilverShieldInGauntletRoom - offset
+            ] },
+            // Whitechapel
+            { 0x09,[
+                Addresses.WC_Pickup_SilverShieldInLibrary - offset
+            ] },
+            // The Museum
+            { 0x0a,[
+                Addresses.TM_Pickup_CopperShield2ndFloorChest - offset,
+                Addresses.TM_Pickup_CopperShieldZarokRoom - offset,
+                Addresses.TM_Pickup_Cannonball - offset
+
+            ] },
+            // Tyrannosaurus Wrecks
+            { 0x0b,[
+                Addresses.TW_Pickup_CopperChestInStairway - offset
+            ] },
+            // Hub
+            { 0x0d,[
+            ] },
+            // The Sewers
+            { 0x0e,[
+                Addresses.TS_Pickup_GoldShieldInHubArea - offset
+            ] },
+            // The Time Machine
+            { 0x0f,[
+            ] },
+            // The Count
+            { 0x10,[
+            ] },
+            // Wulfrum Hall
+            { 0x11,[
+                Addresses.WH_Pickup_SilverShieldCloseToVampireRoom2 - offset
+            ] },
+            // Kensington
+            { 0x12,[
+                Addresses.KT_Pickup_CopperShieldOnRailway - offset, 
+                Addresses.KT_Pickup_Pocketwatch - offset
+
+            ] },
+            // Kensington, The Tomb
+            { 0x1a,[
+            ] },
+            // Greenwhich Navel Academy
+            { 0x1b,[
+            ] },
+            // Time Machine, Sewers
+            { 0x1c,[
+            ] },
+            // Time Machine, The Ripper
+            { 0x1d,[
+            ] },
+            // Cathedral Spires, The Descent
+            { 0x1e,[
+            ] },
+
+        };
 
         public static List<string> ListOfKeyItemStrings = new List<string>()
         {

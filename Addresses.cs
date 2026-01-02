@@ -144,14 +144,14 @@
         public const uint TM_Pickup_GoldCoinsMausoleumRoom2F3 = 0x00144e8c;
         public const uint TM_Winston_ChestOnMausoleumRoom2F = 0x000FFA70;
         public const uint TM_Winston_GoldCoinsOnMausoleumRoom2F = 0x000FFA70;
-        public const uint TM_Pickup_CopperShield2ndFloorChest = 0x00145240;
+        public const uint TM_Pickup_CopperShield2ndFloorChest = 0x00145288;
         public const uint TM_Pickup_GoldCoinsBuddahStatueStaircase = 0x001451bc;
         public const uint TM_Winston_ClimbingWall = 0x000FFA70;
         public const uint TM_Winston_StaircaseAfterBuddah = 0x000FFA70;
         public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyRight = 0x0014592c;
         public const uint TM_Pickup_GoldCoinsDisplayRoomBalconyLeft = 0x00146388;
         public const uint TM_Winston_Chalice = 0x000FFA70;
-        public const uint TM_Pickup_Cannonball = 0x0014541c;
+        public const uint TM_Pickup_Cannonball = 0x001453dc;
         public const uint TM_Pickup_Torch = 0x00144650;
         public const uint TM_Pickup_GoldCoinsZarokRoomRaftersBack = 0x00145d6c;
         public const uint TM_Pickup_GoldCoinsZarokRoomRaftersLeft = 0x00145db0;
@@ -159,7 +159,7 @@
         public const uint TM_Pickup_DinosaurKey = 0x00145c18;
         public const uint TM_Book_TheKraken = 0x00128570;
         public const uint TM_Book_Zarok = 0x001281b4;
-        public const uint TM_Pickup_CopperShieldZarokRoom = 0x00145ce0;
+        public const uint TM_Pickup_CopperShieldZarokRoom = 0x00145ca0;
         public const uint TM_Pickup_GoldCoinsTombRoomLeft = 0x0014609c;
         public const uint TM_Pickup_GoldCoinsTombRoomRight = 0x001460e0;
         public const uint TM_Pickup_GoldCoinsFirstHandRoomChest1 = 0x00145970;
@@ -188,7 +188,7 @@
         // Tyrannosaurus Wrecks
         public const uint TW_Winston_Entrance = 0x000FF628;
         public const uint TW_Pickup_GoldCoinsBagBehindLionStatue = 0x001664A0;
-        public const uint TW_Pickup_CopperChestInStairway = 0x00166524;
+        public const uint TW_Pickup_CopperChestInStairway = 0x0016656c;
         public const uint TW_Pickup_GoldCoinsNearSpivOnStairway = 0x001664e4;
         public const uint TW_Book_DinosaurDisplay = 0x00128414;
         public const uint TW_Pickup_LifeBottle = 0x00166748;
@@ -197,13 +197,13 @@
         public const uint TW_Winston_Shift_Entrance = 0x000FF914;
 
         // Kensington
-        public const uint KT_Pickup_CopperShieldOnRailway = 0x00166a74;
+        public const uint KT_Pickup_CopperShieldOnRailway = 0x00166abc;
         public const uint KT_Winston_PushingAndPulling = 0x001006A0;
         public const uint KT_Pickup_GoldCoinsBagNearWater = 0x001658f0;
         public const uint KT_Pickup_TheDepotKey = 0x00164a10;
         public const uint KT_Pickup_TownHouseKey = 0x001649cc;
         public const uint KT_Winston_WhereTheSpellWasCast = 0x001006A0;
-        public const uint KT_Pickup_Pocketwatch = 0x001657dc;
+        public const uint KT_Pickup_Pocketwatch = 0x00163f70;
         public const uint KT_Winston_MuseumRoof = 0x001006A0;
         public const uint KT_Pickup_Chalice = 0x001639dc;
 
@@ -239,7 +239,7 @@
         public const uint TF_Pickup_HammerGame = FakeAddress;
         public const uint TF_Pickup_WhackAImpDrumsticks = FakeAddress;
         public const uint TF_Winston_Trampoline = 0x00100928;
-        public const uint TF_Pickup_GoldCoinsChestBelowGiantClown = 0x00154280;
+        public const uint TF_Pickup_GoldCoinsChestBelowGiantClown = 0x00154280; 
         public const uint TF_Pickup_GoldCoinsChestHiddenAtTrampolines = 0x0015137C;
         public const uint TF_Winston_ElephantArmy = 0x00100928;
         public const uint TF_Pickup_CopperShieldInChaliceRoom = 0x001527AC;
@@ -314,7 +314,7 @@
         public const uint KG_Pickup_GoldCoinsHandMazeChestReward1 = 0x00144d34;
         public const uint KG_Pickup_GoldCoinsHandMazeChestReward2 = 0x00144cf0;
         public const uint KG_Pickup_GoldCoinsHandMazeChestReward3 = 0x00144cac;
-        public const uint KG_Pickup_SilverShieldInGauntletRoom = 0x0014413c;
+        public const uint KG_Pickup_SilverShieldInGauntletRoom = 0x00144184;
         public const uint KG_Pickup_Chalice = 0x0013fe50;
 
         // Kew Gardens - After Ripper Has Been Defeated
@@ -355,7 +355,7 @@
         public const uint WH_Pickup_EnergyVialInFrontOfHallsStaircase = 0x00155230;
         public const uint WH_Winston_Vampires = 0x000FFA84;
         public const uint WH_Pickup_GoldCoinsChestCloseToVampireRoom1 = 0x001542c8;
-        public const uint WH_Pickup_SilverShieldCloseToVampireRoom2 = 0x00154d68;
+        public const uint WH_Pickup_SilverShieldCloseToVampireRoom2 = 0x00154D68;
         public const uint WH_Pickup_GoldCoinsChestInVampireRoom3 = 0x00153b9c;
         public const uint WH_Pickup_LifeBottle = 0x00153be0;
         public const uint WH_Pickup_GoldCoinsBagInVampireRoom5 = 0x00153fdc;
@@ -403,7 +403,7 @@
         public const uint TS_GirlsFreed_3 = 0x000ff904;
         public const uint TS_GirlsFreed_4 = 0x000ff904;
         public const uint TS_GirlsFreed_5 = 0x000ff904;
-        public const uint TS_Pickup_GoldShieldInHubArea = 0x001717f4;
+        public const uint TS_Pickup_GoldShieldInHubArea = 0x001717F4;
         public const uint TS_Pickup_GoldCoinsBagAtPipesAreaStart = 0x0016fc98;
         public const uint TS_Pickup_GoldCoinsBag1InPipesPuzzleRoom = 0x0017110c;
         public const uint TS_Pickup_GoldCoinsBag2InPipesPuzzleRoom = 0x001710c8;
@@ -464,13 +464,13 @@
         // REGULAR NEEDS MAPPED
         public const uint CS_Pickup_LostSoul = 0x00137a50;
         public const uint CS_Winston_Entrance = 0x000eec60;
-        public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dcd4;
+        public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dd1c;
         public const uint CS_Pickup_GoldCoinsBottomRightNearSpiv = 0x0013ecc8;
         public const uint CS_Pickup_EnergyVialNextToSpiv = 0x0013afb0;
         public const uint CS_Pickup_GoldCoinsChestAfterFirstLostSoul = 0x0013f080;
         public const uint CS_Pickup_GoldCoinsChestAfterFirstFlameGargoyles = 0x0013ed50;
         public const uint CS_Pickup_GoldCoinsChestNearSilverShield = 0x0013ed0c;
-        public const uint CS_Pickup_SilverShieldChest = 0x0013f104;
+        public const uint CS_Pickup_SilverShieldChest = 0x0013f0c4;
         public const uint CS_Pickup_LifeBottle = 0x0013c754;
         public const uint CS_Pickup_GoldCoinsBagAtTopOfSpire = 0x0013ed94;
 

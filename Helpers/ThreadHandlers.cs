@@ -37,5 +37,16 @@ namespace MedievilArchipelago.Helpers
             return;
         }
 
+        static internal void SetChestContents(byte currentLevel)
+        {
+            var chestLocations = ItemHandlers.ListOfChestLocations;
+
+            foreach(var chest in chestLocations[currentLevel])
+            {
+                Memory.WriteByte(chest, 0x01);
+            }
+
+        }
+
     }
 }
