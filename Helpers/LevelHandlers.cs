@@ -46,6 +46,168 @@ namespace MedievilArchipelago.Helpers
             //}
 
         }
+
+        public static Dictionary<string, uint?> GetLevelStatuses(byte currentLevel)
+        {
+            var listOfLevelStatuses = new Dictionary<uint, Dictionary<string, uint?>>() {
+                // Cathedral Spires
+                [0x02] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x00,
+                    ["CompleteWithChalice"] = null
+                },
+                // The Demon
+                [0x03] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x29,
+                    ["CompleteWithChalice"] = null
+                },
+                // Iron Slugger
+                [0x04] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x29,
+                    ["CompleteWithChalice"] = null
+                },
+                // Dankenstein
+                [0x05] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // The Freakshow
+                [0x06] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Greenwhish Observatory
+                [0x07] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Kew Gardens
+                [0x08] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Whitechapel
+                [0x09] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // The Museum
+                [0x0a] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Tyrannosaurus Wrecks
+                [0x0b] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x29,
+                    ["CompleteWithChalice"] = null
+                },
+                // Lab (Hub)
+                [0x0d] = new() {
+                    ["Locked"] = null,
+                    ["Unlocked"] = null,
+                    ["CompleteNoChalice"] = null,
+                    ["CompleteWithChalice"] = null
+                },
+                // The Sewer
+                [0x0e] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // The Time Machine
+                [0x0f] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x29,
+                    ["CompleteWithChalice"] = null
+                },
+                // The Count`
+                [0x10] = new() {
+                    ["Locked"] = 0x20,
+                    ["Unlocked"] = 0x21,
+                    ["CompleteNoChalice"] = 0x29,
+                    ["CompleteWithChalice"] = null
+                },
+                // Wulfum Hall
+                [0x11] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Kensington
+                [0x12] = new() {
+                    ["Locked"] = 0x00,
+                    ["Unlocked"] = 0x01,
+                    ["CompleteNoChalice"] = 0x09,
+                    ["CompleteWithChalice"] = 0x19,
+                },
+                // Main Menu
+                [0x13] = new() {
+                    ["Locked"] = 0x01,
+                    ["Unlocked"] = 0x09,
+                    ["CompleteNoChalice"] = 0x00,
+                    ["CompleteWithChalice"] = 0x00
+                },
+                // Kensington, The Tomb
+                [0x1a] = new() {
+                    ["Locked"] = 0x22,
+                    ["Unlocked"] = 0x23,
+                    ["CompleteNoChalice"] = 0x2B,
+                    ["CompleteWithChalice"] = null
+                },
+                // Greenwich Naval Academy
+                [0x1b] = new() {
+                    ["Locked"] = 0x22,
+                    ["Unlocked"] = 0x23,
+                    ["CompleteNoChalice"] = 0x2B,
+                    ["CompleteWithChalice"] = null
+                },
+                /// Time Machine, Sewers
+                [0x1c] = new() {
+                    ["Locked"] = 0x22,
+                    ["Unlocked"] = 0x23,
+                    ["CompleteNoChalice"] = 0x2B,
+                    ["CompleteWithChalice"] = null
+                },
+                // Time Machine, The Ripper
+                [0x1d] = new() {
+                    ["Locked"] = 0x02,
+                    ["Unlocked"] = 0x03,
+                    ["CompleteNoChalice"] = 0x0b,
+                    ["CompleteWithChalice"] = null
+                },
+                // Cathedral Spires, The Descent
+                [0x1e] = new() {
+                    ["Locked"] = 0x22,
+                    ["Unlocked"] = 0x23,
+                    ["CompleteNoChalice"] = 0x2B,
+                    ["CompleteWithChalice"] = null
+                },
+            };
+            return listOfLevelStatuses[currentLevel];
+
+        }
         public static string GetLevelNameFromId(byte levelId)
         {
             var dict = new Dictionary<byte, string>
@@ -75,7 +237,38 @@ namespace MedievilArchipelago.Helpers
             };
 
             return dict[levelId];
+        }
 
+        // this is just for the locations. These don't really line up anywhere else but here.
+        public static byte GetLevelIdFromName(string levelName)
+        {
+            var dict = new Dictionary<string, byte>
+            {
+                ["Cathedral Spires"] = 0x02,
+                ["The Demon"] = 0x03,
+                ["Iron Slugger"] = 0x04,
+                ["Dankenstein"] = 0x05,
+                ["The Freakshow"] = 0x06,
+                ["Greenwich Observatory"] = 0x07,
+                ["Kew Gardens"] = 0x08,
+                ["Whitechapel"] = 0x09,
+                ["The Museum"] = 0x0a,
+                ["Tyrannosaurus Wrecks"] = 0x0b,
+                ["Hub"] = 0x0d,
+                ["The Sewers"] = 0x0e,
+                ["The Time Machine"] = 0x0f,
+                ["The Count"] = 0x10,
+                ["Wulfrum Hall"] = 0x11,
+                ["Kensington"] = 0x12,
+                ["Main Menu"] = 0x13,
+                ["The Tomb"] = 0x1a,
+                ["Naval Academy"] = 0x1b,
+                ["The Time Machine - The Sewers"] = 0x1c,
+                ["The Ripper"] = 0x1d,
+                ["Cathedral Spires - The Descent"] = 0x1e,
+            };
+
+            return dict[levelName]; 
         }
     }
 }

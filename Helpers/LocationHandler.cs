@@ -220,6 +220,7 @@ namespace MedievilArchipelago.Helpers
                             };
                         }
 
+                        // when logic is added correctly for level completes, make sure to adjust this part and use the correct clear value vs the cutscene at the end
                         if (loc.Name.Contains("Cleared: The Demon"))
                         {
                             {
@@ -275,9 +276,23 @@ namespace MedievilArchipelago.Helpers
                         if (loc.Name.Contains("Cleared:"))
                         {
                             {
-                                List<ILocation> conditionalChoice = new List<ILocation>();
+                                // set the basics up 
+                                List<ILocation> conditionalAnd = new List<ILocation>();
+                                List<ILocation> conditionalOr = new List<ILocation>();
+                                string withChalice = null;
+                                string withoutChalice = null;
+                                CompositeLocation location;
 
-                                conditionalChoice.Add(new Location()
+                                // get the current level from a dictionary
+                                byte levelByte = LevelHandlers.GetLevelIdFromName(loc.Name.Replace("Cleared: ", "").Trim());
+                                var levelClearDetails = LevelHandlers.GetLevelStatuses(levelByte);
+
+                                // get the level values
+                                var levelClearNoChalice = levelClearDetails["CompleteNoChalice"];
+                                var levelClearWithChalice = levelClearDetails["CompleteWithChalice"];
+
+                                // add the hub check to AND (always need to be in the hub for these to trigger
+                                conditionalAnd.Add(new Location()
                                 {
 
                                     Id = -1,
@@ -288,25 +303,79 @@ namespace MedievilArchipelago.Helpers
                                     CheckValue = "13"
                                 });
 
-
-                                conditionalChoice.Add(new Location()
+                                // convert values to integers then strings (the library only takes strings)
+                                withoutChalice = ((int)levelClearNoChalice.Value).ToString();
+                                if (levelClearWithChalice is not null)
                                 {
-                                    Id = -1,
-                                    Name = "Level Clear Check",
-                                    Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
-                                    CheckType = loc.CheckType,
-                                    CompareType = LocationCheckCompareType.Range,
-                                    RangeStartValue = "9",
-                                    RangeEndValue = "45"
-                                });
+                                    withChalice = ((int)levelClearWithChalice.Value).ToString();
+                                }
 
-                                CompositeLocation location = new CompositeLocation()
+                                // if there are both values available, it's a chalice world.
+                                // If it's a chalice world, it need sto check BOTH values.
+                                // an OR will be embeded next to the AND
+                                if (levelClearWithChalice is not null && levelClearNoChalice is not null)
                                 {
-                                    Name = loc.Name,
-                                    Id = locationId,
-                                    CheckType = LocationCheckType.AND,
-                                    Conditions = conditionalChoice
-                                };
+
+                                    conditionalOr.Add(new Location()
+                                    {
+                                        Id = -1,
+                                        Name = "Level Clear No Chalice Check",
+                                        Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
+                                        CheckType = LocationCheckType.Byte,
+                                        CompareType = LocationCheckCompareType.Match,
+                                        CheckValue = withoutChalice
+                                    });
+
+                                    conditionalOr.Add(new Location()
+                                    {
+                                        Id = -1,
+                                        Name = "Level Clear With Chalice Check",
+                                        Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
+                                        CheckType = LocationCheckType.Byte,
+                                        CompareType = LocationCheckCompareType.Match,
+                                        CheckValue = withChalice
+                                    });
+
+                                    CompositeLocation statusCheck = new CompositeLocation()
+                                    {
+                                        Name = "Or Check for with or without chalice",
+                                        Id = -1,
+                                        CheckType = LocationCheckType.OR,
+                                        Conditions = conditionalOr
+                                    };
+
+                                    conditionalAnd.Add(statusCheck);
+
+                                    location = new CompositeLocation()
+                                    {
+                                        Name = loc.Name,
+                                        Id = locationId,
+                                        CheckType = LocationCheckType.AND,
+                                        Conditions = conditionalAnd
+                                    };
+
+                                }
+                                // otherwise, just add the level clear check for no chalice
+                                else
+                                {
+                                    // only one type of clear available
+                                    conditionalAnd.Add(new Location()
+                                    {
+                                        Id = -1,
+                                        Name = "Level Clear Check",
+                                        Address = ripperShift && loc.RipperShiftAddress != 0 ? loc.RipperShiftAddress : loc.Address,
+                                        CheckType = LocationCheckType.Byte,
+                                        CompareType = LocationCheckCompareType.Match,
+                                        CheckValue = withoutChalice
+                                    });
+                                    location = new CompositeLocation()
+                                    {
+                                        Name = loc.Name,
+                                        Id = locationId,
+                                        CheckType = LocationCheckType.AND,
+                                        Conditions = conditionalAnd
+                                    };
+                                }
 
                                 locations.Add(location);
                                 location_index++;
