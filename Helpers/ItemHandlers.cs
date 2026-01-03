@@ -223,6 +223,8 @@ namespace MedievilArchipelago.Helpers
 
         public static Dictionary<int, List<string>> ListOfKeyItemsInLevels = new Dictionary<int, List<string>>
         {
+            { 0x00, [
+            ] },
             // Cathedral Spires
             { 0x02, [
                  "Torch",

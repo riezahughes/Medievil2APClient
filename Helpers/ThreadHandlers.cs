@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Archipelago.Core.Util;
+﻿using Archipelago.Core.Util;
 using Archipelago.Core;
-using Archipelago.MultiClient.Net.Models;
+using Medievil2Archipelago.Models;
 
 namespace MedievilArchipelago.Helpers
 {
@@ -37,15 +32,34 @@ namespace MedievilArchipelago.Helpers
             return;
         }
 
-        static internal void SetChestContents(byte currentLevel)
+        static internal void SetChestContents(byte currentLevel, int keyItemsInPool)
         {
             var chestLocations = ItemHandlers.ListOfChestLocations;
 
-            foreach(var chest in chestLocations[currentLevel])
+            var offset = 0x18;
+
+            foreach (var chest in chestLocations[currentLevel])
             {
+                // these are the only two chests in the game that have a key item in them.
+                if(keyItemsInPool == KeyItemSanityOptions.ON && chest == (Addresses.KT_Pickup_Pocketwatch - offset) || chest == (Addresses.TM_Pickup_Cannonball - offset))
+                {
+                    continue;
+                }
                 Memory.WriteByte(chest, 0x01);
             }
 
+        }
+
+        static internal void SetOpenWorld()
+        {
+            // for every level, set its byte to unlocked. Only do this if it's set to 1.
+            foreach(var (levelId, Statuses) in LevelHandlers.LevelStatusMap)
+            {
+                if (Statuses["Address"] is not null)
+                {
+                    Memory.WriteByte((ulong)Statuses["Address"], (byte)Statuses["Unlocked"]);
+                }                
+            }
         }
 
     }

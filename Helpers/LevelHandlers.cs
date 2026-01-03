@@ -47,167 +47,65 @@ namespace MedievilArchipelago.Helpers
 
         }
 
+        public static readonly Dictionary<uint, Dictionary<string, uint?>> LevelStatusMap = new()
+        {
+            // Cathedral Spires
+            [0x02] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x00, ["CompleteWithChalice"] = null, ["Address"] = Addresses.CS_LevelStatus },
+            // The Demon
+            [0x03] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x29, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TD_LevelStatus },
+            // Iron Slugger                                                                       
+            [0x04] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x29, ["CompleteWithChalice"] = null, ["Address"] = Addresses.IS_LevelStatus },
+            // Dankenstein                                                                 
+            [0x05] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.DK_LevelStatus },
+            // The Freakshow
+            [0x06] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.TF_LevelStatus },
+            // Greenwhish Observatory
+            [0x07] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.GO_LevelStatus },
+            // Kew Gardens
+            [0x08] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.KG_LevelStatus },
+            // Whitechapel
+            [0x09] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.WC_LevelStatus },
+            // The Museum
+            [0x0a] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.TM_LevelStatus },
+            // Tyrannosaurus Wrecks
+            [0x0b] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x29, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TW_LevelStatus },
+            // Lab (Hub)
+            [0x0d] = new() { ["Locked"] = null, ["Unlocked"] = null, ["CompleteNoChalice"] = null, ["CompleteWithChalice"] = null, ["Address"] = null },
+            // The Sewer
+            [0x0e] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.TS_LevelStatus },
+            // The Time Machine
+            [0x0f] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x29, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TTM_LevelStatus },
+            // The Count
+            [0x10] = new() { ["Locked"] = 0x20, ["Unlocked"] = 0x21, ["CompleteNoChalice"] = 0x29, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TC_LevelStatus },
+            // Wulfum Hall
+            [0x11] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.WH_LevelStatus },
+            // Kensington
+            [0x12] = new() { ["Locked"] = 0x00, ["Unlocked"] = 0x01, ["CompleteNoChalice"] = 0x09, ["CompleteWithChalice"] = 0x19, ["Address"] = Addresses.KT_LevelStatus },
+            // Main Menu
+            [0x13] = new() { ["Locked"] = 0x01, ["Unlocked"] = 0x00, ["CompleteNoChalice"] = 0x00, ["CompleteWithChalice"] = 0x00, ["Address"] = null },
+            // Kensington, The Tomb
+            [0x1a] = new() { ["Locked"] = 0x22, ["Unlocked"] = 0x23, ["CompleteNoChalice"] = 0x2B, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TT_LevelStatus },
+            // Greenwich Naval Academy
+            [0x1b] = new() { ["Locked"] = 0x22, ["Unlocked"] = 0x23, ["CompleteNoChalice"] = 0x2B, ["CompleteWithChalice"] = null, ["Address"] = Addresses.GONA_LevelStatus },
+            // Time Machine, Sewers
+            [0x1c] = new() { ["Locked"] = 0x22, ["Unlocked"] = 0x23, ["CompleteNoChalice"] = 0x2B, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TTMTS_LevelStatus },
+            // Time Machine, The Ripper
+            [0x1d] = new() { ["Locked"] = 0x02, ["Unlocked"] = 0x03, ["CompleteNoChalice"] = 0x0b, ["CompleteWithChalice"] = null, ["Address"] = Addresses.TR_LevelStatus },
+            // Cathedral Spires, The Descent
+            [0x1e] = new() { ["Locked"] = 0x22, ["Unlocked"] = 0x23, ["CompleteNoChalice"] = 0x2B, ["CompleteWithChalice"] = null, ["Address"] = Addresses.CSTD_LevelStatus },
+        };
+
         public static Dictionary<string, uint?> GetLevelStatuses(byte currentLevel)
         {
-            var listOfLevelStatuses = new Dictionary<uint, Dictionary<string, uint?>>() {
-                // Cathedral Spires
-                [0x02] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x00,
-                    ["CompleteWithChalice"] = null
-                },
-                // The Demon
-                [0x03] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x29,
-                    ["CompleteWithChalice"] = null
-                },
-                // Iron Slugger
-                [0x04] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x29,
-                    ["CompleteWithChalice"] = null
-                },
-                // Dankenstein
-                [0x05] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // The Freakshow
-                [0x06] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Greenwhish Observatory
-                [0x07] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Kew Gardens
-                [0x08] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Whitechapel
-                [0x09] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // The Museum
-                [0x0a] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Tyrannosaurus Wrecks
-                [0x0b] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x29,
-                    ["CompleteWithChalice"] = null
-                },
-                // Lab (Hub)
-                [0x0d] = new() {
-                    ["Locked"] = null,
-                    ["Unlocked"] = null,
-                    ["CompleteNoChalice"] = null,
-                    ["CompleteWithChalice"] = null
-                },
-                // The Sewer
-                [0x0e] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // The Time Machine
-                [0x0f] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x29,
-                    ["CompleteWithChalice"] = null
-                },
-                // The Count`
-                [0x10] = new() {
-                    ["Locked"] = 0x20,
-                    ["Unlocked"] = 0x21,
-                    ["CompleteNoChalice"] = 0x29,
-                    ["CompleteWithChalice"] = null
-                },
-                // Wulfum Hall
-                [0x11] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Kensington
-                [0x12] = new() {
-                    ["Locked"] = 0x00,
-                    ["Unlocked"] = 0x01,
-                    ["CompleteNoChalice"] = 0x09,
-                    ["CompleteWithChalice"] = 0x19,
-                },
-                // Main Menu
-                [0x13] = new() {
-                    ["Locked"] = 0x01,
-                    ["Unlocked"] = 0x09,
-                    ["CompleteNoChalice"] = 0x00,
-                    ["CompleteWithChalice"] = 0x00
-                },
-                // Kensington, The Tomb
-                [0x1a] = new() {
-                    ["Locked"] = 0x22,
-                    ["Unlocked"] = 0x23,
-                    ["CompleteNoChalice"] = 0x2B,
-                    ["CompleteWithChalice"] = null
-                },
-                // Greenwich Naval Academy
-                [0x1b] = new() {
-                    ["Locked"] = 0x22,
-                    ["Unlocked"] = 0x23,
-                    ["CompleteNoChalice"] = 0x2B,
-                    ["CompleteWithChalice"] = null
-                },
-                /// Time Machine, Sewers
-                [0x1c] = new() {
-                    ["Locked"] = 0x22,
-                    ["Unlocked"] = 0x23,
-                    ["CompleteNoChalice"] = 0x2B,
-                    ["CompleteWithChalice"] = null
-                },
-                // Time Machine, The Ripper
-                [0x1d] = new() {
-                    ["Locked"] = 0x02,
-                    ["Unlocked"] = 0x03,
-                    ["CompleteNoChalice"] = 0x0b,
-                    ["CompleteWithChalice"] = null
-                },
-                // Cathedral Spires, The Descent
-                [0x1e] = new() {
-                    ["Locked"] = 0x22,
-                    ["Unlocked"] = 0x23,
-                    ["CompleteNoChalice"] = 0x2B,
-                    ["CompleteWithChalice"] = null
-                },
-            };
-            return listOfLevelStatuses[currentLevel];
+            if (LevelStatusMap.TryGetValue(currentLevel, out var statuses))
+            {
+                return statuses;
+            }
 
+            // Return null or an empty dictionary if the level isn't found
+            return null;
         }
+
         public static string GetLevelNameFromId(byte levelId)
         {
             var dict = new Dictionary<byte, string>

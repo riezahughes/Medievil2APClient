@@ -2,11 +2,8 @@
 using Archipelago.Core.Util;
 using Serilog;
 using MedievilArchipelago.Helpers;
-using System.Net.NetworkInformation;
-using Microsoft.Extensions.Hosting;
-using System.Threading;
-
-
+using MedievilArchipelago.Models;
+using Medievil2Archipelago.Models;
 namespace MedievilArchipelago
 {
     public class MemoryCheckThreads
@@ -26,6 +23,8 @@ namespace MedievilArchipelago
                     {
 
                         byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                        int openWorld = Int32.Parse(client.Options?.GetValueOrDefault("progression_option", "0").ToString());
+                        int keyitems = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
                         //byte currentgold = Memory.ReadByte(Addresses.DansCurrentGold);
 
                         //Console.WriteLine($"Current Level: {currentLevel} and current gold is {currentgold}");
@@ -43,7 +42,12 @@ namespace MedievilArchipelago
                         if (currentLocation != 0x13)
                         {
                             ThreadHandlers.SetCheatMenu(client);
-                            ThreadHandlers.SetChestContents(currentLocation);
+                            ThreadHandlers.SetChestContents(currentLocation, keyitems);
+                        }
+
+                        if( openWorld == ProgressionOptions.OPENWORLD  && currentLocation != 0x13)
+                        {
+                            ThreadHandlers.SetOpenWorld();
                         }
 
                         Thread.Sleep(5000);

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Archipelago.Core.Models;
 using Archipelago.Core;
 using MedievilArchipelago.Models;
+using Medievil2Archipelago.Models;
 
 namespace MedievilArchipelago.Helpers
 {
