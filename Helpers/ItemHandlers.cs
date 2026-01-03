@@ -328,6 +328,9 @@ namespace MedievilArchipelago.Helpers
                  "Pocket Watch",
                 "Dan's Head",
             ] },
+            { 0x13,[
+
+            ] },
             // Kensington, The Tomb
             { 0x1a,[
                  "Torch",
