@@ -135,8 +135,6 @@ namespace MedievilArchipelago.Helpers
             // for each location that's coming in
             bool hasEquipableWeapon = false;
 
-            Console.WriteLine("Updating player state...");
-
             foreach (ItemInfo itemInf in itemsCollected)
             {
                 Item itm = new Item();

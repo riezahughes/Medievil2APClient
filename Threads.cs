@@ -13,7 +13,23 @@ namespace MedievilArchipelago
         {
             await Task.Run(() =>
             {
+
                 Console.WriteLine("Starting Background Tasks...");
+
+                void SetupLabMonitor()
+                {
+                    // Don't re-setup if the app is closing
+                    if (cts.Token.IsCancellationRequested) return;
+
+                    Memory.MonitorAddressForAction<byte>(
+                        Addresses.CurrentLevel,
+                        () =>
+                        {
+                            Memory.Write(Addresses.LabState, 0x0000000c);
+                            SetupLabMonitor();
+                        },
+                        value => value == 13);
+                }
 
                 byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
                 int openWorld = Int32.Parse(client.Options?.GetValueOrDefault("progression_option", "0").ToString());
@@ -26,11 +42,14 @@ namespace MedievilArchipelago
                         Addresses.CurrentLevel,
                         () =>
                         {
-
                             var val = Memory.Read<byte>(Addresses.CurrentLevel, Enums.Endianness.Big);
-                            Memory.WriteByte(Addresses.CurrentLevel, 0x0d); // 
+                            Memory.WriteByte(Addresses.CurrentLevel, 0x0d);
+
                         },
                         value => value == 10);
+
+                    SetupLabMonitor();
+
                 }
 
 
@@ -57,10 +76,12 @@ namespace MedievilArchipelago
                                 ThreadHandlers.SetChestContents(currentLocation, keyitems);
                             }
 
+
                             if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13)
                             {
-                                ThreadHandlers.SetOpenWorld();
-                            }
+                            ThreadHandlers.SetOpenWorld();
+
+                        }
                     }
                     catch (Exception ex)
                     {
