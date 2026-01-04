@@ -321,7 +321,7 @@ public class Program
 
                         var bottles = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Bottle") select item;
 
-                        var equipment = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Equipment") select item;
+                        var equipment = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.ContainsAny(ItemHandlers.ListOfWeaponStrings) select item;
 
                         Console.WriteLine("Current Equipment: ");
                         foreach (var weapon in equipment.OrderBy(item => item.ItemName))
@@ -336,13 +336,9 @@ public class Program
                         }
 
                         Console.WriteLine("Current Bottles: ");
-                        foreach (var bottle in bottles.OrderBy(item => item.ItemName))
-                        {
-                            Console.WriteLine(bottle.ItemName);
+                            Console.WriteLine(bottles.Count());
+
                         }
-
-
-                    }
                     // allow manually handling traps if you're in dev mode (for testing)
 #if DEBUG
                         else if (input?.Trim().ToLower() == "heavytrap")

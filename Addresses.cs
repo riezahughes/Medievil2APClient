@@ -98,6 +98,9 @@
         public const uint CSTD_LevelStatus = 0x000E1854;
         public const uint TD_LevelStatus = 0x000E1864; // maps to ending cutscene
 
+        // Open World Setup
+        public const uint LabState = 0x000eff84;
+
         ////////////////////////// LEVEL PICKUPS /////////////////////////////
 
         // Hub - Professors Lab
@@ -322,6 +325,7 @@
         public const uint KG_Winston_Shift_Infection = 0x001005F8;
 
         // Dankenstein
+        // 0x10183c new value for number of corpse items
         public const uint DK_Winston_SavePoint = 0x000FECD0;
         public const uint DK_Pickup_Bum = 0x00101870;
         public const uint DK_Pickup_LeftArm = 0x00101870;
