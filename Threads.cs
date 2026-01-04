@@ -2,7 +2,6 @@
 using Archipelago.Core.Util;
 using Serilog;
 using MedievilArchipelago.Helpers;
-using MedievilArchipelago.Models;
 using Medievil2Archipelago.Models;
 namespace MedievilArchipelago
 {
@@ -31,6 +30,17 @@ namespace MedievilArchipelago
                         value => value == 13);
                 }
 
+                void SetupNavalMonitor() {
+                    Memory.MonitorAddressForAction<byte>(
+                        Addresses.CurrentLevel,
+                        () =>
+                        {
+                            Memory.Write(Addresses.LabState, 0x00000010);
+                            SetupNavalMonitor();
+                        },
+                        value => value == 27);
+                }
+
                 byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
                 int openWorld = Int32.Parse(client.Options?.GetValueOrDefault("progression_option", "0").ToString());
                 int keyitems = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
@@ -49,6 +59,7 @@ namespace MedievilArchipelago
                         value => value == 10);
 
                     SetupLabMonitor();
+                    SetupNavalMonitor();
 
                 }
 
