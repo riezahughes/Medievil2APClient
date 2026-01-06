@@ -15,7 +15,7 @@ namespace MedievilArchipelago
 
                 Console.WriteLine("Starting Background Tasks...");
 
-                void SetupLabMonitor()
+                void SetupLabStateMonitor()
                 {
                     // Don't re-setup if the app is closing
                     if (cts.Token.IsCancellationRequested) return;
@@ -25,20 +25,32 @@ namespace MedievilArchipelago
                         () =>
                         {
                             Memory.Write(Addresses.LabState, 0x0000000c);
-                            SetupLabMonitor();
+                            SetupLabStateMonitor();
                         },
                         value => value == 13);
                 }
 
-                void SetupNavalMonitor() {
+                void SetupNavalStateMonitor() {
                     Memory.MonitorAddressForAction<byte>(
                         Addresses.CurrentLevel,
                         () =>
                         {
                             Memory.Write(Addresses.LabState, 0x00000010);
-                            SetupNavalMonitor();
+                            SetupNavalStateMonitor();
                         },
                         value => value == 27);
+                }
+
+                void SetupOpenWorldMonitor()
+                {
+                    Memory.MonitorAddressForAction<byte>(
+                        Addresses.CurrentLevel,
+                        () =>
+                        {
+                            var val = Memory.Read<byte>(Addresses.CurrentLevel, Enums.Endianness.Big);
+                            Memory.WriteByte(Addresses.CurrentLevel, 0x0d);
+                        },
+                        value => value == 10);
                 }
 
                 byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
@@ -48,19 +60,10 @@ namespace MedievilArchipelago
                 // set to listen to "new game" so it'll load straight into the professors lab.
                 if (openWorld == ProgressionOptions.OPENWORLD)
                 {
-                    var task = Memory.MonitorAddressForAction<byte>(
-                        Addresses.CurrentLevel,
-                        () =>
-                        {
-                            var val = Memory.Read<byte>(Addresses.CurrentLevel, Enums.Endianness.Big);
-                            Memory.WriteByte(Addresses.CurrentLevel, 0x0d);
 
-                        },
-                        value => value == 10);
-
-                    SetupLabMonitor();
-                    SetupNavalMonitor();
-
+                    SetupOpenWorldMonitor();
+                    SetupLabStateMonitor();
+                    SetupNavalStateMonitor();
                 }
 
 
@@ -72,7 +75,18 @@ namespace MedievilArchipelago
                         byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
                             Thread.Sleep(3000);
-                            if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame() && currentLevel != 0x13)
+                            if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13 )
+                            {
+                                SetupOpenWorldMonitor();
+                            }
+
+                            if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13)
+                            {
+                                ThreadHandlers.SetOpenWorld();
+
+                            }
+
+                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame() && currentLevel != 0x13)
                             {
                                 PlayerStateHandler.UpdatePlayerState(client, false);
                             }
@@ -87,12 +101,6 @@ namespace MedievilArchipelago
                                 ThreadHandlers.SetChestContents(currentLocation, keyitems);
                             }
 
-
-                            if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13)
-                            {
-                            ThreadHandlers.SetOpenWorld();
-
-                        }
                     }
                     catch (Exception ex)
                     {
