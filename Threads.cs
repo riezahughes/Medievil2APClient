@@ -7,7 +7,7 @@ namespace MedievilArchipelago
 {
     public class MemoryCheckThreads
     {
-
+        static bool withinValidLevel = false;
         async public static Task PassiveLogicChecks(ArchipelagoClient client, CancellationTokenSource cts)
         {
             await Task.Run(() =>
@@ -31,6 +31,8 @@ namespace MedievilArchipelago
                 }
 
                 void SetupNavalStateMonitor() {
+                    if (cts.Token.IsCancellationRequested) return;
+
                     Memory.MonitorAddressForAction<byte>(
                         Addresses.CurrentLevel,
                         () =>
@@ -43,15 +45,33 @@ namespace MedievilArchipelago
 
                 void SetupOpenWorldMonitor()
                 {
+                    if (cts.Token.IsCancellationRequested) return;
+
                     Memory.MonitorAddressForAction<byte>(
                         Addresses.CurrentLevel,
                         () =>
                         {
-                            var val = Memory.Read<byte>(Addresses.CurrentLevel, Enums.Endianness.Big);
                             Memory.WriteByte(Addresses.CurrentLevel, 0x0d);
                         },
                         value => value == 10);
                 }
+
+                //void SetupExitLevelMonitor()
+                //{
+                //    Memory.MonitorAddressForAction<byte>(
+                //        Addresses.CurrentLevel,
+                //        () =>
+                //        {
+                //            if (withinValidLevel == false)
+                //            {
+                //                Console.WriteLine("!!!");
+                //                Memory.WriteByte(Addresses.ExitLevel, 0x00);
+                //                withinValidLevel = true;
+                //            }
+                //            SetupExitLevelMonitor();
+                //        },
+                //        value => value == 10 || value == 11);
+                //}
 
                 byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
                 int openWorld = Int32.Parse(client.Options?.GetValueOrDefault("progression_option", "0").ToString());
@@ -64,6 +84,7 @@ namespace MedievilArchipelago
                     SetupOpenWorldMonitor();
                     SetupLabStateMonitor();
                     SetupNavalStateMonitor();
+                    //SetupExitLevelMonitor();
                 }
 
 
@@ -75,7 +96,8 @@ namespace MedievilArchipelago
                         byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
                             Thread.Sleep(3000);
-                            if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13 )
+
+                            if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13)
                             {
                                 SetupOpenWorldMonitor();
                             }
@@ -84,6 +106,11 @@ namespace MedievilArchipelago
                             {
                                 ThreadHandlers.SetOpenWorld();
 
+                            }
+
+                            if (currentLevel == 0x0a || currentLevel == 0x0b)
+                            {
+                                Memory.WriteByte(Addresses.ExitLevel, 0x00);
                             }
 
                         if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame() && currentLevel != 0x13)

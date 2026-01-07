@@ -85,6 +85,7 @@ namespace MedievilArchipelago.Helpers
             {
                 if (!PlayerStateHandler.isInTheGame() && isValidForDelay)
                 {
+                    Console.WriteLine($"Player is not in a valid location. Delaying {args.Item.Name}");
                     Program.delayedItems.Add(args);
                     return;
                 }
@@ -92,6 +93,7 @@ namespace MedievilArchipelago.Helpers
                 #if DEBUG
                     Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
                 #endif
+
                 byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
                 int keyItemSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
                 int breakAmmoLimitOption = Int32.Parse(client.Options?.GetValueOrDefault("break_ammo_limit", "0").ToString());
@@ -117,6 +119,8 @@ namespace MedievilArchipelago.Helpers
                 PlayerStateHandler.UpdatePlayerState(client, false);
             }
 
+
+
         }
 
         public static void Client_MessageReceived(object sender, MessageReceivedEventArgs e, ArchipelagoClient client, string slot)
@@ -128,9 +132,10 @@ namespace MedievilArchipelago.Helpers
 
             // this message can use emoji's through the overlay. Look into maybe making it a little more obvious 
             // what each item is with a symbol
-            client.AddOverlayMessage(e.Message.ToString());
 
-            Log.Logger.Information(JsonConvert.SerializeObject(e.Message));
+            // this is broken at the moment.
+            //client.AddOverlayMessage(e.Message.ToString());
+
 
             string prefix;
             Kokuban.AnsiEscape.AnsiStyle bg;

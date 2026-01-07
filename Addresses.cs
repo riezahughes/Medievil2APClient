@@ -36,6 +36,9 @@
         public const uint DansHandSkill = 0x000F1694;
         public const uint DaringDashSkill = 0x000F1694;
 
+        // Exit Level Menu
+        public const uint ExitLevel = 0x000d359d;
+
         // Cheat menu
         public const uint CheatMenu = 0x000f0608;
 
