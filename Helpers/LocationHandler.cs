@@ -804,6 +804,7 @@ namespace MedievilArchipelago.Helpers
                 new GenericItemsData("Key Item: Time Machine Piece - Planetarium - TTM", Addresses.TTM_Pickup_TimeMachinePiecePlanetarium, "15", "704", LocationCheckType.UShort),
                 new GenericItemsData("Key Item: Time Machine Piece - Grammar Horn - TTM", Addresses.TTM_Pickup_TimeMachinePieceGrammarHorn, "15", "704", LocationCheckType.UShort),
                 new GenericItemsData("Key Item: Time Machine Piece - Moon Exhibit - TTM", Addresses.TTM_Pickup_TimeMachinePieceMoonExhibit, "15", "704", LocationCheckType.UShort),
+                new GenericItemsData("Gold Coins: Chest Behind Right Lion Statue - TTM", Addresses.TTM_Pickup_GoldChestBehindRightLionStatue, "15", "704", LocationCheckType.UShort),
                 new GenericItemsData("Book: Space Beacon - TTM", Addresses.TTM_Book_SpaceBeacon, "15", "0", LocationCheckType.Byte),
                 new GenericItemsData("Book: Grammar Horn - TTM", Addresses.TTM_Book_GrammarHorn, "15", "0", LocationCheckType.Byte),
                 new GenericItemsData("Book: Moon Exhibit - TTM", Addresses.TTM_Book_MoonExhibit, "15", "0", LocationCheckType.Byte),

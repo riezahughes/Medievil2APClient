@@ -443,6 +443,7 @@
         public const uint TTM_Pickup_TimeMachinePieceMoonExhibit = 0x00149a84;
         public const uint TTM_Book_TheTimeMachine = 0x001283e4;
         public const uint TTM_Winston_Entrance = 0x000FF6EC;
+        public const uint TTM_Pickup_GoldChestBehindRightLionStatue = 0x0014afc4;
 
         // The Time Machine - After Ripper Has Been Defeated
         public const uint TTM_Winston_Shift_Entrance = 0x001002C0;
