@@ -163,7 +163,6 @@ namespace MedievilArchipelago.Helpers
                         }
                         break;
                     case var x when x.Name.Contains("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                    // these two will need to be adjusted, functions don't exist yet.
                     case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
                     case var x when x.Name.Contains("Lost Soul"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
                     case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
