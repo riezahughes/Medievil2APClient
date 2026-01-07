@@ -675,6 +675,22 @@ namespace MedievilArchipelago.Helpers
 
         }
 
+        public static void UpdateCumulativeKeyItem(uint address, int updateValue, int max)
+        {
+            var currentValue = Memory.ReadShort(address);
+
+            var newUpdateValue = currentValue + updateValue;
+
+            SetItemMemoryValue(address, newUpdateValue,max);
+
+        }
+        public static void ReceiveCumulativeKeyItem(Item item)
+        {
+            var addressDict = StatusAndInventoryAddressDictionary();
+
+            UpdateCumulativeKeyItem(addressDict["Key Items"][item.Name], 1, 12);
+        }
+
 
         public static int ExtractBracketAmount(string itemName)
         {
@@ -734,11 +750,12 @@ namespace MedievilArchipelago.Helpers
         }
 
 
+
+
         public static void ReceiveKeyItem(Item item)
         {
             // commented out because i need to make a list of player data addresses to deal with this.
             var addressDict = StatusAndInventoryAddressDictionary();
-
             UpdateKeyItemValues(addressDict["Key Items"][item.Name]);
 
         }
