@@ -24,8 +24,11 @@ namespace MedievilArchipelago
                         Addresses.CurrentLevel,
                         () =>
                         {
+
                             Memory.Write(Addresses.LabState, 0x0000000c);
-                            SetupLabStateMonitor();
+#if DEBUG
+                            Console.WriteLine("----Lab State Set");
+#endif
                         },
                         value => value == 13);
                 }
@@ -38,6 +41,9 @@ namespace MedievilArchipelago
                         () =>
                         {
                             Memory.Write(Addresses.LabState, 0x00000010);
+#if DEBUG
+                            Console.WriteLine("----Naval State Set");
+#endif
                             SetupNavalStateMonitor();
                         },
                         value => value == 27);
@@ -52,26 +58,31 @@ namespace MedievilArchipelago
                         () =>
                         {
                             Memory.WriteByte(Addresses.CurrentLevel, 0x0d);
+#if DEBUG
+                            Console.WriteLine("----Open World State Set");
+#endif
                         },
                         value => value == 10);
                 }
 
-                //void SetupExitLevelMonitor()
-                //{
-                //    Memory.MonitorAddressForAction<byte>(
-                //        Addresses.CurrentLevel,
-                //        () =>
-                //        {
-                //            if (withinValidLevel == false)
-                //            {
-                //                Console.WriteLine("!!!");
-                //                Memory.WriteByte(Addresses.ExitLevel, 0x00);
-                //                withinValidLevel = true;
-                //            }
-                //            SetupExitLevelMonitor();
-                //        },
-                //        value => value == 10 || value == 11);
-                //}
+                void SetupExitLevelMonitor()
+                {
+                    Memory.MonitorAddressForAction<byte>(
+                        Addresses.CurrentLevel,
+                        () =>
+                        {
+                            if (withinValidLevel == false)
+                            {
+#if DEBUG
+                                Console.WriteLine("----Exit World State Set");
+#endif
+                                Memory.WriteByte(Addresses.ExitLevel, 0x00);
+                                withinValidLevel = true;
+                            }
+                            SetupExitLevelMonitor();
+                        },
+                        value => value == 10 || value == 11);
+                }
 
                 byte currentLocation = Memory.ReadByte(Addresses.CurrentLevel);
                 int openWorld = Int32.Parse(client.Options?.GetValueOrDefault("progression_option", "0").ToString());
@@ -95,45 +106,50 @@ namespace MedievilArchipelago
 
                         byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
-                            Thread.Sleep(3000);
+                        if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13)
+                        {
+                            SetupOpenWorldMonitor();
+                        }
 
-                            if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13)
-                            {
-                                SetupOpenWorldMonitor();
-                            }
+                        if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13 && PlayerStateHandler.isInTheGame())
+                        {
+                            ThreadHandlers.SetOpenWorld();
 
-                            if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13)
-                            {
-                                ThreadHandlers.SetOpenWorld();
+                        }
 
-                            }
+                        if (currentLevel == 0x0a || currentLevel == 0x0b && openWorld == ProgressionOptions.OPENWORLD)
+                        {
+                            Memory.WriteByte(Addresses.ExitLevel, 0x00);
+                        }
 
-                            if (currentLevel == 0x0a || currentLevel == 0x0b)
-                            {
-                                Memory.WriteByte(Addresses.ExitLevel, 0x00);
-                            }
+                        if (currentLocation != currentLevel && openWorld == ProgressionOptions.OPENWORLD)
+                        {
+                            SetupLabStateMonitor();
+                        }
 
-                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame() && currentLevel != 0x13)
-                            {
-                                PlayerStateHandler.UpdatePlayerState(client, false);
-                            }
+                        if (currentLocation != currentLevel && PlayerStateHandler.isInTheGame())
+                        {
+                            Thread.Sleep(8000);
+                            PlayerStateHandler.UpdatePlayerState(client, false);
+                        }
 
-                            currentLocation = currentLevel;
+                        currentLocation = currentLevel;
 
-                            GoalConditionHandlers.CheckGoalCondition(client);
 
-                            if (currentLocation != 0x13)
-                            {
-                                ThreadHandlers.SetCheatMenu(client);
-                                ThreadHandlers.SetChestContents(currentLocation, keyitems);
-                            }
+                        if (currentLocation != 0x13 && PlayerStateHandler.isInTheGame())
+                        {
+                            ThreadHandlers.SetCheatMenu(client);
+                            ThreadHandlers.SetChestContents(currentLocation, keyitems);
+                        }
+
+                        GoalConditionHandlers.CheckGoalCondition(client);
 
                     }
                     catch (Exception ex)
                     {
                         Log.Error($"Error in PassiveLogicChecks: {ex.Message}");
                     }
-                    
+                    Thread.Sleep(3000);
                 }
                 }, cts.Token);
 

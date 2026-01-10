@@ -25,9 +25,7 @@ namespace MedievilArchipelago.Helpers
             ulong currentGold = Memory.ReadUInt(Addresses.DansCurrentGold);
             ulong currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
-
-
-            if ((currentLevel <= 0x02 && currentLevel >= 0x1e && currentLevel == 0x13) || currentGold == 0x82a4)
+            if ((currentLevel <= 0x02 && currentLevel >= 0x1e) || currentGold == 0x82a4)
             {
                 return false;
             }
@@ -105,7 +103,7 @@ namespace MedievilArchipelago.Helpers
 
         public static void UpdatePlayerState(ArchipelagoClient client, bool gameCleared)
         {
-            if (playerStateUpdating == true) { return; }
+            if (playerStateUpdating == true || PlayerStateHandler.isInTheGame() == false) { return; }
 
             playerStateUpdating = true;
 
