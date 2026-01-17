@@ -469,7 +469,6 @@
         public const uint TR_Winston_Shift_Entrance = 0x000FF6EC;
 
         // Cathedral Spires
-        // REGULAR NEEDS MAPPED
         public const uint CS_Pickup_LostSoul = 0x00137a50;
         public const uint CS_Winston_Entrance = 0x000eec60;
         public const uint CS_Pickup_GoldShieldInChestAtStart = 0x0013dd1c;
@@ -496,7 +495,6 @@
         public const uint CS_Pickup_Shift_GoldCoinsBagAtTopOfSpire = 0x0013ed94;
 
         // Cathedral Spires, The Descent
-        // REGULAR NEEDS MAPPED
         public const uint CSTD_Pickup_LostSoulLeftChandelier = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulRightChandelier = 0x0013f4b4;
         public const uint CSTD_Pickup_LostSoulDemonStatueMausoleum = 0x0013f4b4;
@@ -529,7 +527,6 @@
         public const uint CSTD_Pickup_Shift_SpellPageDemonDeath = 0x00146188;
 
         // The Demon
-        // REGULAR NEEDS MAPPED
         public const uint TD_Winston_Entrance = 0x000ff7bc;
 
         // The Demon - After Ripper Has Been Defeated

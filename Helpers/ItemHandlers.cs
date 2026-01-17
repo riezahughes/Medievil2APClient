@@ -88,7 +88,7 @@ namespace MedievilArchipelago.Helpers
             // Kensington
             { 0x12,[
                 Addresses.KT_Pickup_CopperShieldOnRailway - offset, 
-                Addresses.KT_Pickup_Pocketwatch - offset
+                //Addresses.KT_Pickup_Pocketwatch - offset # This one is actually a trigger that needs to work. 
 
             ] },
             // Kensington, The Tomb
@@ -262,6 +262,7 @@ namespace MedievilArchipelago.Helpers
             ] },
             // Kew Gardens
             { 0x08,[
+                 "Antidote",
                  "Torch",
                  "Potting Shed Key",
                  "Pond Room Valve",

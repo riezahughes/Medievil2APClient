@@ -108,6 +108,7 @@ namespace MedievilArchipelago.Helpers
             playerStateUpdating = true;
 
             int keyItemSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
+            int antidoteInPoolOption = Int32.Parse(client.Options?.GetValueOrDefault("antidote_in_pool", "0").ToString());
 
             // get a list of all locatoins
             Dictionary<string, uint> all_items = ItemHandlers.FlattenedInventoryStrings();
@@ -146,6 +147,7 @@ namespace MedievilArchipelago.Helpers
                 switch (itm)
                 {
                     // Update memory
+
                     case var x when x.Name.ContainsAny("Ammo"):
                         // no plans yet
                         break;
@@ -164,8 +166,9 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
                     case var x when x.Name.Contains("Lost Soul"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
                     case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
-                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && keyItemSanityOption == 1 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
-                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && keyItemSanityOption == 1 && !existsInLevel: ItemHandlers.RemoveKeyItem(x); break;
+                    case var x when x.Name.Contains("Antidote") && antidoteInPoolOption == 1 && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); Thread.Sleep(100); ItemHandlers.SetItemMemoryValue(Addresses.Antidote, 4132, 4132); break;
+                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && !x.Name.Contains("Antidote") && keyItemSanityOption == 1 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
+                    case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && !x.Name.Contains("Antidote") && keyItemSanityOption == 1 && !existsInLevel: ItemHandlers.RemoveKeyItem(x); break;
                 }
                 usedItems.Add(itm.Name);
             }
@@ -202,11 +205,15 @@ namespace MedievilArchipelago.Helpers
                     continue;
 
                 }
-                else if (itemName.ContainsAny(ItemHandlers.ListOfKeyItemStrings) && keyItemSanityOption == 1)
+                else if (itemName.Contains("Antidote") && antidoteInPoolOption == 1)
                 {
                     ItemHandlers.SetItemMemoryValue(itemAddress, 65535, 65535);
                     continue;
-
+                }
+                else if (itemName.ContainsAny(ItemHandlers.ListOfKeyItemStrings) && !itemName.Contains("Antidote") && keyItemSanityOption == 1)
+                {
+                    ItemHandlers.SetItemMemoryValue(itemAddress, 65535, 65535);
+                    continue;
                 }
 
             }
