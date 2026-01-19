@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Runtime.InteropServices.Marshalling;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 
@@ -266,7 +258,7 @@ namespace MedievilArchipelago.Helpers
                  "Torch",
                  "Potting Shed Key",
                  "Pond Room Valve",
-                 "Hot House Valve",
+                 "Hothouse Valve",
                  "Water Tank Valve",
                 "Dan's Head",
             ] },
@@ -595,7 +587,7 @@ namespace MedievilArchipelago.Helpers
             {
                 var fillValue = 1;
 
-                if (ListOfWeaponAmmoStrings.Any(x => x == inventoryItem) || ListOfWeaponChargeStrings.Any(x=>x == inventoryItem) || ListOfShieldStrings.Any(x => x == inventoryItem))
+                if (ListOfWeaponAmmoStrings.Any(x => x == inventoryItem) || ListOfWeaponChargeStrings.Any(x => x == inventoryItem) || ListOfShieldStrings.Any(x => x == inventoryItem))
                 {
                     fillValue = dict[inventoryItem];
                 }
@@ -622,7 +614,7 @@ namespace MedievilArchipelago.Helpers
             var maxCountLimit = countMax;
             var limitDict = AmmoAndChargeLimits();
 
-            if(!breakLimit)
+            if (!breakLimit)
             {
                 maxCountLimit = limitDict[itemName];
             }
@@ -672,7 +664,7 @@ namespace MedievilArchipelago.Helpers
 
             bool useCurrentHealth = currentEnergy + updateValue <= 300;
 
-            SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, currentEnergy + updateValue, useCurrentHealth ? 300: currentLifeBottles * 300);
+            SetItemMemoryValue(useCurrentHealth ? Addresses.DansCurrentEnergy : Addresses.DansCurrentStoredEnergy, currentEnergy + updateValue, useCurrentHealth ? 300 : currentLifeBottles * 300);
 
         }
 
@@ -682,7 +674,7 @@ namespace MedievilArchipelago.Helpers
 
             var newUpdateValue = currentValue + updateValue;
 
-            SetItemMemoryValue(address, newUpdateValue,max);
+            SetItemMemoryValue(address, newUpdateValue, max);
 
         }
         public static void ReceiveCumulativeKeyItem(Item item)
@@ -724,22 +716,26 @@ namespace MedievilArchipelago.Helpers
         }
 
 
-        public static void ReceiveCountType(Item item, bool breakAmmoLimit)
+        public static void ReceiveCountType(Item item, int breakAmmoLimit)
         {
             var addressDict = StatusAndInventoryAddressDictionary();
             var amount = ExtractBracketAmount(item.Name);
             var name = ExtractDictName(item.Name);
 
-            UpdateAmmoCount(name, addressDict["Ammo"][name], amount, breakAmmoLimit);
+            bool breakAmmo = breakAmmoLimit == 1 ? true : false;
+
+            UpdateAmmoCount(name, addressDict["Ammo"][name], amount, breakAmmo);
         }
 
-        public static void ReceiveChargeType(Item item, bool breakChargeLimit)
+        public static void ReceiveChargeType(Item item, int breakChargeLimit)
         {
             var addressDict = StatusAndInventoryAddressDictionary();
             var amount = ExtractBracketAmount(item.Name);
             var name = ExtractDictName(item.Name);
 
-            UpdateChargeCount(name, addressDict["Ammo"][name],  amount, breakChargeLimit);
+            bool breakCharge = breakChargeLimit == 1 ? true : false;
+
+            UpdateChargeCount(name, addressDict["Ammo"][name], amount, breakCharge);
         }
 
         public static void ReceiveEquipment(Item item)
@@ -795,7 +791,7 @@ namespace MedievilArchipelago.Helpers
 
         public static void EquipWeapon(short currentPrimary, short currentSecondary, byte chosenSlotValue)
         {
-            
+
             var value = chosenSlotValue == 0 ? currentPrimary : currentSecondary;
             SetItemMemoryValue(Addresses.DansCurrentWeapon, value, value);
         }

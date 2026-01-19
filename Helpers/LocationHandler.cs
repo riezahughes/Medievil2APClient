@@ -27,7 +27,7 @@ namespace MedievilArchipelago.Helpers
 
         public static List<ILocation> BuildLocationList(Dictionary<string, object> options, byte offset = 0, bool ripperShift = false)
         {
-            int base_id = 99250000;
+            int base_id = 99350000;
             int region_offset = 1000;
 
             //int gargoyleSanity = int.Parse(options?.GetValueOrDefault("gargoylesanity", "0").ToString());

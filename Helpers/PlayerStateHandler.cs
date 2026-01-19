@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using Archipelago.Core;
 using Archipelago.MultiClient.Net.Models;
-using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
-using Kokuban;
-using System.Threading;
 
 namespace MedievilArchipelago.Helpers
 {
@@ -155,7 +147,7 @@ namespace MedievilArchipelago.Helpers
                         // no plans yet
                         break;
                     case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveSkill(x); break;
-                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings):
+                    case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name):
                         ItemHandlers.ReceiveEquipment(x);
                         if (!x.Name.Contains("Shield"))
                         {
@@ -194,7 +186,7 @@ namespace MedievilArchipelago.Helpers
                     ItemHandlers.SetItemMemoryValue(itemAddress, 0, 0);
                     continue;
                 }
-                else if (itemName.ContainsAny(ItemHandlers.ListOfWeaponStrings) && !itemName.Contains("Ammo"))
+                else if (itemName.ContainsAny(ItemHandlers.ListOfWeaponStrings) || itemName.ContainsAny(ItemHandlers.ListOfShieldStrings) && !itemName.Contains("Ammo"))
                 {
                     ItemHandlers.SetItemMemoryValue(itemAddress, 65535, 65535); // Assuming 65535 is "reset/max" for equipment
                     continue;
@@ -224,7 +216,7 @@ namespace MedievilArchipelago.Helpers
             }
             else
             {
-                ItemHandlers.EquipWeapon(currentPrimaryWeapon, currentSecondaryWeapon, currentSlotChoice); 
+                ItemHandlers.EquipWeapon(currentPrimaryWeapon, currentSecondaryWeapon, currentSlotChoice);
             }
 
 

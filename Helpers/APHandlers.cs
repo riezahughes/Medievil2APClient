@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using Archipelago.Core;
-using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Kokuban;
-using Newtonsoft.Json;
 using Serilog;
-using MedievilArchipelago.Helpers;
-using Archipelago.Core.Util.GPS;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MedievilArchipelago.Helpers
 {
@@ -47,9 +37,9 @@ namespace MedievilArchipelago.Helpers
 
             Console.WriteLine("Setting up player state..");
 
-            #if DEBUG
-                Console.WriteLine($"OnConnected Firing. Itemcount: {client.ItemState.ReceivedItems.Count}");
-            #endif
+#if DEBUG
+            Console.WriteLine($"OnConnected Firing. Itemcount: {client.ItemState.ReceivedItems.Count}");
+#endif
 
             PlayerStateHandler.UpdatePlayerState(client, false);
 
@@ -63,7 +53,7 @@ namespace MedievilArchipelago.Helpers
 
         public static async void OnDisconnected(object sender, ConnectionChangedEventArgs args, ArchipelagoClient client, bool firstRun)
         {
-            if(firstRun == true)
+            if (firstRun == true)
 
             {
                 return;
@@ -90,9 +80,9 @@ namespace MedievilArchipelago.Helpers
                     return;
                 }
 
-                #if DEBUG
-                    Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-                #endif
+#if DEBUG
+                Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
+#endif
 
                 byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
                 int keyItemSanityOption = Int32.Parse(client.Options?.GetValueOrDefault("keyitemsanity", "0").ToString());
@@ -102,8 +92,8 @@ namespace MedievilArchipelago.Helpers
                 switch (args.Item)
                 {
                     case var x when x.Name.ContainsAny("Dan Hand", "Daring Dash"): ItemHandlers.ReceiveSkill(x); break;
-                    case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, true); break;
-                    case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, true); break;
+                    case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
+                    case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
                     case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
                     case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
                     case var x when ItemHandlers.ListOfKeyItemStrings.Any(key => key == x.Name): ItemHandlers.ReceiveKeyItem(x); break;
@@ -125,9 +115,9 @@ namespace MedievilArchipelago.Helpers
 
         public static void Client_MessageReceived(object sender, MessageReceivedEventArgs e, ArchipelagoClient client, string slot)
         {
-            #if DEBUG
-                Console.WriteLine($"MessageReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-            #endif
+#if DEBUG
+            Console.WriteLine($"MessageReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
+#endif
             var message = string.Join("", e.Message.Parts.Select(p => p.Text));
 
             // this message can use emoji's through the overlay. Look into maybe making it a little more obvious 
@@ -169,22 +159,22 @@ namespace MedievilArchipelago.Helpers
 
                 PlayerStateHandler.UpdatePlayerState(client, false);
 
-                if(currentPrimaryWeapon == 12 && currentSecondaryWeapon == 0)
+                if (currentPrimaryWeapon == 12 && currentSecondaryWeapon == 0)
                 {
                     ItemHandlers.DefaultToArm();
                 }
-                #if DEBUG
-                        Console.WriteLine($"LocationCompleted Firing. {e.CompletedLocation.Name} - {e.CompletedLocation.Id} Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-                #endif
+#if DEBUG
+                Console.WriteLine($"LocationCompleted Firing. {e.CompletedLocation.Name} - {e.CompletedLocation.Id} Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
+#endif
             }
         }
 
 
         public static void Locations_CheckedLocationsUpdated(System.Collections.ObjectModel.ReadOnlyCollection<long> newCheckedLocations)
         {
-            #if DEBUG
-                Console.WriteLine($"Location CheckedLocationsUpdated Firing.");
-            #endif
+#if DEBUG
+            Console.WriteLine($"Location CheckedLocationsUpdated Firing.");
+#endif
         }
 
         //public static GPSHandler Client_GPSHandler()
