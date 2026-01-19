@@ -297,9 +297,9 @@ namespace MedievilArchipelago.Helpers
             ] },
             // The Time Machine
             { 0x0f,[
-                 "Time Machine PIece (Contact Room)",
-                 "Time Machine PIece (Earth Room)",
-                 "Time Machine PIece (Space Room)",
+                 "Time Machine Piece (Contact Room)",
+                 "Time Machine Piece (Earth Room)",
+                 "Time Machine Piece (Space Room)",
                  "Torch",
                 "Dan's Head",
             ] },
