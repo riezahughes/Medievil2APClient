@@ -7,7 +7,7 @@ namespace MedievilArchipelago.Helpers
 {
     public class LocationHandlers
     {
-        public static void MemoryShiftAfterRipperClear(ArchipelagoClient client, Dictionary<string, object>  options)
+        public static void MemoryShiftAfterRipperClear(ArchipelagoClient client, Dictionary<string, object> options)
         {
             // After The Ripper is cleared, some memory addresses shift
 
@@ -20,14 +20,14 @@ namespace MedievilArchipelago.Helpers
             }
 
             foreach (var loc in newLocations)
-            { 
+            {
                 client.AddLocationAsync(loc);
             }
         }
 
         public static List<ILocation> BuildLocationList(Dictionary<string, object> options, byte offset = 0, bool ripperShift = false)
         {
-            int base_id = 99350000;
+            int base_id = 99250000;
             int region_offset = 1000;
 
             //int gargoyleSanity = int.Parse(options?.GetValueOrDefault("gargoylesanity", "0").ToString());
