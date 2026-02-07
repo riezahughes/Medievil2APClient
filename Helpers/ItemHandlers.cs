@@ -736,7 +736,9 @@ namespace MedievilArchipelago.Helpers
 
             bool breakCharge = breakChargeLimit == 1 ? true : false;
 
-            UpdateChargeCount(name, addressDict["Ammo"][name], amount, breakCharge);
+            var chargeConversion = amount == 50 ? 2048 : amount == 20 ? 819 : 0;
+
+            UpdateChargeCount(name, addressDict["Ammo"][name], chargeConversion, breakCharge);
         }
 
         public static void ReceiveEquipment(Item item)

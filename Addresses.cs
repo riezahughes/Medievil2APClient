@@ -222,8 +222,8 @@
         public const uint TT_Pickup_GoldCoinsTombEntranceTopR = 0x0014f090;
         public const uint TT_Pickup_GoldCoinsTombEntranceTopL = 0x0014f04c;
         public const uint TT_Pickup_ScrollOfSekhmet = 0x0014c544;
-        public const uint TT_Pickup_TabletOfHorus = 0x0014c4bc;
         public const uint TT_Pickup_StaffOfAnubis = 0x0014c500;
+        public const uint TT_Pickup_TabletOfHorus = 0x0014c4bc;
         public const uint TT_Pickup_GoldCoinsHandAreaChestGroundFloor = 0x0014f404;
         public const uint TT_Pickup_GoldCoinsHandAreaChestUpperFloor = 0x0014f448;
         public const uint TT_Winston_Entrance = 0x001005C8;
@@ -562,9 +562,9 @@
         public const uint TimeMachinePieceEarthRoom = 0x000F1624;
         public const uint TimeMachinePieceSpaceRoom = 0x000F1628;
         public const uint KingMullocksKey = 0x000F162C;
-        public const uint StaffOfAnubis = 0x000F1630;
-        public const uint ScrollOfSekhmet = 0x000F1634;
-        public const uint TabletOfHorus = 0x000F1638;
+        public const uint StaffOfAnubis = 0x000f1634;
+        public const uint ScrollOfSekhmet = 0x000f1630;
+        public const uint TabletOfHorus = 0x000f1638;
         public const uint PocketWatch = 0x000F163C;
         public const uint TownHouseKey = 0x000F1640;
         public const uint TimeStone = 0x000F1644;
