@@ -423,7 +423,8 @@ namespace MedievilArchipelago.Helpers
                 ["Lightning"] = 4096,
                 ["Copper Shield"] = 150,
                 ["Silver Shield"] = 250,
-                ["Gold Shield"] = 400
+                ["Gold Shield"] = 400,
+                ["Dan's Armor"] = 300
             };
         }
 
@@ -468,7 +469,7 @@ namespace MedievilArchipelago.Helpers
                     ["Copper Shield"] = Addresses.CopperShield,
                     ["Silver Shield"] = Addresses.SilverShield,
                     ["Gold Shield"] = Addresses.GoldShield,
-                    ["Dan's Armour"] = Addresses.GoldenArmour
+                    ["Dan's Armour"] = Addresses.GoldenArmourInventory
                 },
 
                 ["Player Stats"] = new Dictionary<string, uint>
@@ -482,7 +483,8 @@ namespace MedievilArchipelago.Helpers
                 ["Skills"] = new Dictionary<string, uint>
                 {
                     ["Daring Dash"] = Addresses.DaringDashSkill,
-                    ["Dan's Hand"] = Addresses.DansHandSkill
+                    ["Dan's Hand"] = Addresses.DansSkills,
+                    ["Gold Armour"] = Addresses.DansSkills
 
                 },
                 ["Key Items"] = new Dictionary<string, uint>
@@ -556,7 +558,6 @@ namespace MedievilArchipelago.Helpers
                 },
             };
         }
-
 
 
         public static int SetItemMemoryValue(uint itemMemoryAddress, int itemUpdateValue, int maxCount)
@@ -783,10 +784,40 @@ namespace MedievilArchipelago.Helpers
             UpdateGoldCount(amount);
         }
 
-        public static void ReceiveSkill(Item item)
+        public static void ReceiveDansHand(Item item)
         {
-            // setting it here till i fix my ridiculous update function
-            SetItemMemoryValue(Addresses.DansHandSkill, 1, 1);
+            byte currentSkills = Memory.ReadByte(Addresses.DansSkills);
+
+            if (currentSkills == 0x00 || currentSkills == 0x01)
+            {
+                Memory.WriteByte(Addresses.DansSkills, 0x01);
+            }
+            else
+            {
+                Memory.WriteByte(Addresses.DansSkills, 0x03);
+            }
+        }
+
+        public static void ReceiveDansArmour(Item item)
+        {
+            byte currentSkills = Memory.ReadByte(Addresses.DansSkills);
+            ushort currentArmour = Memory.ReadUShort(Addresses.GoldenArmourInventory);
+
+            if (currentArmour == 0xFFFF)
+            {
+                Memory.Write(Addresses.GoldenArmourInventory, 0x00);
+                Memory.Write(Addresses.GoldenArmourApparel, 0x00);
+                Memory.Write(Addresses.GoldenArmourInventory, 0x00c8);
+            }
+
+            if (currentSkills == 0x00)
+            {
+                Memory.WriteByte(Addresses.DansSkills, 0x02);
+            }
+            else if (currentSkills == 0x01)
+            {
+                Memory.WriteByte(Addresses.DansSkills, 0x03);
+            }
         }
 
         public static void EquipWeapon(short currentPrimary, short currentSecondary, byte chosenSlotValue)

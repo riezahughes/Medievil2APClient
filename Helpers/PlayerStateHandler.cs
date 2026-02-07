@@ -146,7 +146,8 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.ContainsAny("Charge"):
                         // no plans yet
                         break;
-                    case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveSkill(x); break;
+                    case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
+                    case var x when x.Name.Contains("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name):
                         ItemHandlers.ReceiveEquipment(x);
                         if (!x.Name.Contains("Shield"))

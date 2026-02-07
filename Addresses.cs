@@ -33,7 +33,7 @@
 
 
         // Skills
-        public const uint DansHandSkill = 0x000F1694;
+        public const uint DansSkills = 0x000F1694;
         public const uint DaringDashSkill = 0x000F1694;
 
         // Exit Level Menu
@@ -50,7 +50,7 @@
         ////////////////////////// LEVEL ADDRESSES /////////////////////////////
 
         // Current Level
-        public const uint CurrentLevel = 0x000EFF0C; 
+        public const uint CurrentLevel = 0x000EFF0C;
 
         /*  Current Level Bytes: 
 
@@ -198,7 +198,7 @@
         public const uint TW_Pickup_GoldCoinsNearSpivOnStairway = 0x001664e4;
         public const uint TW_Book_DinosaurDisplay = 0x00128414;
         public const uint TW_Pickup_LifeBottle = 0x00166748;
-         
+
         // Tyrannosaurus Wrecks - After Ripper Has Been Defeated
         public const uint TW_Winston_Shift_Entrance = 0x000FF914;
 
@@ -245,7 +245,7 @@
         public const uint TF_Pickup_HammerGame = FakeAddress;
         public const uint TF_Pickup_WhackAImpDrumsticks = FakeAddress;
         public const uint TF_Winston_Trampoline = 0x00100928;
-        public const uint TF_Pickup_GoldCoinsChestBelowGiantClown = 0x00154280; 
+        public const uint TF_Pickup_GoldCoinsChestBelowGiantClown = 0x00154280;
         public const uint TF_Pickup_GoldCoinsChestHiddenAtTrampolines = 0x0015137C;
         public const uint TF_Winston_ElephantArmy = 0x00100928;
         public const uint TF_Pickup_CopperShieldInChaliceRoom = 0x001527AC;
@@ -602,7 +602,10 @@
         public const uint CopperShield = 0x000F15A0;
         public const uint SilverShield = 0x000F15A4;
         public const uint GoldShield = 0x000F15A8;
-        public const uint GoldenArmour = 0x000F15AC;
+
+        //armour
+        public const uint GoldenArmourInventory = 0x000F15AC;
+        public const uint GoldenArmourApparel = 0x000F1558;
 
         // Other
         public const uint DansArm = 0x000F158C;

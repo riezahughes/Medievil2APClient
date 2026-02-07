@@ -91,7 +91,8 @@ namespace MedievilArchipelago.Helpers
 
                 switch (args.Item)
                 {
-                    case var x when x.Name.ContainsAny("Dan Hand", "Daring Dash"): ItemHandlers.ReceiveSkill(x); break;
+                    case var x when x.Name.ContainsAny("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
+                    case var x when x.Name.ContainsAny("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
                     case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
                     case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
