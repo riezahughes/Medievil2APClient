@@ -137,9 +137,10 @@ namespace MedievilArchipelago.Helpers
             "Town House Key",
             "Time Stone",
             "Antidote",
-            "Pond Room Valve",
-            "Hot House Valve",
-            "Water Tank Valve",
+            //  no need for these
+            //"Pond Room Valve",
+            //"Hot House Valve",
+            //"Water Tank Valve",
             "Cannon Ball",
             "Front Door Key",
             "Potting Shed Key",
@@ -758,6 +759,45 @@ namespace MedievilArchipelago.Helpers
             var addressDict = StatusAndInventoryAddressDictionary();
             UpdateKeyItemValues(addressDict["Key Items"][item.Name]);
 
+        }
+
+        public static void ReceiveProgressiveValve(Item item)
+        {
+            var addressDict = StatusAndInventoryAddressDictionary();
+
+            List<uint> valveList = new List<uint>{
+                Addresses.WaterTankValve,
+                Addresses.HothouseValve,
+                Addresses.PondRoomValve,
+            };
+
+            int countValves = 0;
+
+            foreach (uint add in valveList)
+            {
+                byte check = Memory.ReadByte(add);
+                if (check == 0x01 && countValves < 3)
+                {
+                    countValves++;
+                }
+            }
+
+            countValves++;
+
+            switch (countValves)
+            {
+                case 1: UpdateKeyItemValues(addressDict["Key Items"]["Water Tank Valve"]); break;
+                case 2: UpdateKeyItemValues(addressDict["Key Items"]["Water Tank Valve"]); UpdateKeyItemValues(addressDict["Key Items"]["Pond Room Valve"]); break;
+                case 3: UpdateKeyItemValues(addressDict["Key Items"]["Water Tank Valve"]); UpdateKeyItemValues(addressDict["Key Items"]["Pond Room Valve"]); UpdateKeyItemValues(addressDict["Key Items"]["Hot House Valve"]); break;
+            }
+        }
+
+        public static void ClearValves()
+        {
+            var addressDict = StatusAndInventoryAddressDictionary();
+            UpdateKeyItemValues(addressDict["Key Items"]["Water Tank Valve"], false);
+            UpdateKeyItemValues(addressDict["Key Items"]["Pond Room Valve"], false);
+            UpdateKeyItemValues(addressDict["Key Items"]["Hot House Valve"], false);
         }
 
         public static void RemoveKeyItem(Item item)

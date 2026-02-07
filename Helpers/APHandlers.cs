@@ -91,6 +91,7 @@ namespace MedievilArchipelago.Helpers
 
                 switch (args.Item)
                 {
+                    case var x when x.Name.Contains("Progressive Valve"): ItemHandlers.ReceiveProgressiveValve(x); break;
                     case var x when x.Name.ContainsAny("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
                     case var x when x.Name.ContainsAny("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;

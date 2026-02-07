@@ -571,7 +571,7 @@
         public const uint Antidote = 0x000F1648;
         public const uint PondRoomValve = 0x000F164C;
         public const uint HothouseValve = 0x000F1650;
-        public const uint WaterTankValve = 0x000F1658;
+        public const uint WaterTankValve = 0x000F1654;
         public const uint CannonBall = 0x000F165C;
         public const uint FrontDoorKey = 0x000F1660;
         public const uint PottingShedKey = 0x000F1664;

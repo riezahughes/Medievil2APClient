@@ -1,18 +1,16 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Text;
 using Archipelago.Core;
 using Archipelago.Core.GameClients;
 using Archipelago.Core.Models;
-using Archipelago.Core.Traps;
 using Archipelago.Core.Util;
-using Archipelago.Core.Util.GPS;
-using MedievilArchipelago;
-using Helpers = MedievilArchipelago.Helpers;
 using Archipelago.Core.Util.Overlay;
 using Archipelago.MultiClient.Net.Models;
-using Microsoft.Extensions.Configuration;
-using System.Text;
+using MedievilArchipelago;
 using MedievilArchipelago.Helpers;
+using Microsoft.Extensions.Configuration;
+using Helpers = MedievilArchipelago.Helpers;
 
 public class Program
 {
@@ -38,7 +36,7 @@ public class Program
         string password;
 
         bool firstRun = true;
-        
+
 
 
         CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -80,10 +78,10 @@ public class Program
             }
         }
 
-        #if DEBUG
-        #else
+#if DEBUG
+#else
             Console.Clear();
-        #endif
+#endif
 
         bool connected = gameClient.Connect();
 
@@ -111,24 +109,24 @@ public class Program
         }
 
 
-        #if DEBUG
-            // auto logs in with Local.json settings if it's set to dev (because laziness)
-            var configuration = new ConfigurationBuilder()
-                // Add the default appsettings.json file
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
-                .Build();
+#if DEBUG
+        // auto logs in with Local.json settings if it's set to dev (because laziness)
+        var configuration = new ConfigurationBuilder()
+            // Add the default appsettings.json file
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
+            .Build();
 
-            Console.WriteLine("Logging in using settings in appsettings.Local.json");
-            Console.WriteLine(configuration["port"]);
-            Console.WriteLine(configuration["slot"]);
-            Console.WriteLine(configuration["pass"]);
-            url = "wss://archipelago.gg";
-            port = configuration["port"];
-            slot = configuration["slot"];
-            password = configuration["pass"];
+        Console.WriteLine("Logging in using settings in appsettings.Local.json");
+        Console.WriteLine(configuration["port"]);
+        Console.WriteLine(configuration["slot"]);
+        Console.WriteLine(configuration["pass"]);
+        url = "wss://archipelago.gg";
+        port = configuration["port"];
+        slot = configuration["slot"];
+        password = configuration["pass"];
 
-        #else
+#else
             // start AP Login
 
             Console.WriteLine("Enter AP Domain: (archipelago.gg)");
@@ -156,7 +154,7 @@ public class Program
                 Console.WriteLine("Slot name cannot be empty. Please provide a valid slot name.");
                 return;
             }
-        #endif
+#endif
 
 
         Console.WriteLine("Got the details! Attempting to connect to Archipelagos main server");
@@ -165,7 +163,7 @@ public class Program
         try
         {
 
-            
+
 
             await archipelagoClient.Connect(url + ":" + port, "Medievil 2");
 
@@ -173,13 +171,13 @@ public class Program
 
             await archipelagoClient?.Login(slot, password);
 
-            
+
             int retryCount = 0;
             Console.WriteLine("Waiting for connection...");
             while (archipelagoClient.IsLoggedIn == false)
             {
 
-                if(retryCount >= 10)
+                if (retryCount >= 10)
                 {
                     throw new Exception("The Medievil Client was unable to log into Archipelago. Please make sure your room is running, that you are putting in the correct details and that you are online.");
 
@@ -194,20 +192,21 @@ public class Program
         catch (Exception ex)
         {
             Console.WriteLine($"\nAn error occurred while connecting to Archipelago: {ex.Message}");
-            #if DEBUG
-                Console.WriteLine(ex); // Print full exception for debugging
-            #endif
+#if DEBUG
+            Console.WriteLine(ex); // Print full exception for debugging
+#endif
             Console.ReadKey();
             Environment.Exit(1);
 
         }
 
-        try { 
+        try
+        {
 
 
 
 
-        var overlayOptions = new OverlayOptions();
+            var overlayOptions = new OverlayOptions();
 
             overlayOptions.XOffset = 50;
             overlayOptions.YOffset = 500;
@@ -321,6 +320,8 @@ public class Program
 
                         var bottles = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Bottle") select item;
 
+                        var valves = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.Contains("Progressive Valve") select item;
+
                         var equipment = from item in archipelagoClient.CurrentSession.Items.AllItemsReceived where item.ItemName.ContainsAny(ItemHandlers.ListOfWeaponStrings) select item;
 
                         Console.WriteLine("Current Equipment: ");
@@ -334,29 +335,29 @@ public class Program
                         {
                             Console.WriteLine(item.ItemName);
                         }
+                        Console.WriteLine($"Progressive Valves: {valves.Count()}");
 
                         Console.WriteLine("Current Bottles: ");
-                            Console.WriteLine(bottles.Count());
-
-                        }
+                        Console.WriteLine(bottles.Count());
+                    }
                     // allow manually handling traps if you're in dev mode (for testing)
 #if DEBUG
-                        else if (input?.Trim().ToLower() == "heavytrap")
-                        {
-                            Helpers.TrapHandlers.HeavyDanTrap();
-                        }
-                        else if (input?.Trim().ToLower() == "lighttrap")
-                        {
-                            Helpers.TrapHandlers.LightDanTrap();
-                        }
-                        //else if (input?.Trim().ToLower() == "darknesstrap")
-                        //{
-                        //    Helpers.TrapHandlers.DarknessTrap(0x01);
-                        //}
-                        //else if (input?.Trim().ToLower() == "hudtrap")
-                        //{
-                        //    Helpers.TrapHandlers.HudlessTrap();
-                        //}
+                    else if (input?.Trim().ToLower() == "heavytrap")
+                    {
+                        Helpers.TrapHandlers.HeavyDanTrap();
+                    }
+                    else if (input?.Trim().ToLower() == "lighttrap")
+                    {
+                        Helpers.TrapHandlers.LightDanTrap();
+                    }
+                    //else if (input?.Trim().ToLower() == "darknesstrap")
+                    //{
+                    //    Helpers.TrapHandlers.DarknessTrap(0x01);
+                    //}
+                    //else if (input?.Trim().ToLower() == "hudtrap")
+                    //{
+                    //    Helpers.TrapHandlers.HudlessTrap();
+                    //}
 #endif
                     else if (!string.IsNullOrWhiteSpace(input))
                     {

@@ -116,6 +116,7 @@ namespace MedievilArchipelago.Helpers
             byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
             ItemHandlers.SetItemMemoryValue(Addresses.DansCurrentLifeBottles, 0, 0);
+            ItemHandlers.ClearValves();
 
             if (keyItemSanityOption == 1)
             {
@@ -146,6 +147,7 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.ContainsAny("Charge"):
                         // no plans yet
                         break;
+                    case var x when x.Name.Contains("Progressive Valve"): ItemHandlers.ReceiveProgressiveValve(x); break;
                     case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
                     case var x when x.Name.Contains("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name):
