@@ -47,6 +47,9 @@
         public const uint BookInteractToggle = 0x000ef268;
         public const uint CutscenePlayingValue = 0x000ebc5a;
 
+
+        public const uint GameGlobalScene = 0x000F05FC;
+
         ////////////////////////// LEVEL ADDRESSES /////////////////////////////
 
         // Current Level

@@ -1,6 +1,7 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Kokuban;
 using Serilog;
 
@@ -20,20 +21,20 @@ namespace MedievilArchipelago.Helpers
             Log.Logger.Information($"Playing {client.CurrentSession.ConnectionInfo.Game} as {client.CurrentSession.Players.GetPlayerName(client.CurrentSession.ConnectionInfo.Slot)}");
 
             // if deathlink goes here
-            //int deathlink = Int32.Parse(client.Options?.GetValueOrDefault("deathlink", "0").ToString());
+            int deathlink = Int32.Parse(client.Options?.GetValueOrDefault("deathlink", "0").ToString());
 
 
-            //DeathLinkService deathLinkClient = null;
+            DeathLinkService deathLinkClient = null;
 
-            //if (deathlink == 1)
-            //{
-            //    #if DEBUG
-            //        Console.WriteLine("Deathlink is activated.");
-            //    #endif
-            //    deathLinkClient = client.EnableDeathLink();
-            //    deathLinkClient.OnDeathLinkReceived += (args) => PlayerStateHandler.KillPlayer();
-            //    PlayerStateHandler.StartDeathlinkMonitor(deathLinkClient, client);
-            //}
+            if (deathlink == 1)
+            {
+#if DEBUG
+                Console.WriteLine("Deathlink is activated.");
+#endif
+                deathLinkClient = client.EnableDeathLink();
+                deathLinkClient.OnDeathLinkReceived += (args) => PlayerStateHandler.KillPlayer();
+                PlayerStateHandler.StartDeathlinkMonitor(deathLinkClient, client);
+            }
 
             Console.WriteLine("Setting up player state..");
 

@@ -1,7 +1,9 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Models;
+using Kokuban;
 
 namespace MedievilArchipelago.Helpers
 {
@@ -25,73 +27,73 @@ namespace MedievilArchipelago.Helpers
 
         }
 
-        //    public static void KillPlayer()
-        //    {
-        //        Memory.WriteByte(Addresses.GameGlobalScene, 0x06);
-        //    }
+        public static void KillPlayer()
+        {
+            Memory.WriteByte(Addresses.GameGlobalScene, 0x04);
+        }
 
-        //    public static void StartDeathlinkMonitor(DeathLinkService deathLink, ArchipelagoClient client)
-        //    {
+        public static void StartDeathlinkMonitor(DeathLinkService deathLink, ArchipelagoClient client)
+        {
 
-        //        CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
-        //        CancellationToken cancellationToken = _cancellationTokenSource.Token;
+            CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken cancellationToken = _cancellationTokenSource.Token;
 
-        //        _deathlinkMonitorTask = Task.Run(async () =>
-        //        {
-        //            // This is a continuous loop that runs until the task is canceled.
-        //            while (!cancellationToken.IsCancellationRequested)
-        //            {
-        //                // Read the memory address.
-        //                int currentValue = Memory.ReadUShort(Addresses.CurrentEnergy);
+            _deathlinkMonitorTask = Task.Run(async () =>
+            {
+                // This is a continuous loop that runs until the task is canceled.
+                while (!cancellationToken.IsCancellationRequested)
+                {
+                    // Read the memory address.
+                    int currentValue = Memory.ReadUShort(Addresses.DansCurrentEnergy);
 
-        //                // Check your condition.
-        //                if (currentValue == 0)
-        //                {
-        //                    // Execute the action.
-        //                    IsTrulyDead(deathLink, client);
-        //                }
+                    // Check your condition.
+                    if (currentValue == 0)
+                    {
+                        // Execute the action.
+                        IsTrulyDead(deathLink, client);
+                    }
 
-        //                // Await a short delay to prevent high CPU usage.
-        //                await Task.Delay(100, cancellationToken);
-        //            }
-        //        }, cancellationToken);
-        //    }
+                    // Await a short delay to prevent high CPU usage.
+                    await Task.Delay(100, cancellationToken);
+                }
+            }, cancellationToken);
+        }
 
-        //    public static void IsTrulyDead(DeathLinkService deathlink, ArchipelagoClient client)
-        //    {
-        //        var rnd = new Random();
+        public static void IsTrulyDead(DeathLinkService deathlink, ArchipelagoClient client)
+        {
+            var rnd = new Random();
 
-        //        List<string> deathResponse = new List<string>
-        //        {
-        //            "Everyone disliked that.",
-        //            "We're in danger!",
-        //            "You hate to see it.",
-        //            "Press F to pay respects.",
-        //            "This is fine.",
-        //            "Dan's dissapointment: Immeasurable.",
-        //            "We're going down swimming.",
-        //            "Lock, Stock and... we're all dead."
-        //        };
+            List<string> deathResponse = new List<string>
+                {
+                    "Everyone disliked that.",
+                    "We're in danger!",
+                    "You hate to see it.",
+                    "Press F to pay respects.",
+                    "This is fine.",
+                    "Dan's dissapointment: Immeasurable.",
+                    "We're going down swimming.",
+                    "Lock, Stock and... we're all dead."
+                };
 
-        //        int listChoice = rnd.Next(deathResponse.Count);
+            int listChoice = rnd.Next(deathResponse.Count);
 
 
-        //        if (DateTime.Now - lastDeathTime >= TimeSpan.FromSeconds(30))
-        //        {
-        //            ushort bottleEnergy = Memory.ReadUShort(Addresses.CurrentStoredEnergy);
-        //            ushort currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+            if (DateTime.Now - lastDeathTime >= TimeSpan.FromSeconds(30))
+            {
+                ushort bottleEnergy = Memory.ReadUShort(Addresses.DansCurrentStoredEnergy);
+                ushort currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
-        //            Kokuban.AnsiEscape.AnsiStyle bg = Chalk.BgCyan;
-        //            Kokuban.AnsiEscape.AnsiStyle fg = Chalk.Black;
+                Kokuban.AnsiEscape.AnsiStyle bg = Chalk.BgCyan;
+                Kokuban.AnsiEscape.AnsiStyle fg = Chalk.Black;
 
-        //            if (bottleEnergy == 0 && currentLevel != 0 && isInTheGame())
-        //            {
-        //                Console.WriteLine(bg + (fg + "[   ☠️💀 Deathlink Sent. " + deathResponse[listChoice] + " 💀☠️   ]"));
-        //                deathlink.SendDeathLink(new DeathLink(client.CurrentSession.Players.ActivePlayer.Name));
-        //                lastDeathTime = DateTime.Now;
-        //            }
-        //        }
-        //    }
+                if (bottleEnergy == 0 && currentLevel != 19 && isInTheGame())
+                {
+                    Console.WriteLine(bg + (fg + "[   ☠️💀 Deathlink Sent. " + deathResponse[listChoice] + " 💀☠️   ]"));
+                    deathlink.SendDeathLink(new DeathLink(client.CurrentSession.Players.ActivePlayer.Name));
+                    lastDeathTime = DateTime.Now;
+                }
+            }
+        }
 
         public static void UpdatePlayerState(ArchipelagoClient client, bool gameCleared)
         {
