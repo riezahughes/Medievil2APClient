@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Archipelago.Core.Models;
-using Archipelago.Core;
-using MedievilArchipelago.Models;
+﻿using Archipelago.Core;
 using Medievil2Archipelago.Models;
 
 namespace MedievilArchipelago.Helpers
@@ -14,9 +7,20 @@ namespace MedievilArchipelago.Helpers
     {
         private static bool CheckDemonCondition(ArchipelagoClient client)
         {
-            if (client?.LocationState?.CompletedLocations == null) return false;
+            if (client?.CurrentSession.Locations.AllLocations == null) return false;
 
-            if (client?.LocationState?.CompletedLocations.Any(x => x != null && x.Name.Equals("Cleared: The Demon")) == true)
+            var demonLocation = LocationHandlers.BuildLocationList(client.Options)
+                .Where(loc => loc.Name == ("Cleared: The Demon")).ToList();
+
+            var checkedIds = new HashSet<long>(client.CurrentSession.Locations.AllLocationsChecked);
+
+            List<string> matchingNames = demonLocation
+                .Where(loc => checkedIds.Contains((long)loc.Id))
+                .Select(loc => loc.Name)
+                .ToList();
+
+
+            if (matchingNames.Count() == 1)
             {
                 Console.WriteLine("You've Defeated The Demon!");
                 return true;
@@ -53,12 +57,12 @@ namespace MedievilArchipelago.Helpers
         public static bool CheckGoalCondition(ArchipelagoClient client)
         {
 
-            if (client?.LocationState?.CompletedLocations == null)
+            if (client?.CurrentSession.Locations.AllLocations == null)
             {
                 return false;
             }
 
-            if(client?.Options == null) { return false; }
+            if (client?.Options == null) { return false; }
 
             int goalCondition = Int32.Parse(client.Options?.GetValueOrDefault("goal", "0").ToString());
 

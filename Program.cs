@@ -2,7 +2,7 @@
 
 using System.Text;
 using Archipelago.Core;
-using Archipelago.Core.GameClients;
+using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 using Archipelago.Core.Util.Overlay;
@@ -19,7 +19,7 @@ public class Program
     private static async Task Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
-        Console.Title = "Medievil 2 Archipelago Client";
+        Console.Title = "💀 Medievil 2 Archipelago Client";
 
         // set values
         const byte US_OFFSET = 0x38; // this is ADDED to addresses to get their US location
@@ -34,6 +34,7 @@ public class Program
         string port;
         string slot = "";
         string password;
+        string gameName = "Medievil 2";
 
         bool firstRun = true;
 
@@ -52,7 +53,7 @@ public class Program
         // Make sure the connect is initialised
 
 
-        DuckstationClient gameClient = null;
+        GameClient gameClient = null;
         bool clientInitializedAndConnected = false; // Renamed for clarity
         int retryAttempt = 0;
 
@@ -64,7 +65,7 @@ public class Program
 
             try
             {
-                gameClient = new DuckstationClient();
+                gameClient = new GameClient("duckstation-qt-x64-ReleaseLTCG");
                 clientInitializedAndConnected = true;
             }
             catch (Exception ex)
@@ -78,6 +79,8 @@ public class Program
             }
         }
 
+
+
 #if DEBUG
 #else
             Console.Clear();
@@ -87,13 +90,6 @@ public class Program
 
         var archipelagoClient = new ArchipelagoClient(gameClient);
 
-        // Register event handlers
-        archipelagoClient.Connected += (sender, args) => Helpers.APHandlers.OnConnected(sender, args, archipelagoClient);
-        archipelagoClient.Disconnected += (sender, args) => Helpers.APHandlers.OnDisconnected(sender, args, archipelagoClient, firstRun);
-        archipelagoClient.ItemReceived += (sender, args) => Helpers.APHandlers.ItemReceived(sender, args, archipelagoClient);
-        archipelagoClient.MessageReceived += (sender, args) => Helpers.APHandlers.Client_MessageReceived(sender, args, archipelagoClient, slot);
-        archipelagoClient.LocationCompleted += (sender, args) => Helpers.APHandlers.Client_LocationCompleted(sender, args, archipelagoClient);
-        archipelagoClient.EnableLocationsCondition = () => Helpers.PlayerStateHandler.isInTheGame();
 
         Console.WriteLine("Successfully connected to Duckstation.");
 
@@ -156,7 +152,6 @@ public class Program
             }
 #endif
 
-
         Console.WriteLine("Got the details! Attempting to connect to Archipelagos main server");
 
 
@@ -165,7 +160,7 @@ public class Program
 
 
 
-            await archipelagoClient.Connect(url + ":" + port, "Medievil 2");
+            await archipelagoClient.Connect(url + ":" + port, gameName);
 
             Thread.Sleep(1000);
 
@@ -199,6 +194,14 @@ public class Program
             Environment.Exit(1);
 
         }
+
+        // Register event handlers (must be after Connect so ItemManager/LocationManager are initialized)
+        archipelagoClient.Connected += (sender, args) => APHandlers.OnConnected(sender, args, archipelagoClient);
+        archipelagoClient.Disconnected += (sender, args) => APHandlers.OnDisconnected(sender, args, archipelagoClient, firstRun);
+        archipelagoClient.ItemManager.ItemReceived += (sender, args) => APHandlers.ItemReceived(sender, args, archipelagoClient);
+        archipelagoClient.MessageReceived += (sender, args) => APHandlers.Client_MessageReceived(sender, args, archipelagoClient, slot);
+        archipelagoClient.LocationManager.LocationCompleted += (sender, args) => APHandlers.Client_LocationCompleted(sender, args, archipelagoClient);
+        archipelagoClient.LocationManager.EnableLocationsCondition = () => PlayerStateHandler.isInTheGame();
 
         try
         {
@@ -274,9 +277,11 @@ public class Program
             //    Console.WriteLine($"ID: {location.Id} - {location.Name}");
             //}
 
+            await archipelagoClient.ReceiveReady();
+
             firstRun = false;
 
-            _ = archipelagoClient.MonitorLocations(GameLocations);
+            _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             _ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
 
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
@@ -289,6 +294,11 @@ public class Program
                         _cancellationTokenSource.Cancel();
                         break;
                     }
+                    else if (input?.Trim().ToLower().Contains("release") == true)
+                    {
+                        Console.WriteLine("Manually sending goal completion ping to Archipelago server...");
+                        archipelagoClient.SendGoalCompletion();
+                    }
                     else if (input?.Trim().ToLower().Contains("hint") == true)
                     {
 
@@ -297,7 +307,7 @@ public class Program
                     }
                     else if (input?.Trim().ToLower() == "update")
                     {
-                        if (archipelagoClient.LocationState.CompletedLocations != null)
+                        if (archipelagoClient.CurrentSession.Locations.AllLocationsChecked != null)
                         {
                             Helpers.PlayerStateHandler.UpdatePlayerState(archipelagoClient, false);
                             Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");

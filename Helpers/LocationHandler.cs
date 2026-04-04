@@ -16,12 +16,12 @@ namespace MedievilArchipelago.Helpers
 
             foreach (var loc in currentLocations)
             {
-                client.RemoveLocationAsync(loc);
+                client.LocationManager.RemoveLocation(loc);
             }
 
             foreach (var loc in newLocations)
             {
-                client.AddLocationAsync(loc);
+                client.LocationManager.AddLocation(loc);
             }
         }
 
