@@ -360,6 +360,10 @@ public class Program
                     {
                         Helpers.TrapHandlers.LightDanTrap();
                     }
+                    else if (input?.Trim().ToLower() == "headtrap")
+                    {
+                        Helpers.TrapHandlers.BigHeadDanTrap();
+                    }
                     //else if (input?.Trim().ToLower() == "darknesstrap")
                     //{
                     //    Helpers.TrapHandlers.DarknessTrap(0x01);

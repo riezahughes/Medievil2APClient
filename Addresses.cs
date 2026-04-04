@@ -31,6 +31,10 @@
         public const uint DanPushRelatedValue = 0x000cba70;
         public const uint DanSidewaysValue = 0x000CBA60;
 
+        public const uint DanSkullScale1 = 0x000cef58;
+        public const uint DanSkullScale2 = 0x000cef5a;
+        public const uint DanSkullScale3 = 0x000cef5c;
+
 
         // Skills
         public const uint DansSkills = 0x000F1694;

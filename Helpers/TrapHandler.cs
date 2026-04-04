@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Archipelago.Core.Traps;
+﻿using Archipelago.Core.Traps;
 using Archipelago.Core.Util;
 
 namespace MedievilArchipelago.Helpers
 {
     internal class TrapHandlers
     {
-         // trap logic needs put here for darkness an dhud traps. I'm missing the values.
+        // trap logic needs put here for darkness an dhud traps. I'm missing the values.
 
         public static void ResetTraps()
         {
@@ -36,6 +31,8 @@ namespace MedievilArchipelago.Helpers
 
             byte[] defaultRenderDistance = BitConverter.GetBytes(0x1000);
 
+            byte[] defaultSkullValue = BitConverter.GetBytes(0x1000);
+
             // Reset Hud
             //Memory.Write(Addresses.WeaponIconX, DefaultWeaponIconX);
             //Memory.Write(Addresses.ShieldIconX, DefaultShieldIconX);
@@ -56,6 +53,9 @@ namespace MedievilArchipelago.Helpers
             Memory.Write(Addresses.DanPushValue, defaultPushValue);
             Memory.Write(Addresses.DanClimbValue, defaultClimbValue);
             Memory.Write(Addresses.DanSidewaysValue, defaultSidewaysValue);
+            Memory.Write(Addresses.DanSkullScale1, defaultSkullValue);
+            Memory.Write(Addresses.DanSkullScale2, defaultSkullValue);
+            Memory.Write(Addresses.DanSkullScale3, defaultSkullValue);
 
             // Reset Lighting
             //Memory.Write(Addresses.RenderDistance, defaultRenderDistance);
@@ -108,6 +108,26 @@ namespace MedievilArchipelago.Helpers
             Task.Delay(duration).ContinueWith(delegate
             {
                 Memory.Write(Addresses.DanJumpHeight, defaultValue);
+            }, TaskScheduler.Default);
+        }
+
+        public static void BigHeadDanTrap()
+        {
+            byte[] defaultValue = BitConverter.GetBytes(0x1000);
+            byte[] changedValue = BitConverter.GetBytes(0x4000);
+
+            TimeSpan duration = TimeSpan.FromSeconds(15);
+
+            Memory.Write(Addresses.DanSkullScale1, changedValue);
+            Memory.Write(Addresses.DanSkullScale2, changedValue);
+            Memory.Write(Addresses.DanSkullScale3, changedValue);
+
+            Task.Delay(duration).ContinueWith(delegate
+            {
+                Memory.Write(Addresses.DanSkullScale1, defaultValue);
+                Memory.Write(Addresses.DanSkullScale2, defaultValue);
+                Memory.Write(Addresses.DanSkullScale3, defaultValue);
+
             }, TaskScheduler.Default);
         }
 
