@@ -105,6 +105,7 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
                     case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
                     case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
+                    case var x when x.Name.Contains("Trap: Big Head"): TrapHandlers.BigHeadDanTrap(); break;
                     case null: Console.WriteLine("Received an item with null data. Skipping."); break;
                     default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
                 };
