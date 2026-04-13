@@ -223,7 +223,7 @@ public class Program
             //gameOverlay.CreateFont(fontPath, 12);
 
             // overlay is turned off till version update of AP Client Library
-            //archipelagoClient.IntializeOverlayService(gameOverlay);
+            archipelagoClient.IntializeOverlayService(gameOverlay);
 
             while (archipelagoClient.CurrentSession == null)
             {
@@ -255,10 +255,10 @@ public class Program
 
 
             // Set up GPS
-            //archipelagoClient.GPSHandler = Helpers.APHandlers.Client_GPSHandler();
-            //archipelagoClient.GPSHandler.SetInterval(100);
-            //archipelagoClient.GPSHandler.PositionChanged += (sender, args) => Helpers.APHandlers.Client_GPSPositionChanged(archipelagoClient, GameLocations);
-            //archipelagoClient.GPSHandler.Start();
+            archipelagoClient.GPSHandler = APHandlers.Client_GPSHandler();
+            archipelagoClient.GPSHandler.SetInterval(500);
+            archipelagoClient.GPSHandler.PositionChanged += (sender, args) => APHandlers.Client_GPSPositionChanged(archipelagoClient, GameLocations);
+            archipelagoClient.GPSHandler.Start();
 
 
 #if DEBUG
@@ -280,6 +280,8 @@ public class Program
             await archipelagoClient.ReceiveReady();
 
             firstRun = false;
+
+            gameOverlay.AddTextPopup("Vagrant Story is ready to go.");
 
             _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             _ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);

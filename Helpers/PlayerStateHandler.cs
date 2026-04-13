@@ -123,7 +123,7 @@ namespace MedievilArchipelago.Helpers
             if (keyItemSanityOption == 1)
             {
                 ItemHandlers.SetItemMemoryValue(Addresses.GoldenCog, 0, 0);
-                ItemHandlers.SetItemMemoryValue(Addresses.LostSoul, 0, 0);
+                ItemHandlers.SetItemMemoryValue(Addresses.LostSoulsCollectedAP, 0, 0);
             }
 
             // for each location that's coming in
@@ -161,7 +161,7 @@ namespace MedievilArchipelago.Helpers
                         break;
                     case var x when x.Name.Contains("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
                     case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
-                    case var x when x.Name.Contains("Lost Soul"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
+                    case var x when x.Name.Contains("Lost Soul"): break;
                     case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
                     case var x when x.Name.Contains("Antidote") && antidoteInPoolOption == 1 && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); Thread.Sleep(100); ItemHandlers.SetItemMemoryValue(Addresses.Antidote, 4132, 4132); break;
                     case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && !x.Name.Contains("Antidote") && keyItemSanityOption == 1 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;

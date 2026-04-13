@@ -20,9 +20,9 @@
         public const uint DansEquippedShield = 0x000F1548;
 
         // GPS Coords
-        public const uint DanRespawnPositionX = 0x000f3b84;
-        public const uint DanRespawnPositionY = 0x000f3b88;
-        public const uint DanRespawnPositionZ = 0x000f3b8c;
+        public const uint DanPositionX = 0x000f3b84;
+        public const uint DanPositionY = 0x000f3b88;
+        public const uint DanPositionZ = 0x000f3b8c;
 
         public const uint DanForwardSpeed = 0x000CBA5C;
         public const uint DanJumpHeight = 0x000CBA6E;
@@ -50,7 +50,9 @@
         public const uint WinstonTalkToggle = 0x000ef104;
         public const uint BookInteractToggle = 0x000ef268;
         public const uint CutscenePlayingValue = 0x000ebc5a;
+        public const uint LostSoulsCollectedAP = 0x000f153a;
 
+        public const uint CathedralSpiresDoor = 0x000efe4b;
 
         public const uint GameGlobalScene = 0x000F05FC;
 
@@ -58,6 +60,7 @@
 
         // Current Level
         public const uint CurrentLevel = 0x000EFF0C;
+        public const uint CurrentLevelChunk = 0x000eff14;
 
         /*  Current Level Bytes: 
 

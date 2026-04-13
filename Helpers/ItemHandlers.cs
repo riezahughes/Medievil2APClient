@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 
@@ -502,6 +503,7 @@ namespace MedievilArchipelago.Helpers
                     ["Torso"] = Addresses.Torso,
                     ["Bellows"] = Addresses.Bellows,
                     ["Lost Soul"] = Addresses.LostSoul,
+                    //["Lost Soul"] = Addresses.LostSoulsCollectedAP,
                     ["Golden Cog 1"] = Addresses.GoldenCog,
                     ["Golden Cog 2"] = Addresses.GoldenCog,
                     ["Spell Page"] = Addresses.SpellPage,
@@ -875,6 +877,13 @@ namespace MedievilArchipelago.Helpers
             SetItemMemoryValue(Addresses.DansEquippedSecondaryWeapon, 12, 12);
             SetItemMemoryValue(Addresses.DansEquippedPrimaryWeapon, 12, 12);
             SetItemMemoryValue(Addresses.DansCurrentWeapon, 12, 12);
+        }
+
+        public static int CountCurrentSouls(ArchipelagoClient client)
+        {
+            var items = client.CurrentSession.Items.AllItemsReceived;
+            int lostSoulCount = items.Count(item => item.ItemName != null && item.ItemName.Contains("Lost Soul"));
+            return lostSoulCount;
         }
     }
 }

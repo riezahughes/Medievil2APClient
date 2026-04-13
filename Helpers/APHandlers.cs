@@ -1,6 +1,7 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.Core.Util.GPS;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Kokuban;
 using Serilog;
@@ -128,7 +129,7 @@ namespace MedievilArchipelago.Helpers
             // what each item is with a symbol
 
             // this is broken at the moment.
-            //client.AddOverlayMessage(e.Message.ToString());
+            client.AddOverlayMessage(e.Message.ToString());
 
 
             string prefix;
@@ -178,41 +179,72 @@ namespace MedievilArchipelago.Helpers
 #endif
         }
 
-        //public static GPSHandler Client_GPSHandler()
-        //{
-        //    return new GPSHandler(() =>
-        //    {
-        //        byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
-        //        if (PlayerStateHandler.isInTheGame())
-        //        {
-        //            return new PositionData
-        //            {
-        //                MapId = currentLevel,
-        //                MapName = LevelHandlers.GetLevelNameFromId(currentLevel),
-        //                X = Memory.ReadUShort(Addresses.DanRespawnPositionX),
-        //                Y = Memory.ReadUShort(Addresses.DanRespawnPositionY),
-        //                Z = Memory.ReadUShort(Addresses.DanRespawnPositionZ)
-        //            };
-        //        }
-        //        else
-        //        {
-        //            return new PositionData
-        //            {
-        //                MapId = 0,
-        //                MapName = "No Map Detected",
-        //                X = 0,
-        //                Y = 0,
-        //                Z = 0,
-        //            };
-        //        }
-        //    });
-        //}
+        public static GPSHandler Client_GPSHandler()
+        {
+            return new GPSHandler(() =>
+            {
+                byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+                if (PlayerStateHandler.isInTheGame())
+                {
+                    return new PositionData
+                    {
+                        MapId = currentLevel,
+                        MapName = LevelHandlers.GetLevelNameFromId(currentLevel),
+                        X = Memory.ReadUShort(Addresses.DanPositionX),
+                        Y = Memory.ReadUShort(Addresses.DanPositionY),
+                        Z = Memory.ReadUShort(Addresses.DanPositionZ)
+                    };
+                }
+                else
+                {
+                    return new PositionData
+                    {
+                        MapId = 0,
+                        MapName = "No Map Detected",
+                        X = 0,
+                        Y = 0,
+                        Z = 0,
+                    };
+                }
+            });
+        }
 
-        //public static void Client_GPSPositionChanged(ArchipelagoClient client, List<ILocation> gameLocations)
-        //{
-        //    if (!PlayerStateHandler.isInTheGame()) return;
+        public static void Client_GPSPositionChanged(ArchipelagoClient client, List<ILocation> gameLocations)
+        {
+            if (!PlayerStateHandler.isInTheGame()) return;
 
-        //    LevelHandlers.CheckPositionalLocations(client, gameLocations);
-        //}
+            var currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+
+            var countOfCurrentSouls = ItemHandlers.CountCurrentSouls(client);
+
+            if (currentLevel == 0x02)
+            {
+                var danPositionY = Memory.ReadUShort(Addresses.DanPositionY);
+                var soulsCount = ItemHandlers.CountCurrentSouls(client);
+
+                if (danPositionY > 0xf2a7 && danPositionY < 0xf4d7 && soulsCount >= 5)
+                {
+                    Memory.WriteByte(Addresses.CathedralSpiresDoor, 0x01);
+                }
+                else
+                {
+                    Memory.WriteByte(Addresses.CathedralSpiresDoor, 0x00);
+                }
+            }
+            if (currentLevel == 0x1e)
+            {
+                var currentChunk = Memory.ReadByte(Addresses.CurrentLevelChunk);
+
+                if (currentChunk == 0x03 && countOfCurrentSouls == 12)
+                {
+                    Memory.Write(Addresses.LostSoul, 0x000c);
+                }
+                else
+                {
+                    Memory.Write(Addresses.LostSoul, 0x0000);
+                }
+            }
+            LevelHandlers.CheckPositionalLocations(client, gameLocations);
+        }
     }
 }
