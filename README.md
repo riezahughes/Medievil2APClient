@@ -7,7 +7,7 @@ To play medievil 2 on archipelago requires:
 - [Archipelago](https://archipelago.gg) installed
 - The latest copy of [the medievil 2 client](https://github.com/riezahughes/Medievil2APClient/releases)
 - The latest copy of [the medievil 2 AP World](https://github.com/riezahughes/Medievil2APWorld/releases)
-- A legal copy of the EU Version of Medievil 2
+- A legal copy of the NTSC-U Version of Medievil 2
 - [Duckstation] (https://www.duckstation.org)
 
 # Setup
