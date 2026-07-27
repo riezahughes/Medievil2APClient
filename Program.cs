@@ -8,6 +8,7 @@ using Archipelago.Core.Util;
 using Archipelago.Core.Util.Overlay;
 using MedievilArchipelago;
 using MedievilArchipelago.Helpers;
+using Serilog;
 using Helpers = MedievilArchipelago.Helpers;
 
 public class Program
@@ -16,6 +17,10 @@ public class Program
 
     private static async Task Main(string[] args)
     {
+
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .CreateLogger();
         Console.OutputEncoding = Encoding.UTF8;
         Console.Title = "💀 Medievil 2 Archipelago Client";
 
@@ -279,7 +284,7 @@ public class Program
 
             firstRun = false;
 
-            gameOverlay.AddTextPopup("Vagrant Story is ready to go.");
+            gameOverlay.AddTextPopup("Medievil 2 is ready to go.");
 
             _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             _ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
