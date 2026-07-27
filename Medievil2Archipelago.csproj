@@ -7,7 +7,16 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>medievil.ico</ApplicationIcon>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
+
+  <!-- Keep external/ (checked-out Archipelago.Core source) out of this project's own compile/globs -->
+  <ItemGroup>
+    <Compile Remove="external\**" />
+    <Content Remove="external\**" />
+    <EmbeddedResource Remove="external\**" />
+    <None Remove="external\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Assets\MediEvilFont.ttf" />
@@ -23,8 +32,17 @@
 	  <Content Include="medievil.ico" />
   </ItemGroup>
 
+  <!-- Local dev machine: use your local fork checkout if present -->
+  <ItemGroup Condition="Exists('D:\Archipelago\dev\Archipelago.core.myrepo\Archipelago.Core\Archipelago.Core.csproj')">
+    <ProjectReference Include="D:\Archipelago\dev\Archipelago.core.myrepo\Archipelago.Core\Archipelago.Core.csproj" />
+  </ItemGroup>
+
+  <!-- CI / anyone else: use the copy of main checked out by the workflow -->
+  <ItemGroup Condition="!Exists('D:\Archipelago\dev\Archipelago.core.myrepo\Archipelago.Core\Archipelago.Core.csproj') AND Exists('$(MSBuildThisFileDirectory)external\Archipelago.Core\Archipelago.Core.csproj')">
+    <ProjectReference Include="$(MSBuildThisFileDirectory)external\Archipelago.Core\Archipelago.Core.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Archipelago.Core" Version="2.0.1" />
     <PackageReference Include="Kokuban" Version="0.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />

@@ -6,10 +6,8 @@ using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 using Archipelago.Core.Util.Overlay;
-using Archipelago.MultiClient.Net.Models;
 using MedievilArchipelago;
 using MedievilArchipelago.Helpers;
-using Microsoft.Extensions.Configuration;
 using Helpers = MedievilArchipelago.Helpers;
 
 public class Program
@@ -83,7 +81,7 @@ public class Program
 
 #if DEBUG
 #else
-            Console.Clear();
+        Console.Clear();
 #endif
 
         bool connected = gameClient.Connect();
@@ -123,33 +121,33 @@ public class Program
         password = configuration["pass"];
 
 #else
-            // start AP Login
+        // start AP Login
 
-            Console.WriteLine("Enter AP Domain: (archipelago.gg)");
-            string lineUrl = Console.ReadLine();
+        Console.WriteLine("Enter AP Domain: (archipelago.gg)");
+        string lineUrl = Console.ReadLine();
 
-            url = string.IsNullOrWhiteSpace(lineUrl) ? "archipelago.gg" : lineUrl;
+        url = string.IsNullOrWhiteSpace(lineUrl) ? "archipelago.gg" : lineUrl;
 
-            Console.WriteLine("Enter Port: eg, 80001");
-            port = Console.ReadLine();
+        Console.WriteLine("Enter Port: eg, 80001");
+        port = Console.ReadLine();
 
-            Console.WriteLine("Enter Slot Name:");
-            slot = Console.ReadLine();
+        Console.WriteLine("Enter Slot Name:");
+        slot = Console.ReadLine();
 
-            Console.WriteLine("Room Password:");
-            string linePassword = Console.ReadLine();
-            password = string.IsNullOrWhiteSpace(linePassword) ? null : linePassword;
+        Console.WriteLine("Room Password:");
+        string linePassword = Console.ReadLine();
+        password = string.IsNullOrWhiteSpace(linePassword) ? null : linePassword;
 
-            Console.WriteLine("Details:");
-            Console.WriteLine($"URL:{url}:{port}");
-            Console.WriteLine($"Slot: {slot}");
-            Console.WriteLine($"Password: {password}");
+        Console.WriteLine("Details:");
+        Console.WriteLine($"URL:{url}:{port}");
+        Console.WriteLine($"Slot: {slot}");
+        Console.WriteLine($"Password: {password}");
 
-            if (string.IsNullOrWhiteSpace(slot))
-            {
-                Console.WriteLine("Slot name cannot be empty. Please provide a valid slot name.");
-                return;
-            }
+        if (string.IsNullOrWhiteSpace(slot))
+        {
+            Console.WriteLine("Slot name cannot be empty. Please provide a valid slot name.");
+            return;
+        }
 #endif
 
         Console.WriteLine("Got the details! Attempting to connect to Archipelagos main server");
