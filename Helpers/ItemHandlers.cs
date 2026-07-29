@@ -117,8 +117,7 @@ namespace MedievilArchipelago.Helpers
             //"Torso",
             "Bellows",
             "Lost Soul",
-            "Golden Cog 1",
-            "Golden Cog 2",
+            //"Golden Cog",
             "Spell Page",
             "Griffin Shield",
             "Unicorn Shield",
@@ -356,8 +355,7 @@ namespace MedievilArchipelago.Helpers
             { 0x1e,[
                  "Torch",
                  "Lost Souls",
-                 "Golden Cog 1",
-                 "Golden Cog 2",
+                 "Golden Cog",
                 "Dan's Head",
             ] },
 
@@ -504,8 +502,7 @@ namespace MedievilArchipelago.Helpers
                     ["Bellows"] = Addresses.Bellows,
                     ["Lost Soul"] = Addresses.LostSoul,
                     //["Lost Soul"] = Addresses.LostSoulsCollectedAP,
-                    ["Golden Cog 1"] = Addresses.GoldenCog,
-                    ["Golden Cog 2"] = Addresses.GoldenCog,
+                    ["Golden Cog"] = Addresses.GoldenCog,
                     ["Spell Page"] = Addresses.SpellPage,
                     ["Griffin Shield"] = Addresses.GriffinShield,
                     ["Unicorn Shield"] = Addresses.UnicornShield,
@@ -575,10 +572,10 @@ namespace MedievilArchipelago.Helpers
             return itemUpdateValue;
         }
 
-        public static void UpdateKeyItemValues(uint itemMemoryAddress, bool add = true)
+        public static void UpdateKeyItemValues(uint itemMemoryAddress, bool add = true, int current = 1, int max = 1)
         {
-            int value = add ? 1 : -1;
-            SetItemMemoryValue(itemMemoryAddress, value, 1);
+            int value = add ? current + 1 : -1;
+            SetItemMemoryValue(itemMemoryAddress, value, max);
         }
 
         public static void UpdateEquippedItemValues(uint itemMemoryAddress, string inventoryItem)
@@ -763,6 +760,21 @@ namespace MedievilArchipelago.Helpers
 
         }
 
+
+        public static void ReceiveProgressiveGoldenCog(Item item)
+        {
+            var addressDict = StatusAndInventoryAddressDictionary();
+
+            byte check = Memory.ReadByte(Addresses.GoldenCog);
+
+            if (check > 0x02)
+            {
+                return;
+            }
+
+            UpdateKeyItemValues(addressDict["Key Items"]["Golden Cog"], true, check, 2);
+        }
+
         public static void ReceiveProgressiveValve(Item item)
         {
             var addressDict = StatusAndInventoryAddressDictionary();
@@ -884,6 +896,13 @@ namespace MedievilArchipelago.Helpers
             var items = client.CurrentSession.Items.AllItemsReceived;
             int lostSoulCount = items.Count(item => item.ItemName != null && item.ItemName.Contains("Lost Soul"));
             return lostSoulCount;
+        }
+
+        public static int CountCurrentCogs(ArchipelagoClient client)
+        {
+            var items = client.CurrentSession.Items.AllItemsReceived;
+            int cogCount = items.Count(item => item.ItemName != null && item.ItemName.Contains("Progressive Gold Cog"));
+            return cogCount;
         }
     }
 }

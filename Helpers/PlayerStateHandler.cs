@@ -150,6 +150,7 @@ namespace MedievilArchipelago.Helpers
                         // no plans yet
                         break;
                     case var x when x.Name.Contains("Progressive Valve"): ItemHandlers.ReceiveProgressiveValve(x); break;
+                    case var x when x.Name.Contains("Progressive Golden Cog"): ItemHandlers.ReceiveProgressiveGoldenCog(x); break;
                     case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
                     case var x when x.Name.Contains("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name):
@@ -160,7 +161,6 @@ namespace MedievilArchipelago.Helpers
                         }
                         break;
                     case var x when x.Name.Contains("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                    case var x when x.Name.Contains("Golden Cog"): ItemHandlers.ReceiveCumulativeKeyItem(x); break;
                     case var x when x.Name.Contains("Lost Soul"): break;
                     case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
                     case var x when x.Name.Contains("Antidote") && antidoteInPoolOption == 1 && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); Thread.Sleep(100); ItemHandlers.SetItemMemoryValue(Addresses.Antidote, 4132, 4132); break;

@@ -1,8 +1,8 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Util;
-using Serilog;
-using MedievilArchipelago.Helpers;
 using Medievil2Archipelago.Models;
+using MedievilArchipelago.Helpers;
+using Serilog;
 namespace MedievilArchipelago
 {
     public class MemoryCheckThreads
@@ -33,7 +33,8 @@ namespace MedievilArchipelago
                         value => value == 13);
                 }
 
-                void SetupNavalStateMonitor() {
+                void SetupNavalStateMonitor()
+                {
                     if (cts.Token.IsCancellationRequested) return;
 
                     Memory.MonitorAddressForAction<byte>(
@@ -106,14 +107,14 @@ namespace MedievilArchipelago
 
                         byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
-                        if(openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13)
+                        if (openWorld == ProgressionOptions.OPENWORLD && currentLevel == 0x13)
                         {
                             SetupOpenWorldMonitor();
                         }
 
                         if (openWorld == ProgressionOptions.OPENWORLD && currentLocation != 0x13 && PlayerStateHandler.isInTheGame())
                         {
-                            ThreadHandlers.SetOpenWorld();
+                            ThreadHandlers.SetOpenWorld(client);
 
                         }
 
@@ -151,7 +152,7 @@ namespace MedievilArchipelago
                     }
                     Thread.Sleep(3000);
                 }
-                }, cts.Token);
+            }, cts.Token);
 
         }
     }
