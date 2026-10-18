@@ -93,6 +93,9 @@ namespace MedievilArchipelago.Helpers
 
                 switch (args.Item)
                 {
+                    // with keyitemsanity off the game handles key items itself (torches are applied in UpdatePlayerState)
+                    case var x when keyItemSanityOption == 0 && x.Name.ContainsAny("Progressive Valve", "Progressive Golden Cog"): break;
+                    case var x when keyItemSanityOption == 0 && ItemHandlers.ListOfKeyItemStrings.Any(key => key == x.Name): break;
                     case var x when x.Name.Contains("Progressive Valve"): ItemHandlers.ReceiveProgressiveValve(x); break;
                     case var x when x.Name.Contains("Progressive Golden Cog"): ItemHandlers.ReceiveProgressiveGoldenCog(x); break;
                     case var x when x.Name.ContainsAny("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;

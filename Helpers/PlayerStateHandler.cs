@@ -118,10 +118,10 @@ namespace MedievilArchipelago.Helpers
             byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
 
             ItemHandlers.SetItemMemoryValue(Addresses.DansCurrentLifeBottles, 0, 0);
-            ItemHandlers.ClearValves();
 
             if (keyItemSanityOption == 1)
             {
+                ItemHandlers.ClearValves();
                 ItemHandlers.SetItemMemoryValue(Addresses.GoldenCog, 0, 0);
                 ItemHandlers.SetItemMemoryValue(Addresses.LostSoulsCollectedAP, 0, 0);
             }
@@ -149,8 +149,8 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.ContainsAny("Charge"):
                         // no plans yet
                         break;
-                    case var x when x.Name.Contains("Progressive Valve"): ItemHandlers.ReceiveProgressiveValve(x); break;
-                    case var x when x.Name.Contains("Progressive Golden Cog"): ItemHandlers.ReceiveProgressiveGoldenCog(x); break;
+                    case var x when x.Name.Contains("Progressive Valve") && keyItemSanityOption == 1: ItemHandlers.ReceiveProgressiveValve(x); break;
+                    case var x when x.Name.Contains("Progressive Golden Cog") && keyItemSanityOption == 1: ItemHandlers.ReceiveProgressiveGoldenCog(x); break;
                     case var x when x.Name.Contains("Dan Hand"): ItemHandlers.ReceiveDansHand(x); break;
                     case var x when x.Name.Contains("Gold Armour"): ItemHandlers.ReceiveDansArmour(x); break;
                     case var x when x.Name.ContainsAny(ItemHandlers.ListOfWeaponStrings) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name):
@@ -163,7 +163,7 @@ namespace MedievilArchipelago.Helpers
                     case var x when x.Name.Contains("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
                     case var x when x.Name.Contains("Lost Soul"): break;
                     case var x when x.Name.Contains("Torch") && keyItemSanityOption == 0 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
-                    case var x when x.Name.Contains("Antidote") && antidoteInPoolOption == 1 && keyItemSanityOption == 1: ItemHandlers.ReceiveKeyItem(x); Thread.Sleep(100); ItemHandlers.SetItemMemoryValue(Addresses.Antidote, 4132, 4132); break;
+                    case var x when x.Name.Contains("Antidote") && antidoteInPoolOption == 1 && keyItemSanityOption == 1:ItemHandlers.ReceiveKeyItem(x); Thread.Sleep(100); ItemHandlers.SetItemMemoryValue(Addresses.Antidote, 4132, 4132); break;
                     case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && !x.Name.Contains("Antidote") && keyItemSanityOption == 1 && existsInLevel: ItemHandlers.ReceiveKeyItem(x); break;
                     case var x when ItemHandlers.ListOfKeyItemStrings.Any(keyitem => keyitem == x.Name) && !x.Name.Contains("Antidote") && keyItemSanityOption == 1 && !existsInLevel: ItemHandlers.RemoveKeyItem(x); break;
                 }
