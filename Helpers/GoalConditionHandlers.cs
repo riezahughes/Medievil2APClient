@@ -1,4 +1,5 @@
 ﻿using Archipelago.Core;
+using Archipelago.Core.Util;
 using Medievil2Archipelago.Models;
 
 namespace MedievilArchipelago.Helpers
@@ -7,25 +8,17 @@ namespace MedievilArchipelago.Helpers
     {
         private static bool CheckDemonCondition(ArchipelagoClient client)
         {
-            if (client?.CurrentSession.Locations.AllLocations == null) return false;
+            // "Cleared: The Demon" is a goal event in the APWorld (no location id), so it can never appear in
+            // the server's checked locations. Detect it from memory: in The Demon's level (3) with the
+            // ending cutscene status (41) set.
+            byte currentLevel = Memory.ReadByte(Addresses.CurrentLevel);
+            if (currentLevel != 3) return false;
 
-            var demonLocation = LocationHandlers.BuildLocationList(client.Options)
-                .Where(loc => loc.Name == ("Cleared: The Demon")).ToList();
+            byte levelStatus = Memory.ReadByte(Addresses.TD_LevelStatus);
+            if (levelStatus != 41) return false;
 
-            var checkedIds = new HashSet<long>(client.CurrentSession.Locations.AllLocationsChecked);
-
-            List<string> matchingNames = demonLocation
-                .Where(loc => checkedIds.Contains((long)loc.Id))
-                .Select(loc => loc.Name)
-                .ToList();
-
-
-            if (matchingNames.Count() == 1)
-            {
-                Console.WriteLine("You've Defeated The Demon!");
-                return true;
-            }
-            return false;
+            Console.WriteLine("You've Defeated The Demon!");
+            return true;
         }
 
         //private static bool CheckChaliceCondition(ArchipelagoClient client)
