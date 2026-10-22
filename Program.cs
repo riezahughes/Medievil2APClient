@@ -12,6 +12,8 @@ using Archipelago.Core.Util.GPS;
 using Archipelago.Core.Util.Overlay;
 using Archipelago.Core.Util.PlatformMemory;
 using Kokuban;
+using Archipelago.MultiClient.Net.Models;
+using Microsoft.Extensions.Configuration;
 using MedievilArchipelago;
 using MedievilArchipelago.Helpers;
 using Serilog;
@@ -262,14 +264,14 @@ public class Program
             overlayOptions.FontSize = 12;
             overlayOptions.DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow;
 
-            var gameOverlay = new WindowsOverlayService(overlayOptions);
+            var toggleableOverlay = new ToggleableOverlayService(() => new WindowsOverlayService(overlayOptions));
 
             //var fontPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "MediEvilFont.ttf");
             //Console.WriteLine(fontPath)
             //gameOverlay.CreateFont(fontPath, 12);
 
             // overlay is turned off till version update of AP Client Library
-            archipelagoClient.IntializeOverlayService(gameOverlay);
+            archipelagoClient.IntializeOverlayService(toggleableOverlay);
 
             while (archipelagoClient.CurrentSession == null)
             {
@@ -327,7 +329,7 @@ public class Program
 
             firstRun = false;
 
-            gameOverlay.AddTextPopup("Medievil 2 is ready to go.");
+            toggleableOverlay.AddTextPopup("Medievil 2 is ready to go.");
 
             _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             _ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
@@ -421,6 +423,11 @@ public class Program
                     //    Helpers.TrapHandlers.HudlessTrap();
                     //}
 #endif
+                    else if (input?.Trim().ToLower() == "overlay")
+                    {
+                        toggleableOverlay.Enabled = !toggleableOverlay.Enabled;
+                        Console.WriteLine($"Game overlay {(toggleableOverlay.Enabled ? "enabled" : "disabled")}.");
+                    }
                     else if (!string.IsNullOrWhiteSpace(input))
                     {
                         Console.WriteLine($"Unknown command: '{input}'");
